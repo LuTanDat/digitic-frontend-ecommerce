@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <>
       <footer className='py-4'>
-        <div class="container-xxl">
+        <div className="container-xxl">
           <div className='row align-items-center'>
             <div className='col-5'>
               <div className='footer-top-data d-flex gap-30 align-items-center'>
@@ -32,7 +32,7 @@ const Footer = () => {
         </div>
       </footer>
       <footer className='py-4'>
-        <div class="container-xxl">
+        <div className="container-xxl">
           <div className='row'>
             <div className='col-4'>
               <h4 className='text-white mb-4'>Contac Us</h4>
@@ -85,7 +85,7 @@ const Footer = () => {
         </div>
       </footer>
       <footer className='py-4'>
-        <div class="container-xxl">
+        <div className="container-xxl">
           <div className='row'>
             <div className='col-12'>
               <p className='text-center mb-0 text-white'>

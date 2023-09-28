@@ -82,7 +82,7 @@ const Header = () => {
             <div className='col-12'>
               <div className='menu-bottom d-flex align-items-center gap-30'>
                 <div>
-                  <div class="dropdown">
+                  <div className="dropdown">
                     <button className="btn btn-secondary dropdown-toggle bg-transparent border-0 d-flex gap-15 align-items-center"
                       type="button"
                       id="dropdownMenuButton1"
