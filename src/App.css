@@ -8,6 +8,7 @@
   --color-3b4149: #3b4149;
   --color-febd69: #febd69;
   --color-232f3e: #232f3e;
+  --color-bf4800: #bf4800;
 }
 body{
   font-family: 'Rubik', sans-serif;
@@ -107,3 +108,34 @@ footer .input-group-text{
 }
 
 /* Footer Part End Here*/
+
+
+
+
+/* Home Part */
+
+.main-banner-content{
+  top: 15%;
+  left: 5%;
+}
+
+.main-banner-content h4{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-bf4800);
+  margin: 0 0 12px;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+
+.main-banner-content h5{
+  font-size: 52px;
+  line-height: 64px;
+  letter-spacing: -2px;
+  font-weight: 500;
+  /* padding: 0; */
+  text-transform: none;
+}
+
+/* Home Part End here*/
