@@ -2,7 +2,6 @@ import React from 'react';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
 import { Link } from 'react-router-dom';
-import Forgotpassword from './Forgotpassword';
 
 const Login = () => {
   return (
@@ -20,7 +19,7 @@ const Login = () => {
                     <input
                       type='email'
                       name='email'
-                      placeholder='email'
+                      placeholder='Email'
                       className='form-control'
                     />
                   </div>
@@ -28,15 +27,15 @@ const Login = () => {
                     <input
                       type='password'
                       name='password'
-                      placeholder='password'
+                      placeholder='Password'
                       className='form-control'
                     />
                   </div>
                   <div>
-                    <Link to='/forgot-password'>Forgot Password</Link>
+                    <Link to='/forgot-password'>Forgot Password?</Link>
                     <div className='mt-3 d-flex justify-content-center align-items-center gap-15'>
-                      <button className='button border-0'>Login</button>
-                      <Link to='/singup' className='button signup'>SignUp</Link>
+                      <button className='button border-0' type='submit'>Login</button>
+                      <Link to='/signup' className='button signup'>SignUp</Link>
                     </div>
                   </div>
                 </form>
