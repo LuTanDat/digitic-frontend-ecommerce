@@ -62,7 +62,7 @@ const OurStore = () => {
                         id="floatingInput"
                         placeholder="from"
                       />
-                      <label for="floatingInput">From</label>
+                      <label htmlFor="floatingInput">From</label>
                     </div>
                     <div className="form-floating">
                       <input type="email"
@@ -70,7 +70,7 @@ const OurStore = () => {
                         id="floatingInput1"
                         placeholder="to"
                       />
-                      <label for="floatingInput1">To</label>
+                      <label htmlFor="floatingInput1">To</label>
                     </div>
                   </div>
                   <h5 className="sub-title">Colors</h5>
