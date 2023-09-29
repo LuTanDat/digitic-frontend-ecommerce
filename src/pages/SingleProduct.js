@@ -22,8 +22,8 @@ const SingleProduct = () => {
         <div className='container-xxl'>
           <div className='row'>
             <div className='col-12'>
+              <h4>Description</h4>
               <div className='bg-white p-3'>
-                <h4>Description</h4>
                 <p>
                   "At vero eos et accusamus et iusto odio dignissimos ducimus qui
                   blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
@@ -35,10 +35,11 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
-      <section className='reviews-product-wrapper home-wrapper-2 py-5'>
+      <section className='reviews-product-wrapper home-wrapper-2'>
         <div className='container-xxl'>
           <div className='row'>
             <div className='col-12'>
+              <h3>Reviews</h3>
               <div className='review-inner-wrapper'>
                 <div className='review-head d-flex justify-content-between align-items-end'>
                   <div>
