@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import BreadCrumb from '../components/BreadCrumb';
+import Meta from '../components/Meta'; // thay doi tieu de
 
 const Contact = () => {
   return (
-    <div>Contact</div>
+    <>
+      <Meta title='Contact' />
+      <BreadCrumb title='Contact' />
+    </>
   )
 }
 
