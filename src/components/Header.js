@@ -25,7 +25,7 @@ const Header = () => {
           <div className='row align-items-center'>
             <div className='col-2'>
               <h2>
-                <Link>Dev LuDat</Link>
+                <Link to='/'>Dev LuDat</Link>
               </h2>
             </div>
             <div className='col-5'>
