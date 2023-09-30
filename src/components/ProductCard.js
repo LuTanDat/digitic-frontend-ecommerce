@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
 import ReactStars from "react-rating-stars-component";
 import { Link, useLocation } from 'react-router-dom';
@@ -14,14 +13,19 @@ import view from '../images/view.svg';
 
 const ProductCard = (props) => {
   const { grid } = props;
+
   let location = useLocation();
 
   return (
     <>
       <div
-        className={`${location.pathname === "/store" ? `gr-${grid}` : "col-3"}`}
+        className={`${location.pathname === "/product" ? `gr-${grid}` : "col-3"}`}
       >
-        <Link to=':id' className='product-card position-relative'>
+        <Link
+          to={`${location.pathname === "/" ? "/product/:id"
+            : location.pathname === "/product/:id" ? "/product/1" : ":id"}`}
+          className='product-card position-relative'
+        >
           <div className='wishlist-icon position-absolute'>
             <button className='border-0 bg-transparent'>
               <img src={wish} alt='wishlist' />
@@ -67,9 +71,12 @@ const ProductCard = (props) => {
         </Link>
       </div>
       <div
-        className={`${location.pathname === "/store" ? `gr-${grid}` : "col-3"}`}
+        className={`${location.pathname === "/product" ? `gr-${grid}` : "col-3"}`}
       >
-        <Link className='product-card position-relative'>
+        <Link
+          to={`${location.pathname === "/" ? "/product/:id"
+            : location.pathname === "/product/:id" ? "/product/1" : ":id"}`}
+          className='product-card position-relative'>
           <div className='wishlist-icon position-absolute'>
             <button className='border-0 bg-transparent'>
               <img src={wish} alt='wishlist' />
