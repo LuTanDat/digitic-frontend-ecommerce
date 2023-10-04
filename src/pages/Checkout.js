@@ -17,22 +17,22 @@ const Checkout = () => {
                 style={{ "--bs-breadcrumb-divider": '>' }}
                 aria-label="breadcrumb"
               >
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item">
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
                     <Link className='text-dark total-price' to="/cart">
                       Cart
                     </Link>
                   </li>
                   &nbsp; /
-                  <li class="breadcrumb-item total-price active" aria-current="page">
+                  <li className="breadcrumb-item total-price active" aria-current="page">
                     Information
                   </li>
                   &nbsp; /
-                  <li class="breadcrumb-item total-price active" aria-current="page">
+                  <li className="breadcrumb-item total-price active" aria-current="page">
                     Shipping
                   </li>
                   &nbsp; /
-                  <li class="breadcrumb-item total-price active" aria-current="page">
+                  <li className="breadcrumb-item total-price active" aria-current="page">
                     Payment
                   </li>
                 </ol>

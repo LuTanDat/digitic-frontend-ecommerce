@@ -13,7 +13,7 @@ const Home = () => {
     <>
       <Meta title='Ecommerce App' />
 
-      <Container class1="home-wrapper-1 py-5">
+      <Container class1="home-wrapper-1 py-3">
         <div className="row">
           <div className="col-6">
             <div className="main-banner position-relative">
@@ -118,6 +118,7 @@ const Home = () => {
           </div>
         </div>
       </Container>
+
       <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
