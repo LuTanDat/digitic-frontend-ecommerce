@@ -586,6 +586,10 @@ footer .input-group-text{
   color: white;
   border: none;
 }
+.error{
+  color: red;
+  font-size: 12px;
+}
 /* Auth Card */
 
 
