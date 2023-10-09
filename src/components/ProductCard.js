@@ -45,7 +45,7 @@ const ProductCard = (props) => {
               </div>
               <div className='product-image'>
                 <img
-                  src={item?.images[0].url}
+                  src={item?.images[0]?.url ? item?.images[0]?.url : watch}
                   className='img-fluid mx-auto'
                   alt='product image'
                   width={160}
@@ -67,6 +67,7 @@ const ProductCard = (props) => {
                   activeColor="#ffd700"
                 />
                 <p
+                  style={{ wordWrap: 'break-word' }}
                   className={`description ${grid === 12 ? "d-block" : "d-none"}`}
                   dangerouslySetInnerHTML={{ __html: item.description }}
                 >

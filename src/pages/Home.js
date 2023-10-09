@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import Meta from "../components/Meta";
@@ -7,8 +7,20 @@ import ProductCard from "../components/ProductCard";
 import SpecialProduct from "../components/SpecialProduct";
 import Container from "../components/Container";
 import { services } from "../utils/Data";
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllBlogs } from '../features/blogs/blogSlice';
+import moment from 'moment';
 
 const Home = () => {
+  const blogState = useSelector((state) => state?.blog?.blogs);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getBlogs();
+  }, [])
+  const getBlogs = () => {
+    dispatch(getAllBlogs());
+  }
   return (
     <>
       <Meta title='Ecommerce App' />
@@ -305,18 +317,23 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
+          {
+            blogState && blogState?.map((item, index) => {
+              if (index < 3) {
+                return (
+                  <div className="col-3 " key={index}>
+                    <BlogCard
+                      id={item?._id}
+                      title={item?.title}
+                      description={item?.description}
+                      image={item?.images[0]?.url}
+                      date={moment(item?.createdAt).format('MMMM Do YYYY, h:mm a')}
+                    />
+                  </div>
+                )
+              }
+            })
+          }
         </div>
       </Container>
 

@@ -1,19 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const BlogCard = () => {
+const BlogCard = (props) => {
+  const { id, title, description, date, image } = props;
   return (
     <div className='blog-card'>
       <div className='card-image'>
-        <img src='images/blog-1.jpg' className='img-fluid w-100' alt='blog' />
+        <img
+          src={image ? image : 'images/blog-1.jpg'}
+          className='img-fluid w-100' alt='blog' />
       </div>
       <div className='blog-content'>
-        <p className='date'>11 June, 2022</p>
-        <h5 className='title'> A beautiful sunday morning renaissance</h5>
-        <p className='desc'>
-          You’re only as good as your last collection, which is an enormous pressure. I think there is something about luxury...
-        </p>
-        <Link to='/blog/:id' className='button'>
+        <p className='date'>{date}</p>
+        <h5 className='title'>{title}</h5>
+        <p className='desc'
+          style={{ wordWrap: 'break-word' }}
+          dangerouslySetInnerHTML={{ __html: description.substr(0, 70) + "..." }}
+        ></p>
+        <Link to={"/blog/" + id} className='button'>
           Read more
         </Link>
       </div>
