@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import Meta from "../components/Meta";
 import BlogCard from "../components/BlogCard";
@@ -28,7 +28,7 @@ import view from '../images/view.svg';
 const Home = () => {
   const blogState = useSelector((state) => state?.blog?.blogs);
   const productState = useSelector((state) => state?.product?.products);
-  console.log(productState);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -233,9 +233,7 @@ const Home = () => {
                     key={index}
                     className={"col-3"}
                   >
-                    <Link
-                      // to={`${location.pathname === "/" ? "/product/:id"
-                      //   : location.pathname === "/product/:id" ? "/product/1" : ":id"}`}
+                    <div
                       className='product-card position-relative'
                     >
                       <div className='wishlist-icon position-absolute'>
@@ -276,14 +274,14 @@ const Home = () => {
                             <img src={prodcompare} alt='compare' />
                           </button>
                           <button className='border-0 bg-transparent'>
-                            <img src={view} alt='view' />
+                            <img onClick={() => navigate("/product/" + item?._id)} src={view} alt='view' />
                           </button>
                           <button className='border-0 bg-transparent'>
                             <img src={addcart} alt='addcart' />
                           </button>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   </div>
                 )
               }
@@ -347,6 +345,7 @@ const Home = () => {
               if (item.tags === "special") {
                 return <SpecialProduct
                   key={index}
+                  id={item?._id}
                   brand={item?.brand}
                   title={item?.title}
                   totalrating={parseInt(item?.totalrating)}
@@ -374,9 +373,7 @@ const Home = () => {
                     key={index}
                     className={"col-3"}
                   >
-                    <Link
-                      // to={`${location.pathname === "/" ? "/product/:id"
-                      //   : location.pathname === "/product/:id" ? "/product/1" : ":id"}`}
+                    <div
                       className='product-card position-relative'
                     >
                       <div className='wishlist-icon position-absolute'>
@@ -417,14 +414,14 @@ const Home = () => {
                             <img src={prodcompare} alt='compare' />
                           </button>
                           <button className='border-0 bg-transparent'>
-                            <img src={view} alt='view' />
+                            <img onClick={() => navigate("/product/" + item?._id)} src={view} alt='view' />
                           </button>
                           <button className='border-0 bg-transparent'>
                             <img src={addcart} alt='addcart' />
                           </button>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   </div>
                 )
               }
