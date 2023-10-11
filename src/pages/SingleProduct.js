@@ -10,24 +10,37 @@ import Color from './../components/Color';
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from 'react-icons/ai';
 import Container from './../components/Container';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAProduct } from '../features/products/productSlice';
 import { toast } from 'react-toastify';
 import { addProdToCart } from "../features/user/userSlice";
+import { getUserCart } from '../features/user/userSlice';
 
 const SingleProduct = () => {
   const [color, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [alreadyAdded, setAlreadyAdded] = useState(false); // prouduct da add vao cart chua ?
 
   const location = useLocation();
+  const navigate = useNavigate();
   const getProductId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
+  const productState = useSelector((state) => state.product.singleProduct);
+  const cartState = useSelector((state) => state.auth.cartProducts);
   useEffect(() => {
     dispatch(getAProduct(getProductId));
+    dispatch(getUserCart());
+
   }, [])
-  const productState = useSelector((state) => state.product.singleProduct);
+  useEffect(() => {
+    for (let index = 0; index < cartState.length; index++) {
+      if (getProductId === cartState[index]?.productId?._id) {
+        setAlreadyAdded(true);
+      }
+    }
+  }, [])
 
   const uploadCart = () => {
     if (color === null) {
@@ -40,6 +53,7 @@ const SingleProduct = () => {
         quantity,
         price: productState?.price
       }))
+      navigate('/cart');
     }
   }
 
@@ -141,33 +155,41 @@ const SingleProduct = () => {
                   </div>
                 </div>
                 <div className='d-flex gap-10 flex-column mt-2 mb-3'>
-                  <h3 className='product-heading'>Color :</h3>
-                  <Color setColor={setColor} colorData={productState?.color} />
+                  {
+                    alreadyAdded === false && <>
+                      <h3 className='product-heading'>Color :</h3>
+                      <Color setColor={setColor} colorData={productState?.color} />
+                    </>
+                  }
                 </div>
                 <div className='d-flex gap-15 align-items-center flex-row mt-2 mb-3'>
-                  <h3 className='product-heading'>Quantity :</h3>
-                  <div>
-                    <input
-                      type='number'
-                      name=''
-                      min={1}
-                      max={10}
-                      className='form-control'
-                      style={{ width: '70px' }}
-                      id=''
-                      onChange={(e) => setQuantity(e.target.value)}
-                      value={quantity}
-                    />
-                  </div>
-                  <div className='d-flex justify-content-center gap-30 ms-5'>
+                  {
+                    alreadyAdded === false && <>
+                      <h3 className='product-heading'>Quantity :</h3>
+                      <div>
+                        <input
+                          type='number'
+                          name=''
+                          min={1}
+                          max={10}
+                          className='form-control'
+                          style={{ width: '70px' }}
+                          id=''
+                          onChange={(e) => setQuantity(e.target.value)}
+                          value={quantity}
+                        />
+                      </div>
+                    </>
+                  }
+                  <div className={'d-flex justify-content-center gap-30 ms-5' + alreadyAdded ? "ms-0" : "ms-5"}>
                     <button
                       className='button border-0'
                       type='button'
-                      onClick={() => { uploadCart() }}
+                      onClick={() => { alreadyAdded ? navigate('/cart') : uploadCart() }}
                     >
-                      Add to Cart
+                      {alreadyAdded ? "Go to Cart" : "Add to Cart"}
                     </button>
-                    <button to='/signup' className='button signup border-0'>Buy It Now</button>
+                    {/* <button to='/signup' className='button signup border-0'>Buy It Now</button> */}
                   </div>
                 </div>
                 <div className='d-flex gap-15 align-items-center'>
