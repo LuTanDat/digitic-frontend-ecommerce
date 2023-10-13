@@ -156,7 +156,7 @@ const Home = () => {
         </div>
       </Container>
 
-      <Container class1="home-wrapper-2 py-5">
+      {/* <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
             <div className="categories d-flex justify-content-between flex-wrap align-items-center">
@@ -219,7 +219,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </Container> */}
       <Container class1="featured-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
@@ -270,15 +270,15 @@ const Home = () => {
                       </div>
                       <div className='action-bar position-absolute'>
                         <div className='d-flex flex-column gap-15'>
-                          <button className='border-0 bg-transparent'>
+                          {/* <button className='border-0 bg-transparent'>
                             <img src={prodcompare} alt='compare' />
-                          </button>
+                          </button> */}
                           <button className='border-0 bg-transparent'>
                             <img onClick={() => navigate("/product/" + item?._id)} src={view} alt='view' />
                           </button>
-                          <button className='border-0 bg-transparent'>
+                          {/* <button className='border-0 bg-transparent'>
                             <img src={addcart} alt='addcart' />
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>
@@ -410,15 +410,15 @@ const Home = () => {
                       </div>
                       <div className='action-bar position-absolute'>
                         <div className='d-flex flex-column gap-15'>
-                          <button className='border-0 bg-transparent'>
+                          {/* <button className='border-0 bg-transparent'>
                             <img src={prodcompare} alt='compare' />
-                          </button>
+                          </button> */}
                           <button className='border-0 bg-transparent'>
                             <img onClick={() => navigate("/product/" + item?._id)} src={view} alt='view' />
                           </button>
-                          <button className='border-0 bg-transparent'>
+                          {/* <button className='border-0 bg-transparent'>
                             <img src={addcart} alt='addcart' />
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>
