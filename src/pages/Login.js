@@ -6,7 +6,7 @@ import Container from '../components/Container';
 import CustomInput from '../components/CustomInput';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../features/user/userSlice';
 
 let loginSchema = Yup.object().shape({
@@ -20,6 +20,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const authState = useSelector((state) => state.auth);
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -28,6 +30,7 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: values => {
       dispatch(loginUser(values));
+      navigate("/");
     },
   });
   return (

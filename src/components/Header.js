@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 const Header = () => {
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state.auth.cartProducts);
+  const authState = useSelector((state) => state.auth);
+
   const [total, setTotal] = useState(null);
 
   useEffect(() => {
@@ -70,9 +72,13 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to='/login' className='d-flex align-items-center gap-10 text-white'>
+                  <Link to={authState?.user === null ? '/login' : ''} className='d-flex align-items-center gap-10 text-white'>
                     <img src='images/user.svg' alt='user' />
-                    <p className='mb-0'>Log In <br /> My Account</p>
+                    {
+                      authState?.user === null ?
+                        <p className='mb-0'>Log In <br /> My Account</p> :
+                        <p className='mb-0'>Welcome {authState?.user?.firstName}</p>
+                    }
                   </Link>
                 </div>
                 <div>
