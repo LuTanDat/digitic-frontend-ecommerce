@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../features/user/userSlice';
 
-let signUpSchema = Yup.object().shape({
+let loginSchema = Yup.object().shape({
   email: Yup.string()
     .email("Email should be valid")
     .required("Email is Required"),
@@ -25,7 +25,7 @@ const Login = () => {
       email: '',
       password: '',
     },
-    validationSchema: signUpSchema,
+    validationSchema: loginSchema,
     onSubmit: values => {
       dispatch(loginUser(values));
     },
