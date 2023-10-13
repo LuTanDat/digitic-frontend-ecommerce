@@ -30,7 +30,11 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: values => {
       dispatch(loginUser(values));
-      navigate("/");
+      setTimeout(() => {
+        if (authState.user !== null) {
+          navigate("/");
+        }
+      }, 300)
     },
   });
   return (
