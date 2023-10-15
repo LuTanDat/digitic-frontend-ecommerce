@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
 import { Link, useNavigate } from 'react-router-dom';
@@ -30,13 +31,13 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: values => {
       dispatch(loginUser(values));
-      setTimeout(() => {
-        if (authState.user !== null) {
-          navigate("/");
-        }
-      }, 300)
     },
   });
+  useEffect(() => {
+    if (authState.user !== null && authState.isError === false) {
+      navigate("/")
+    }
+  }, [authState])
   return (
     <>
       <Meta title='Login' />

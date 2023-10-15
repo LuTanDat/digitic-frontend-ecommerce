@@ -5,9 +5,10 @@ import Container from '../components/Container';
 import CustomInput from '../components/CustomInput';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../features/user/userSlice';
+import { useEffect } from 'react';
 
 let signUpSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is Required"),
@@ -20,6 +21,7 @@ let signUpSchema = Yup.object().shape({
 });
 
 const Signup = () => {
+  const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -36,7 +38,11 @@ const Signup = () => {
       dispatch(registerUser(values));
     },
   });
-
+  useEffect(() => {
+    if (authState.createdUser !== undefined && authState.isError === false) {
+      navigate("/login")
+    }
+  }, [authState])
   return (
     <>
       <Meta title='Sign Up' />

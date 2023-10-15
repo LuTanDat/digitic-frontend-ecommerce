@@ -171,7 +171,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
         if (state.isError === true) {
-          toast.error(action.error);
+          toast.error(action.payload.response.data.message);
         }
       })
 
@@ -184,7 +184,6 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.user = action.payload;
         if (state.isSuccess === true) {
-          // localStorage.setItem("token", action.payload.token);
           toast.success("User Logged In Successfully");
         }
       })
@@ -194,7 +193,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
         if (state.isError === true) {
-          toast.error(action.error);
+          toast.error(action.payload.response.data.message);
         }
       })
 
