@@ -339,6 +339,13 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.updatedProfile = action.payload;
         if (state.isSuccess === true) {
+          const currentUserData = JSON.parse(localStorage.getItem('customer')) || {};// get object current user logged in
+          currentUserData.firstName = action.payload.firstName;
+          currentUserData.lastName = action.payload.lastName;
+          currentUserData.email = action.payload.email;
+          currentUserData.mobile = action.payload.mobile;
+          localStorage.setItem('customer', JSON.stringify(currentUserData)); // update user in localStorage
+          state.user = currentUserData; // update user in Redux Store
           toast.success("Profile Updated Successfully!");
         }
       })
