@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import { authService } from './userService';
 import { toast } from "react-toastify";
 
@@ -90,6 +90,17 @@ export const deleteCartProduct = createAsyncThunk(
   }
 );
 
+export const deleteUserCart = createAsyncThunk(
+  "user/cart/delete",
+  async (thunkAPI) => {
+    try {
+      return await authService.emptyCart();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const updateCartProduct = createAsyncThunk(
   "user/cart/product/update",
   async (cartDetail, thunkAPI) => {
@@ -133,6 +144,9 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
+export const resetState = createAction("Reset_all");
+
 
 const getCustomerfromLocalStorage = localStorage.getItem("customer")
   ? JSON.parse(localStorage.getItem("customer"))
@@ -301,7 +315,7 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.orderedProduct = action.payload;
         if (state.isSuccess === true) {
-          toast.success("Ordered Successfully!");
+          toast.success("Ordered Created Successfully!");
         }
       })
       .addCase(createAnOrder.rejected, (state, action) => {
@@ -340,10 +354,10 @@ export const authSlice = createSlice({
         state.updatedProfile = action.payload;
         if (state.isSuccess === true) {
           const currentUserData = JSON.parse(localStorage.getItem('customer')) || {};// get object current user logged in
-          currentUserData.firstName = action.payload.firstName;
-          currentUserData.lastName = action.payload.lastName;
-          currentUserData.email = action.payload.email;
-          currentUserData.mobile = action.payload.mobile;
+          currentUserData.firstName = action?.payload?.firstName;
+          currentUserData.lastName = action?.payload?.lastName;
+          currentUserData.email = action?.payload?.email;
+          currentUserData.mobile = action?.payload?.mobile;
           localStorage.setItem('customer', JSON.stringify(currentUserData)); // update user in localStorage
           state.user = currentUserData; // update user in Redux Store
           toast.success("Profile Updated Successfully!");
@@ -402,6 +416,24 @@ export const authSlice = createSlice({
           toast.error("Something Went Wrong!")
         }
       })
+
+      .addCase(deleteUserCart.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteUserCart.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.deletedCart = action.payload;
+      })
+      .addCase(deleteUserCart.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+
+      .addCase(resetState, () => initialState);
   },
 })
 

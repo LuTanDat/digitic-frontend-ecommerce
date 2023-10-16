@@ -9,7 +9,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { config } from "../utils/axiosconfig"
-import { createAnOrder, getUserCart } from "../features/user/userSlice";
+import { createAnOrder, deleteUserCart, getUserCart, resetState } from "../features/user/userSlice";
 
 
 let shippingSchema = Yup.object().shape({
@@ -56,7 +56,7 @@ const Checkout = () => {
 
 
   useEffect(() => {
-    if (authState?.orderedProduct !== null && authState?.orderedProduct?.success === true) {
+    if (authState?.orderedProduct?.order !== null && authState?.orderedProduct?.success === true) {
       navigate("/my-orders");
     }
   }, [authState])
@@ -150,8 +150,8 @@ const Checkout = () => {
             paymentInfo: result.data,
             shippingInfo
           }))
-        }, 2000)
-
+        }, 2000);
+        setTimeout(() => { dispatch(deleteUserCart()) }, 2000); // lam trong gio hangf
       },
       prefill: {
         name: "Dev LuDat",

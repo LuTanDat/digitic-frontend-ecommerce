@@ -3,13 +3,14 @@ import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
 import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrders } from '../features/user/userSlice';
+import { getOrders, resetState } from '../features/user/userSlice';
 
 const Orders = () => {
   const dispatch = useDispatch();
   const orderState = useSelector((state) => state?.auth?.getOrderedProduct?.orders);
 
   useEffect(() => {
+    dispatch(resetState())
     dispatch(getOrders())
   }, [])
   return (
