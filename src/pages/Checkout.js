@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import watch from "../images/watch.jpg";
 import Container from "./../components/Container";
@@ -9,7 +9,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { config } from "../utils/axiosconfig"
-import { createAnOrder } from "../features/user/userSlice";
+import { createAnOrder, getUserCart } from "../features/user/userSlice";
 
 
 let shippingSchema = Yup.object().shape({
@@ -24,12 +24,11 @@ let shippingSchema = Yup.object().shape({
 
 const Checkout = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartState = useSelector((state) => state.auth.cartProducts);
   const [totalAmount, setTotalAmount] = useState(null);
-  const [shippingInfo, setShippingInfo] = useState(null);
-  const [paymentInfo, setPaymentInfo] = useState({ razorpayPaymentId: "", razorpayOrderId: "" });
+  const authState = useSelector((state) => state.auth);
   const [cartProductState, setCartProductState] = useState([]);
-  // console.log(paymentInfo, shippingInfo);
 
   useEffect(() => {
     let sum = 0;
@@ -38,6 +37,29 @@ const Checkout = () => {
       setTotalAmount(sum);
     }
   }, [cartState]);
+
+
+  const getTokenFromLocalStorage = localStorage.getItem("customer")
+    ? JSON.parse(localStorage.getItem("customer"))
+    : null;
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+        }`,
+      Accept: "application/json",
+    },
+  };
+  useEffect(() => {
+    dispatch(getUserCart(config2));
+  }, [])
+
+
+  useEffect(() => {
+    if (authState?.orderedProduct !== null && authState?.orderedProduct?.success === true) {
+      navigate("/my-orders");
+    }
+  }, [authState])
 
   const formik = useFormik({
     initialValues: {
@@ -52,9 +74,9 @@ const Checkout = () => {
     },
     validationSchema: shippingSchema,
     onSubmit: (values) => {
-      setShippingInfo(values);
+      // setShippingInfo(values);
       setTimeout(() => {
-        checkOutHandler();
+        checkOutHandler(values);
       }, 300)
     },
   });
@@ -87,7 +109,7 @@ const Checkout = () => {
   }, [])
   // console.log(cartProductState);
 
-  const checkOutHandler = async () => {
+  const checkOutHandler = async (shippingInfo) => {
 
     const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
     if (!res) {
@@ -120,18 +142,16 @@ const Checkout = () => {
 
         const result = await axios.post("http://localhost:5000/api/user/order/paymentVerification", data, config);
 
-        setPaymentInfo({
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-        })
+        setTimeout(() => {
+          dispatch(createAnOrder({
+            totalPrice: totalAmount,
+            totalPriceAfterDiscount: totalAmount,
+            orderItems: cartProductState,
+            paymentInfo: result.data,
+            shippingInfo
+          }))
+        }, 2000)
 
-        dispatch(createAnOrder({
-          totalPrice: totalAmount,
-          totalPriceAfterDiscount: totalAmount,
-          orderItems: cartProductState,
-          paymentInfo,
-          shippingInfo
-        }))
       },
       prefill: {
         name: "Dev LuDat",
