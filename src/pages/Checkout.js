@@ -38,23 +38,6 @@ const Checkout = () => {
     }
   }, [cartState]);
 
-
-  const getTokenFromLocalStorage = localStorage.getItem("customer")
-    ? JSON.parse(localStorage.getItem("customer"))
-    : null;
-
-  const config2 = {
-    headers: {
-      Authorization: `Bearer ${getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
-        }`,
-      Accept: "application/json",
-    },
-  };
-  useEffect(() => {
-    dispatch(getUserCart(config2));
-  }, [])
-
-
   useEffect(() => {
     if (authState?.orderedProduct?.order !== null && authState?.orderedProduct?.success === true) {
       navigate("/my-orders");
