@@ -558,7 +558,7 @@ footer .input-group-text{
 .auth-card h3{
   font-size: 19px;
   font-weight: 500;
-  color: var(--color-777777);
+  color: var(--color-3b4149);
 }
 .auth-card .form-control{
   height: 50px;
@@ -566,7 +566,7 @@ footer .input-group-text{
   color: var(--color-777777);
   font-size: 14px;
   border-radius: 10px;
-  border-color: transparent;
+  border-color: var(--color-777777);;
 }
 .auth-card a{
   font-size: 14px;

@@ -37,7 +37,7 @@ const Resetpassword = () => {
     <>
       <Meta title='Reset Password' />
       <BreadCrumb title='Reset Password' />
-      <Container class1='login-wrapper home-wrapper-2 py-5'>
+      <Container class1='login-wrapper py-5' style={{ backgroundColor: '#7985c9' }}>
         <div className='row'>
           <div className='col-12'>
             <div className='auth-card'>
