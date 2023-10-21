@@ -66,7 +66,7 @@ a{
   background-color: var(--color-131921);
 }
 .header-upper{
-  background-color: var(--color-131921);
+  background-color: var(--color-3b4149);
 }
 .header-bottom{
   background-color: var(--color-232f3e);
@@ -78,7 +78,8 @@ a{
   width: 35px;
   height: 35px;
 }
-.header-bottom .menu-links a,
+.header-upper .menu-links a,
+.header-upper .menu-links button,
 .header-bottom .dropdown button {
   color: white;
   font-size: 14px;

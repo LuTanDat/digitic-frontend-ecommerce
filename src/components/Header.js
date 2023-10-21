@@ -32,13 +32,13 @@ const Header = () => {
   useEffect(() => {
     dispatch(getUserCart(config2));
   }, [])
-  useEffect(() => {
-    let sum = 0;
-    for (let index = 0; index < cartState?.length; index++) {
-      sum = sum + (Number(cartState[index].quantity) * Number(cartState[index].price))
-      setTotal(sum);
-    }
-  }, [cartState])
+  // useEffect(() => {
+  //   let sum = 0;
+  //   for (let index = 0; index < cartState?.length; index++) {
+  //     sum = sum + (Number(cartState[index].quantity) * Number(cartState[index].price))
+  //     setTotal(sum);
+  //   }
+  // }, [cartState])
 
   useEffect(() => {
     let data = [];
@@ -59,36 +59,51 @@ const Header = () => {
   }
   return (
     <>
-      <header className='header-upper py-3'>
-        <div className='container-xxl'>
-          <div className='row align-items-center'>
+      <header className='header-upper p-2'>
+        <div className=''>
+          <div className='row align-items-center w-100'>
             <div className='col-2'>
-              <h2>
+              <h2 className='text-center mb-0'>
                 <Link to='/'>Tech Smart</Link>
               </h2>
             </div>
             <div className='col-5'>
-              <div className="input-group">
-                <Typeahead
-                  id="pagination-example"
-                  onPaginate={() => console.log('Results paginated')}
-                  onChange={(selected) => {
-                    navigate(`/product/${selected[0]?.prod}`)
-                    dispatch(getAProduct(selected[0]?.prod))
-                  }}
-                  options={productOpt}
-                  paginate={paginate}
-                  labelKey={"name"}
-                  minLength={2}
-                  placeholder="Search for Products here..."
-                />
-                <span className="input-group-text" id="basic-addon2">
-                  <BsSearch className='fs-5' />
-                </span>
+              <div className='menu-links'>
+                <div className='d-flex align-items-center gap-15'>
+                  <NavLink to="/">Trang chủ</NavLink>
+                  <NavLink to="/product">Sản phẩm</NavLink>
+                  {/* <NavLink to="/blogs">Bài viết</NavLink> */}
+                  <NavLink to="/contact">Liên hệ</NavLink>
+                  <NavLink to="/introduce">Giới thiệu</NavLink>
+                  <NavLink to="/my-orders">Đơn hàng của tôi</NavLink>
+                  {
+                    authState?.user === null ?
+                      "" :
+                      <button onClick={handleLogout} className='border border-0 bg-transparent text-white text-uppercase' type='button'>Đăng Xuất</button>
+                  }
+                </div>
               </div>
             </div>
             <div className='col-5'>
-              <div className='header-upper-links d-flex align-items-center justify-content-between'>
+              <div className='header-upper-links d-flex align-items-center justify-content-between gap-30'>
+                <div className="input-group">
+                  <Typeahead
+                    id="pagination-example"
+                    onPaginate={() => console.log('Results paginated')}
+                    onChange={(selected) => {
+                      navigate(`/product/${selected[0]?.prod}`)
+                      dispatch(getAProduct(selected[0]?.prod))
+                    }}
+                    options={productOpt}
+                    paginate={paginate}
+                    labelKey={"name"}
+                    minLength={2}
+                    placeholder="Search for Products here..."
+                  />
+                  <span className="input-group-text" id="basic-addon2">
+                    <BsSearch className='fs-5' />
+                  </span>
+                </div>
                 {/* <div>
                   <Link to='/compare-product' className='d-flex align-items-center gap-10 text-white'>
                     <img src='images/compare.svg' alt='compare' />
@@ -98,7 +113,7 @@ const Header = () => {
                 <div>
                   <Link to='/wishlist' className='d-flex align-items-center gap-10 text-white'>
                     <img src='images/wishlist.svg' alt='wishlist' />
-                    <p className='mb-0'>Favourite <br /> Wishlist</p>
+                    <p className='mb-0'>Favourite</p>
                   </Link>
                 </div>
                 <div>
@@ -106,17 +121,16 @@ const Header = () => {
                     <img src='images/user.svg' alt='user' />
                     {
                       authState?.user === null ?
-                        <p className='mb-0'>Log In <br /> My Account</p> :
+                        <p className='mb-0'>Login</p> :
                         <p className='mb-0'>Welcome {authState?.user?.firstName}</p>
                     }
                   </Link>
                 </div>
                 <div>
-                  <Link to='/cart' className='d-flex align-items-center gap-10 text-white'>
+                  <Link to='/cart' className='d-flex align-items-center gap-10 text-white position-relative'>
                     <img src='images/cart.svg' alt='cart' />
-                    <div className='d-flex flex-column gap-10'>
+                    <div className='d-flex flex-column gap-10 position-absolute top-0 start-100 translate-middle'>
                       <span className='badge bg-white text-dark'>{cartState?.length ? cartState?.length : 0}</span>
-                      <p className='mb-0'>$ {total ? total : 0}</p>
                     </div>
                   </Link>
                 </div>
@@ -125,7 +139,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <header className='header-bottom py-3'>
+      {/* <header className='header-bottom py-3'>
         <div className='container-xxl'>
           <div className='row'>
             <div className='col-12'>
@@ -148,22 +162,11 @@ const Header = () => {
                     </ul>
                   </div>
                 </div>
-                <div className='menu-links'>
-                  <div className='d-flex align-items-center gap-15'>
-                    <NavLink to="/">Home</NavLink>
-                    <NavLink to="/product">Our Store</NavLink>
-                    <NavLink to="/my-orders">My Orders</NavLink>
-                    <NavLink to="/blogs">Blogs</NavLink>
-                    <NavLink to="/contact">Contact</NavLink>
-                    <button onClick={handleLogout} className='border border-0 bg-transparent text-white text-uppercase' type='button'>Logout</button>
-                  </div>
-                </div>
-
               </div>
             </div>
           </div>
         </div>
-      </header>
+      </header> */}
     </>
   )
 }

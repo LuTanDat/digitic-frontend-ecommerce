@@ -5,7 +5,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import OurStore from './pages/OurStore';
+import Product from './pages/Product';
 import Blog from './pages/Blog';
 import CompareProduct from './pages/CompareProduct';
 import Wishlist from './pages/Wishlist';
@@ -25,6 +25,7 @@ import { PrivateRoutes } from './routing/PrivateRoutes';
 import { OpenRoutes } from './routing/OpenRoutes';
 import Orders from './pages/Orders';
 import Profile from './pages/Profile';
+import Introduce from './pages/Introduce';
 
 function App() {
   return (
@@ -35,7 +36,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path='about' element={<About />} />
             <Route path='contact' element={<Contact />} />
-            <Route path='product' element={<OurStore />} />
+            <Route path='introduce' element={<Introduce />} />
+            <Route path='product' element={<Product />} />
             <Route path='product/:id' element={<SingleProduct />} />
             <Route path='blogs' element={<Blog />} />
             <Route path='blog/:id' element={<SingleBlog />} />

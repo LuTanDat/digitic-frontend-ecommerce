@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
 import ReactStars from "react-rating-stars-component";
-import ProductCard from './../components/ProductCard';
+import ProductCard from '../components/ProductCard';
 import Color from '../components/Color';
-import Container from './../components/Container';
+import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../features/products/productSlice';
 
-const OurStore = () => {
+const Product = () => {
   const [grid, setGrid] = useState(4);
   const productState = useSelector((state) => state?.product?.products);
   const [brands, setBrands] = useState([]);
@@ -51,7 +51,7 @@ const OurStore = () => {
   return (
     <div>
       <Meta title='Our Store' />
-      <BreadCrumb title='Our Store' />
+      <BreadCrumb title='Sản phẩm' />
       <Container class1='store-wrapper home-wrapper-2 py-5'>
         <div className='row'>
           <div className='col-3'>
@@ -184,4 +184,4 @@ const OurStore = () => {
   )
 }
 
-export default OurStore;
+export default Product;
