@@ -130,7 +130,7 @@ const Header = () => {
                   <Link to='/cart' className='d-flex align-items-center gap-10 text-white position-relative'>
                     <img src='images/cart.svg' alt='cart' />
                     <div className='d-flex flex-column gap-10 position-absolute top-0 start-100 translate-middle'>
-                      <span className='badge bg-white text-dark'>{cartState?.length ? cartState?.length : 0}</span>
+                      <span className='badge rounded-circle bg-white text-dark'>{cartState?.length ? cartState?.length : 0}</span>
                     </div>
                   </Link>
                 </div>
