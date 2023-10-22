@@ -78,6 +78,9 @@ a{
   width: 35px;
   height: 35px;
 }
+.header-upper .header-upper-links p {
+  white-space: nowrap;
+}
 .header-upper .menu-links a,
 .header-upper .menu-links button,
 .header-bottom .dropdown button {

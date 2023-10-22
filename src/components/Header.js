@@ -116,7 +116,7 @@ const Header = () => {
                 <div>
                   <Link to='/wishlist' className='d-flex align-items-center gap-10 text-white'>
                     <img src='images/wishlist.svg' alt='wishlist' />
-                    <p className='mb-0'>Favourite</p>
+                    <p className='mb-0' >Yêu thích</p>
                   </Link>
                 </div>
                 <div>
@@ -124,8 +124,11 @@ const Header = () => {
                     <img src='images/user.svg' alt='user' />
                     {
                       authState?.user === null ?
-                        <p className='mb-0'>Login</p> :
-                        <p className='mb-0'>Welcome {authState?.user?.firstName}</p>
+                        <p className='mb-0'>Đăng nhập</p> :
+                        <div>
+                          <p className='mb-0'>Xin chào</p>
+                          <p className='mb-0'>{authState?.user?.firstName}</p>
+                        </div>
                     }
                   </Link>
                 </div>
