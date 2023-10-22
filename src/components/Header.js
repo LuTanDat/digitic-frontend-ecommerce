@@ -75,7 +75,10 @@ const Header = () => {
                   {/* <NavLink to="/blogs">Bài viết</NavLink> */}
                   <NavLink to="/contact">Liên hệ</NavLink>
                   <NavLink to="/introduce">Giới thiệu</NavLink>
-                  <NavLink to="/my-orders">Đơn hàng của tôi</NavLink>
+                  {
+                    authState?.user === null ?
+                      "" :
+                      <NavLink to="/my-orders">Đơn hàng của tôi</NavLink>}
                   {
                     authState?.user === null ?
                       "" :

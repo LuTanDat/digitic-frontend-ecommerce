@@ -13,6 +13,15 @@ import { addToWishlist, getAllProducts } from '../features/products/productSlice
 // import { services } from "../utils/Data";
 // import moment from 'moment';
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { Image } from 'antd';
+
+import slider1 from '../images/slider1.webp';
+import slider2 from '../images/slider2.webp';
+import slider3 from '../images/slider3.webp';
+import slider4 from '../images/slider4.webp';
 
 // special product
 import wish from '../images/wish.svg';
@@ -27,6 +36,17 @@ import view from '../images/view.svg';
 
 
 const Home = () => {
+  const arrImagesSlider = [slider1, slider2, slider3, slider4];
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1500
+  };
+
   const blogState = useSelector((state) => state?.blog?.blogs);
   const productState = useSelector((state) => state?.product?.products);
   const navigate = useNavigate();
@@ -53,7 +73,20 @@ const Home = () => {
 
       <Container class1="home-wrapper-1 py-3">
         <div className="row">
-          <div className="col-6">
+          <div className="col-12">
+            <Slider {...settings}>
+              {
+                arrImagesSlider.map((image, index) => {
+                  return (
+                    <div key={index}>
+                      <Image src={image} alt="slider" width="100%" preview={false} height="299px" />
+                    </div>
+                  )
+                })
+              }
+            </Slider>
+          </div>
+          {/* <div className="col-6">
             <div className="main-banner position-relative">
               <img
                 src="images/main-banner-1.jpg"
@@ -134,7 +167,7 @@ const Home = () => {
               </div>
 
             </div>
-          </div>
+          </div> */}
         </div>
       </Container>
       <Container class1="home-wrapper-2 py-5">

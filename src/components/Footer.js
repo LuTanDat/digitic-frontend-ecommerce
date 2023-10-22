@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BsLinkedin, BsGithub, BsYoutube, BsInstagram } from "react-icons/bs";
+import { BsLinkedin, BsGithub, BsYoutube, BsInstagram, BsFacebook } from "react-icons/bs";
 import newsletter from '../images/newsletter.png';
 
 
@@ -33,30 +33,19 @@ const Footer = () => {
           </div>
         </div>
       </footer> */}
-      <footer className='py-4'>
+      <footer className='py-2'>
         <div className="container-xxl">
           <div className='row'>
-            <div className='col-4'>
-              <h4 className='text-white mb-4'>Contac Us</h4>
-              <div>
-                <address className='text-white fs-6'>
-                  Demo Store <br /> No. 1259 Freedom, New York, 11111 <br /> United States
-                </address>
-                <a href='tel:+84 12345678' className='mt-3 d-block mb-1 text-white'>
-                  0123456789
-                </a>
-                <a href='mailto:abc@gmail.com' className='mt-2 d-block mb-0 text-white'>
-                  abc@gmail.com
-                </a>
-                <div className='social-icons d-flex align-items-center gap-15 mt-4'>
-                  <a href='' className='text-white'><BsLinkedin className='fs-4' /></a>
-                  <a href='' className='text-white'><BsInstagram className='fs-4' /></a>
-                  <a href='' className='text-white'><BsYoutube className='fs-4' /></a>
-                  <a href='' className='text-white'><BsGithub className='fs-4' /></a>
+            <div className='col-12'>
+              <div className='d-flex align-items-center justify-content-center gap-30'>
+                <h4 className='text-white text-center mb-0'>Liên lạc với chúng tôi</h4>
+                <div className='social-icons d-flex align-items-center gap-15 justify-content-center'>
+                  <a href='#' className='text-white'><BsFacebook className='fs-4' /></a>
+                  <a href='#' className='text-white'><BsInstagram className='fs-4' /></a>
                 </div>
               </div>
             </div>
-            <div className='col-3'>
+            {/* <div className='col-3'>
               <h4 className='text-white mb-4'>Information</h4>
               <div className='footer-links d-flex flex-column'>
                 <Link to='/privacy-policy' className='text-white py-2 mb-1'>Privacy Policy</Link>
@@ -82,7 +71,7 @@ const Footer = () => {
                 <Link className='text-white py-2 mb-1'>Tablets</Link>
                 <Link className='text-white py-2 mb-1'>Watch</Link>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </footer>
