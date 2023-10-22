@@ -156,35 +156,13 @@ const SingleProduct = () => {
                     edit={false}
                     activeColor="#ffd700"
                   />
-                  <p className='mb-0 t-review'>( 2 reviews )</p>
                 </div>
                 <a className='review-btn' href='#review'>
-                  Write a Review
+                  Viết đánh giá
                 </a>
               </div>
-              <div className='py-3'>
-                <div className='d-flex gap-10 align-items-center my-2'>
-                  <h3 className='product-heading'>Type :</h3>
-                  <p className='product-data'>Watch</p>
-                </div>
-                <div className='d-flex gap-10 align-items-center my-2'>
-                  <h3 className='product-heading'>Brand :</h3>
-                  <p className='product-data'>{productState?.brand}</p>
-                </div>
-                <div className='d-flex gap-10 align-items-center my-2'>
-                  <h3 className='product-heading'>Category :</h3>
-                  <p className='product-data'>{productState?.category}</p>
-                </div>
-                <div className='d-flex gap-10 align-items-center my-2'>
-                  <h3 className='product-heading'>Tags :</h3>
-                  <p className='product-data'>{productState?.tags}</p>
-                </div>
-                <div className='d-flex gap-10 align-items-center my-2'>
-                  <h3 className='product-heading'>Availability :</h3>
-                  <p className='product-data'>In Stock</p>
-                </div>
-
-                <div className='d-flex gap-10 flex-column mt-2 mb-3'>
+              <div className='border-bottom pt-3'>
+                {/* <div className='d-flex gap-10 flex-column mt-2 mb-3'>
                   <h3 className='product-heading'>Size :</h3>
                   <div className='d-flex flex-wrap gap-15'>
                     <span className='badge border border-1 bg-white text-dark text-secondary'>S</span>
@@ -192,11 +170,11 @@ const SingleProduct = () => {
                     <span className='badge border border-1 bg-white text-dark text-secondary'>L</span>
                     <span className='badge border border-1 bg-white text-dark text-secondary'>XL</span>
                   </div>
-                </div>
+                </div> */}
                 <div className='d-flex gap-10 flex-column mt-2 mb-3'>
                   {
                     alreadyAdded === false && <>
-                      <h3 className='product-heading'>Color :</h3>
+                      <h3 className='product-heading'>Màu :</h3>
                       <Color setColor={setColor} colorData={productState?.color} />
                     </>
                   }
@@ -204,7 +182,7 @@ const SingleProduct = () => {
                 <div className='d-flex gap-15 align-items-center flex-row mt-2 mb-3'>
                   {
                     alreadyAdded === false && <>
-                      <h3 className='product-heading'>Quantity :</h3>
+                      <h3 className='product-heading'>Số lượng :</h3>
                       <div>
                         <input
                           type='number'
@@ -228,26 +206,24 @@ const SingleProduct = () => {
                     >
                       {alreadyAdded ? "Go to Cart" : "Add to Cart"}
                     </button>
-                    {/* <button to='/signup' className='button signup border-0'>Buy It Now</button> */}
                   </div>
                 </div>
                 <div className='d-flex gap-15 align-items-center'>
-                  <div>
+                  {/* <div>
                     <a href=''><TbGitCompare className='fs-5 me-2' /> Add to Compare</a>
-                  </div>
-                  <div>
-                    <a href=''><AiOutlineHeart className='fs-5 me-2' /> Add to Wishlist</a>
-                  </div>
+                  </div> */}
+                  {/* <div>
+                    <a href=''><AiOutlineHeart className='fs-5 me-2' /> Thêm vào danh sách mong muốn</a>
+                  </div> */}
                 </div>
-
                 <div className='d-flex gap-10 flex-column my-3'>
-                  <h3 className='product-heading'>Shipping & Returns :</h3>
-                  <p className='product-data'>Free shipping and returns available on all orders!
-                    We ship all US domestic orders within <b>5-10 business days!</b>
+                  <h3 className='product-heading'>Vận chuyển và Trả hàng :</h3>
+                  <p className='product-data'>
+                    Chúng tôi vận chuyển tất cả các đơn đặt hàng nội địa trong vòng <b>3-7 ngày làm việc!</b>
                   </p>
                 </div>
                 <div className='d-flex gap-10 align-items-center my-2'>
-                  <h3 className='product-heading'>Product link :</h3>
+                  <h3 className='product-heading'>Chia sẻ :</h3>
                   <a
                     href='javascript:void(0);'
                     onClick={() => {
@@ -256,9 +232,28 @@ const SingleProduct = () => {
                       );
                     }}
                   >
-                    Copy product link
+                    Sao chép đường dẫn sản phẩm
                   </a>
                 </div>
+              </div>
+              <div className='pt-4 fw-600'>
+                <h4 className='text-center' style={{ fontWeight: "600" }}>Thông số kỹ thuật</h4>
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td>John</td>
+                      <td>Doe</td>
+                    </tr>
+                    <tr>
+                      <td>Mary</td>
+                      <td>Moe</td>
+                    </tr>
+                    <tr>
+                      <td>July</td>
+                      <td>Dooley</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -267,7 +262,7 @@ const SingleProduct = () => {
       <Container class1='description-wrapper home-wrapper-2 py-5'>
         <div className='row'>
           <div className='col-12'>
-            <h4>Description</h4>
+            <h4>Mô tả</h4>
             <div className='bg-white p-3'>
               <p
                 style={{ wordWrap: 'break-word' }}
@@ -281,11 +276,11 @@ const SingleProduct = () => {
       <Container class1='reviews-product-wrapper home-wrapper-2'>
         <div className='row'>
           <div className='col-12'>
-            <h3 id='review'>Reviews</h3>
+            <h3 id='review'>Đánh giá</h3>
             <div className='review-inner-wrapper'>
               <div className='review-head d-flex justify-content-between align-items-end'>
                 <div>
-                  <h4 className='mb-2'>Customer Reviews</h4>
+                  <h4 className='mb-2'>Tổng đánh giá</h4>
                   <div className='d-flex align-items-center gap-10'>
                     <ReactStars
                       count={5}
@@ -299,12 +294,12 @@ const SingleProduct = () => {
                 </div>
                 {orderedProduct && (
                   <div>
-                    <a href='/' className='text-dark text-decoration-underline'>Write a Review</a>
+                    <a href='/' className='text-dark text-decoration-underline'>Viết đánh giá</a>
                   </div>)
                 }
               </div>
               <div className='review-form py-4'>
-                <h4>Write a Review</h4>
+                <h4>Đánh giá</h4>
                 <ReactStars
                   count={5}
                   size={24}
@@ -360,7 +355,7 @@ const SingleProduct = () => {
       <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
-            <h3 className="section-heading">Our Popular Products</h3>
+            <h3 className="section-heading">Sản phẩm phổ biến</h3>
           </div>
         </div>
         <div className="row">
