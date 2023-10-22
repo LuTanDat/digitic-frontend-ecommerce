@@ -43,7 +43,7 @@ const Profile = () => {
   return (
     <>
       <Meta title={'My-Profile'} />
-      <BreadCrumb title='My-Profile' />
+      <BreadCrumb title='Hồ sơ của tôi' />
       <Container class1='cart-wrapper home-wrapper-2 py-5'>
         <div className='row'>
           <div className='col-12'>
