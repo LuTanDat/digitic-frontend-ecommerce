@@ -59,7 +59,7 @@ const Header = () => {
   }
   return (
     <>
-      <header className='header-upper p-2'>
+      <header className='header-upper p-2 fixed-header'>
         <div className=''>
           <div className='row align-items-center w-100'>
             <div className='col-2'>

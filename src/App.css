@@ -68,6 +68,13 @@ a{
 .header-upper{
   background-color: var(--color-3b4149);
 }
+.fixed-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+}
 .header-bottom{
   background-color: var(--color-232f3e);
 }
@@ -441,6 +448,9 @@ footer .input-group-text{
 .filter-card .form-check-input:checked{
   background-color: var(--color-febd69);
   border-color: var(--color-febd69);
+}
+.filter-card .product-tags {
+  cursor: pointer;
 }
 .sub-title{
   font-size: 14px;
