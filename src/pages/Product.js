@@ -97,7 +97,7 @@ const Product = () => {
                 <div>
                   <div className='product-tags d-flex flex-wrap align-items-center gap-10'>
                     {
-                      categories && [...new Set(categories)].map((item, index) => {
+                      tags && [...new Set(tags)].map((item, index) => {
                         return (
                           <span onClick={() => setTag(item)} key={index} className='badge bg-light text-secondary rounded-3 py-2 px-3'>
                             {item}
