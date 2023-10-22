@@ -10,12 +10,13 @@ import { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 
 let profileSchema = Yup.object().shape({
-  firstName: Yup.string().required("First Name is Required"),
-  lastName: Yup.string().required("Last Name is Required"),
+  firstName: Yup.string().required("Họ không được để trống"),
+  lastName: Yup.string().required("Tên không được để trống"),
   email: Yup.string()
-    .email("Email should be valid")
-    .required("Email is Required"),
-  mobile: Yup.string().required("Mobile No is Required"),
+    .email("Email không khả dụng")
+    .required("Email không được để trống"),
+  mobile: Yup.string().required("Số điện thoại không được để trống"),
+  // address: Yup.string().required("Địa chỉ không được để trống"),
 });
 
 const Profile = () => {
@@ -31,6 +32,7 @@ const Profile = () => {
       lastName: userState?.lastName,
       email: userState?.email,
       mobile: userState?.mobile,
+      address: userState?.address,
     },
     validationSchema: profileSchema,
     onSubmit: values => {
@@ -46,7 +48,7 @@ const Profile = () => {
         <div className='row'>
           <div className='col-12'>
             <div className='d-flex justify-content-between align-items-center'>
-              <h3 className='my-3'>Update Profile</h3>
+              <h3 className='my-3 section-heading'>Cập nhật hồ sơ</h3>
               <FiEdit className='fs-3' onClick={() => setEdit(false)} />
             </div>
           </div>
@@ -55,7 +57,7 @@ const Profile = () => {
               onSubmit={formik.handleSubmit}
             >
               <div className="mb-3">
-                <label htmlFor="example1" className="form-label">First Name</label>
+                <label htmlFor="example1" className="form-label">Tên</label>
                 <input
                   type="text"
                   name='firstName'
@@ -71,7 +73,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="mb-3">
-                <label htmlFor="example2" className="form-label">Last Name</label>
+                <label htmlFor="example2" className="form-label">Họ</label>
                 <input
                   type="text"
                   name='lastName'
@@ -87,7 +89,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                <label htmlFor="exampleInputEmail1" className="form-label">Email</label>
                 <input
                   type="email"
                   name='email'
@@ -104,7 +106,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="mb-3">
-                <label htmlFor="exampleInputEmail2" className="form-label">Mobile No</label>
+                <label htmlFor="exampleInputEmail2" className="form-label">Số điện thoại</label>
                 <input
                   type="text"
                   name='mobile'
@@ -118,6 +120,22 @@ const Profile = () => {
                 />
                 <div className="error">
                   {formik.touched.mobile && formik.errors.mobile}
+                </div>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="example3" className="form-label">Địa chỉ</label>
+                <input
+                  type="text"
+                  name='address'
+                  disabled={edit}
+                  className="form-control"
+                  id="example3"
+                  value={formik.values.address}
+                  onChange={formik.handleChange("address")}
+                  onBlur={formik.handleBlur("address")}
+                />
+                <div className="error">
+                  {formik.touched.address && formik.errors.address}
                 </div>
               </div>
               {edit === false && <button type="submit" className="btn btn-primary">Save</button>}
