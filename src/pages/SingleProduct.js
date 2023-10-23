@@ -19,6 +19,18 @@ import { addProdToCart } from "../features/user/userSlice";
 import { getUserCart } from '../features/user/userSlice';
 
 const SingleProduct = () => {
+  const getTokenFromLocalStorage = localStorage.getItem("customer")
+    ? JSON.parse(localStorage.getItem("customer"))
+    : null;
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+        }`,
+      Accept: "application/json",
+    },
+  };
+
   const [color, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [alreadyAdded, setAlreadyAdded] = useState(false); // prouduct da add vao cart chua ?
@@ -27,13 +39,14 @@ const SingleProduct = () => {
   const navigate = useNavigate();
   const getProductId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
+  const authState = useSelector((state) => state?.auth?.user);
   const productState = useSelector((state) => state?.product?.singleProduct);
   const productsState = useSelector((state) => state?.product?.products);
 
   const cartState = useSelector((state) => state?.auth?.cartProducts);
   useEffect(() => {
     dispatch(getAProduct(getProductId));
-    dispatch(getUserCart());
+    dispatch(getUserCart(config2));
     dispatch(getAllProducts())
   }, [])
   useEffect(() => {
@@ -45,24 +58,23 @@ const SingleProduct = () => {
   }, [])
 
   const uploadCart = () => {
-    if (color === null) {
-      toast.error("Please Choose Color");
-      return false;
-    } else {
-      dispatch(addProdToCart({
-        productId: productState?._id,
-        color,
-        quantity,
-        price: productState?.price
-      }))
-      navigate('/cart');
-    }
+    // if (color === null) {
+    //   toast.error("Please Choose Color");
+    //   return false;
+
+    dispatch(addProdToCart({
+      productId: productState?._id,
+      color: color || productState?.color[0]?._id,
+      quantity,
+      price: productState?.price
+    }))
+    navigate('/cart');
   }
 
   const props = {
     width: 400,
-    height: 600,
-    zoomWidth: 600,
+    height: 400,
+    zoomWidth: 400,
     img: productState?.images[0]?.url ? productState?.images[0]?.url : "https://www.apple.com/newsroom/images/2023/09/apple-introduces-the-advanced-new-apple-watch-series-9/article/Apple-Watch-S9-hero-230912_Full-Bleed-Image.jpg.xlarge.jpg"
   };
 
@@ -118,15 +130,15 @@ const SingleProduct = () => {
     <>
       <Meta title='Product Name' />
       <BreadCrumb title={productState?.title} />
-      <Container class1='main-product-wrapper home-wrapper-2 py-5'>
+      <Container class1='main-product-wrapper home-wrapper-2 py-4'>
         <div className='row'>
-          <div className='col-6'>
+          <div className='col-5'>
             <div className='main-product-image'>
               <div>
                 <ReactImageZoom {...props} />
               </div>
             </div>
-            <div className='other-prouduct-image d-flex flex-wrap gap-15'>
+            {/* <div className='other-prouduct-image d-flex flex-wrap gap-15'>
               {
                 productState?.images.map((item, index) => {
                   return (
@@ -139,29 +151,34 @@ const SingleProduct = () => {
                   )
                 })
               }
-            </div>
+            </div> */}
           </div>
-          <div className='col-6'>
+          <div className='col-7'>
             <div className='main-product-detail'>
               <div className='border-bottom'>
                 <h3 className='title'>{productState?.title}</h3>
               </div>
-              <div className='border-bottom py-3'>
-                <p className='price'>$ {productState?.price}</p>
-                <div className='d-flex align-items-center gap-10'>
-                  <ReactStars
-                    count={5}
-                    size={24}
-                    value={parseInt(productState?.totalrating)}
-                    edit={false}
-                    activeColor="#ffd700"
-                  />
+              <div className='border-bottom py-2'>
+                <h4 className='price' style={{ color: "red" }}>{productState?.price} đ</h4>
+                <div className='d-flex justify-content-between align-items-center gap-10'>
+                  <div className='d-flex align-items-center gap-10'>
+                    <ReactStars
+                      count={5}
+                      size={24}
+                      value={parseInt(productState?.totalrating)}
+                      edit={false}
+                      activeColor="#ffd700"
+                    />
+                    <p className='mb-0'>{`${productState?.ratings?.length} đánh giá`}</p>
+                  </div>
+                  {orderedProduct && (
+                    <div>
+                      <a href='#review' className='review-btn text-decoration-underline'>Viết đánh giá</a>
+                    </div>)
+                  }
                 </div>
-                <a className='review-btn' href='#review'>
-                  Viết đánh giá
-                </a>
               </div>
-              <div className='border-bottom pt-3'>
+              <div className='pt-2'>
                 {/* <div className='d-flex gap-10 flex-column mt-2 mb-3'>
                   <h3 className='product-heading'>Size :</h3>
                   <div className='d-flex flex-wrap gap-15'>
@@ -222,7 +239,7 @@ const SingleProduct = () => {
                     Chúng tôi vận chuyển tất cả các đơn đặt hàng nội địa trong vòng <b>3-7 ngày làm việc!</b>
                   </p>
                 </div>
-                <div className='d-flex gap-10 align-items-center my-2'>
+                <div className='d-flex gap-10 align-items-center mt-2'>
                   <h3 className='product-heading'>Chia sẻ :</h3>
                   <a
                     href='javascript:void(0);'
@@ -236,32 +253,13 @@ const SingleProduct = () => {
                   </a>
                 </div>
               </div>
-              <div className='pt-4 fw-600'>
-                <h4 className='text-center' style={{ fontWeight: "600" }}>Thông số kỹ thuật</h4>
-                <table class="table table-striped">
-                  <tbody>
-                    <tr>
-                      <td>John</td>
-                      <td>Doe</td>
-                    </tr>
-                    <tr>
-                      <td>Mary</td>
-                      <td>Moe</td>
-                    </tr>
-                    <tr>
-                      <td>July</td>
-                      <td>Dooley</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
             </div>
           </div>
         </div>
       </Container>
-      <Container class1='description-wrapper home-wrapper-2 py-5'>
+      <Container class1='description-wrapper home-wrapper-2 py-4'>
         <div className='row'>
-          <div className='col-12'>
+          <div className='col-8'>
             <h4>Mô tả</h4>
             <div className='bg-white p-3'>
               <p
@@ -271,9 +269,30 @@ const SingleProduct = () => {
               </p>
             </div>
           </div>
+          <div className='col-4'>
+            <div className='p-3 pt-0'>
+              <h4 className='text-center' style={{ fontWeight: "600" }}>Thông số kỹ thuật</h4>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                  </tr>
+                  <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                  </tr>
+                  <tr>
+                    <td>July</td>
+                    <td>Dooley</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </Container>
-      <Container class1='reviews-product-wrapper home-wrapper-2'>
+      <Container class1='reviews-product-wrapper home-wrapper-2 py-3'>
         <div className='row'>
           <div className='col-12'>
             <h3 id='review'>Đánh giá</h3>
@@ -285,25 +304,20 @@ const SingleProduct = () => {
                     <ReactStars
                       count={5}
                       size={24}
-                      value={4}
+                      value={parseInt(productState?.totalrating)}
                       edit={false}
                       activeColor="#ffd700"
                     />
-                    <p className='mb-0'>Based on 2 reviews</p>
+                    <p className='mb-0'>{`${productState?.ratings?.length} đánh giá`}</p>
                   </div>
                 </div>
-                {orderedProduct && (
-                  <div>
-                    <a href='/' className='text-dark text-decoration-underline'>Viết đánh giá</a>
-                  </div>)
-                }
               </div>
               <div className='review-form py-4'>
                 <h4>Đánh giá</h4>
                 <ReactStars
                   count={5}
                   size={24}
-                  value={4}
+                  value={5}
                   edit={true}
                   activeColor="#ffd700"
                   onChange={(e) => { setStar(e) }}
@@ -330,7 +344,7 @@ const SingleProduct = () => {
                     return (
                       <div key={index} className='review'>
                         <div className='d-flex gap-10 align-items-center'>
-                          <h6 className='mb-0'>Lu Tan Dat</h6>
+                          <h6 className='mb-0'>{authState?.firstName}</h6>
                           <ReactStars
                             count={5}
                             size={24}
@@ -340,7 +354,7 @@ const SingleProduct = () => {
                           />
                         </div>
 
-                        <p className='mt-3'>
+                        <p className='mt-3 mb-0'>
                           {item?.comment}
                         </p>
                       </div>
@@ -352,7 +366,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </Container>
-      <Container class1="popular-wrapper py-5 home-wrapper-2">
+      <Container class1="popular-wrapper home-wrapper-2 py-4">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Sản phẩm phổ biến</h3>
