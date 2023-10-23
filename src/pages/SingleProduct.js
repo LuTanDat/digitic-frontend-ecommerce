@@ -132,7 +132,7 @@ const SingleProduct = () => {
       <BreadCrumb title={productState?.title} />
       <Container class1='main-product-wrapper home-wrapper-2 py-4'>
         <div className='row'>
-          <div className='col-5'>
+          <div className='col-7'>
             <div className='main-product-image'>
               <div>
                 <ReactImageZoom {...props} />
@@ -153,7 +153,7 @@ const SingleProduct = () => {
               }
             </div> */}
           </div>
-          <div className='col-7'>
+          <div className='col-5'>
             <div className='main-product-detail'>
               <div className='border-bottom'>
                 <h3 className='title'>{productState?.title}</h3>
@@ -188,7 +188,7 @@ const SingleProduct = () => {
                     <span className='badge border border-1 bg-white text-dark text-secondary'>XL</span>
                   </div>
                 </div> */}
-                <div className='d-flex gap-10 flex-column mt-2 mb-3'>
+                <div className='d-flex gap-30 flex-row mt-2 mb-3'>
                   {
                     alreadyAdded === false && <>
                       <h3 className='product-heading'>Màu :</h3>
@@ -260,7 +260,7 @@ const SingleProduct = () => {
       <Container class1='description-wrapper home-wrapper-2 py-4'>
         <div className='row'>
           <div className='col-8'>
-            <h4>Mô tả</h4>
+            <h4 style={{ fontWeight: "600" }}>Mô tả</h4>
             <div className='bg-white p-3'>
               <p
                 style={{ wordWrap: 'break-word' }}
@@ -272,19 +272,27 @@ const SingleProduct = () => {
           <div className='col-4'>
             <div className='p-3 pt-0'>
               <h4 className='text-center' style={{ fontWeight: "600" }}>Thông số kỹ thuật</h4>
-              <table class="table table-striped">
+              <table class="table table-striped mb-0">
                 <tbody>
                   <tr>
-                    <td>John</td>
-                    <td>Doe</td>
+                    <td>Thương hiệu</td>
+                    <td></td>
                   </tr>
                   <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
+                    <td>Kích thước</td>
+                    <td></td>
                   </tr>
                   <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
+                    <td>Trọng lượng</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Công suất</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Tuổi thọ</td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>

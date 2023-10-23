@@ -695,6 +695,7 @@ footer .input-group-text{
 }
 
 .main-product-image{
+  text-align: center;
   padding: 20px;
   background-color: white;
   border-radius: 10px;
@@ -703,7 +704,7 @@ footer .input-group-text{
   border: 1px solid rgba(0,0,0,0.25);
 }
 .main-product-image img{
-  width: 100% !important;
+  width: 400px !important;
   height: 400px !important;
   object-fit: cover;
 }
