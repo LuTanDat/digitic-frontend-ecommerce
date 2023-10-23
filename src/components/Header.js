@@ -63,9 +63,9 @@ const Header = () => {
         <div className=''>
           <div className='row align-items-center w-100'>
             <div className='col-2'>
-              <h2 className='text-center mb-0'>
-                <Link to='/'>Tech Smart</Link>
-              </h2>
+              <Link to='/' style={{ width: "100%", padding: "0 25px" }}>
+                <img src='images/logo.png' alt='logo' style={{ width: "100%", height: "48px" }} />
+              </Link>
             </div>
             <div className='col-5'>
               <div className='menu-links'>
