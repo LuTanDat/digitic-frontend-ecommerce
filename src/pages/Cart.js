@@ -61,11 +61,11 @@ const Cart = () => {
       <Container class1='cart-wrapper home-wrapper-2 py-5'>
         <div className='row'>
           <div className='col-12'>
-            <div className='cart-header py-3 d-flex justify-content-between align-items-center'>
-              <h4 className='cart-col-1'>Product</h4>
-              <h4 className='cart-col-2'>Price</h4>
-              <h4 className='cart-col-3'>Quantity</h4>
-              <h4 className='cart-col-4'>Total</h4>
+            <div className='cart-header p-3 d-flex justify-content-between align-items-center'>
+              <h4 className='cart-col-1 mb-0 text-white fs-5'>Sản phẩm</h4>
+              <h4 className='cart-col-2 mb-0 text-white fs-5'>Giá</h4>
+              <h4 className='cart-col-3 mb-0 text-white fs-5'>Số lượng</h4>
+              <h4 className='cart-col-4 mb-0 text-white fs-5'>Thành tiền</h4>
             </div>
             {
               userCartState && userCartState?.map((item, index) => {
@@ -91,7 +91,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className='cart-col-2'>
-                      <h5 className='price'>$ {item?.price}</h5>
+                      <h5 className='price'>{item?.price} đ</h5>
                     </div>
                     <div className='cart-col-3 d-flex align-items-center gap-15'>
                       <div>
@@ -122,15 +122,14 @@ const Cart = () => {
             <div className='col-12 py-2 mt-4'>
               <div className='d-flex justify-content-between align-items-baseline'>
                 <Link to='/product' className='button'>
-                  Continue Shopping
+                  Tiếp tục mua sắm
                 </Link>
                 {
                   (totalAmount !== null || totalAmount !== 0) &&
                   <div className='d-flex flex-column align-items-end'>
-                    <h4>SubTotal: $ {totalAmount}</h4>
-                    <p>Taxes and Shipping calculated at checkout</p>
-                    <Link to='/checkout' className='button'>
-                      Checkout
+                    <h4>{`Tổng tiền : ${totalAmount} đ`}</h4>
+                    <Link to='/checkout' className='button' style={{ backgroundColor: "#fd7e14" }}>
+                      Thanh toán
                     </Link>
                   </div>
                 }

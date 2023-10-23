@@ -768,6 +768,9 @@ footer .input-group-text{
 
 
 /* Cart Page */
+.cart-header{
+  background-color: #fd7e14;
+}
 .cart-header,
 .cart-data{
   border-bottom: 1px solid #aeaeae;
