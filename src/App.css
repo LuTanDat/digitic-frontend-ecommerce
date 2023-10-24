@@ -13,6 +13,7 @@
   --color-ededed: #ededed;
   --color-777777: #777777;
   --color-1c1c1b: #1c1c1b;
+  --color-fd7e14: #fd7e14;
 }
 .section-heading{
   font-size: 26px;
@@ -771,7 +772,7 @@ footer .input-group-text{
 
 /* Cart Page */
 .cart-header{
-  background-color: #fd7e14;
+  background-color: var(--color-fd7e14);
 }
 .cart-header,
 .cart-data{

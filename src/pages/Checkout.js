@@ -155,11 +155,10 @@ const Checkout = () => {
 
   return (
     <>
-      <Container class1="checkout-wrapper home-wrapper-2 py-5">
+      <Container class1="checkout-wrapper home-wrapper-2 py-5" style={{ marginTop: "70px" }}>
         <div className="row">
-          <div className="col-7">
+          <div className="col-8">
             <div className="checkout-left-data">
-              <h3 className="website name">Dev LuDat</h3>
               <nav
                 style={{ "--bs-breadcrumb-divider": ">" }}
                 aria-label="breadcrumb"
@@ -175,34 +174,18 @@ const Checkout = () => {
                     className="breadcrumb-item total-price active"
                     aria-current="page"
                   >
-                    Information
-                  </li>
-                  &nbsp; /
-                  <li
-                    className="breadcrumb-item total-price active"
-                    aria-current="page"
-                  >
-                    Shipping
-                  </li>
-                  &nbsp; /
-                  <li
-                    className="breadcrumb-item total-price active"
-                    aria-current="page"
-                  >
                     Payment
                   </li>
                 </ol>
               </nav>
-              <h4 className="title total">Contact Information</h4>
-              <p className="user-details total">ludathoc@gmail.com</p>
 
-              <h4 className="mb-3">Shipping Address</h4>
+              <h4 className="mb-3">Thông tin giao hàng</h4>
               <form
                 action=""
                 onSubmit={formik.handleSubmit}
                 className="d-flex flex-wrap gap-15 justify-content-between"
               >
-                <div className="w-100">
+                {/* <div className="w-100">
                   <select
                     name="country"
                     value={formik.values.country}
@@ -220,11 +203,11 @@ const Checkout = () => {
                   <div className="error ms-2 my-1">
                     {formik.touched.country && formik.errors.country}
                   </div>
-                </div>
+                </div> */}
                 <div className="flex-grow-1">
                   <input
                     type="text"
-                    placeholder="First Name"
+                    placeholder="Tên"
                     className="form-control"
                     name='firstName'
                     value={formik.values.firstName}
@@ -238,7 +221,7 @@ const Checkout = () => {
                 <div className="flex-grow-1">
                   <input
                     type="text"
-                    placeholder="Last Name"
+                    placeholder="Họ"
                     className="form-control"
                     name='lastName'
                     value={formik.values.lastName}
@@ -252,7 +235,21 @@ const Checkout = () => {
                 <div className="w-100">
                   <input
                     type="text"
-                    placeholder="Address"
+                    placeholder="Số điện thoại"
+                    className="form-control"
+                    name='mobile'
+                    value={formik.values.mobile}
+                    onChange={formik.handleChange("mobile")}
+                    onBlur={formik.handleBlur("mobile")}
+                  />
+                  <div className="error ms-2 my-1">
+                    {formik.touched.mobile && formik.errors.mobile}
+                  </div>
+                </div>
+                <div className="w-100 pb-3 border-bottom">
+                  <input
+                    type="text"
+                    placeholder="Địa chỉ"
                     className="form-control"
                     name='address'
                     value={formik.values.address}
@@ -263,7 +260,7 @@ const Checkout = () => {
                     {formik.touched.address && formik.errors.address}
                   </div>
                 </div>
-                <div className="w-100">
+                {/* <div className="w-100">
                   <input
                     type="text"
                     placeholder="Apartment, Suit, etc (Optional)"
@@ -323,79 +320,89 @@ const Checkout = () => {
                   <div className="error ms-2 my-1">
                     {formik.touched.pincode && formik.errors.pincode}
                   </div>
+                </div>*/}
+                <div className="border-bottom py-4">
+                  <h4 className="mb-3">Sản phẩm</h4>
+                  {cartState &&
+                    cartState?.map((item, index) => {
+                      return (
+                        <div
+                          className="d-flex gap-10 mb-2 align-items-center"
+                          key={index}
+                        >
+                          <div className="w-75 d-flex gap-10">
+                            <div className="w-25 position-relative">
+                              <span
+                                style={{ top: "-10px", right: "2px" }}
+                                className="badge bg-secondary text-white rounded-circle p-2 position-absolute"
+                              >
+                                {item?.quantity}
+                              </span>
+                              <img
+                                src={item?.productId?.images[0]?.url}
+                                width={100}
+                                height={100}
+                                alt="product"
+                              />
+                            </div>
+                            <div>
+                              <h5 className="total-price">
+                                {item?.productId?.title}
+                              </h5>
+                              <p className="total-price">{item?.color?.title}</p>
+                            </div>
+                          </div>
+                          <div className="flex-grow-1 text-center">
+                            <h5 className="total">
+                              {item?.price * item?.quantity} đ
+                            </h5>
+                          </div>
+                        </div>
+                      );
+                    })}
                 </div>
                 <div className="w-100">
                   <div className="d-flex justify-content-between align-items-center">
                     <Link to="/cart" className="text-dark">
                       <BiArrowBack className="me-2" />
-                      Return to Cart
+                      Trở về giỏ hàng
                     </Link>
                     <Link to="/product" className="button">
-                      Continue to Shopping
+                      Tiếp tục mua sắm
                     </Link>
-                    <button className="button" type="submit">
+                    {/* <button className="button" type="submit">
                       Place Order
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </form>
             </div>
           </div>
-          <div className="col-5">
-            <div className="border-bottom py-4">
-              {cartState &&
-                cartState?.map((item, index) => {
-                  return (
-                    <div
-                      className="d-flex gap-10 mb-2 align-items-center"
-                      key={index}
-                    >
-                      <div className="w-75 d-flex gap-10">
-                        <div className="w-25 position-relative">
-                          <span
-                            style={{ top: "-10px", right: "2px" }}
-                            className="badge bg-secondary text-white rounded-circle p-2 position-absolute"
-                          >
-                            {item?.quantity}
-                          </span>
-                          <img
-                            src={item?.productId?.images[0]?.url}
-                            width={100}
-                            height={100}
-                            alt="product"
-                          />
-                        </div>
-                        <div>
-                          <h5 className="total-price">
-                            {item?.productId?.title}
-                          </h5>
-                          <p className="total-price">{item?.color?.title}</p>
-                        </div>
-                      </div>
-                      <div className="flex-grow-1">
-                        <h5 className="total">
-                          $ {item?.price * item?.quantity}
-                        </h5>
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
+          <div className="col-4">
+
             <div className="border-bottom py-4">
               <div className="d-flex justify-content-between align-items-center">
-                <p className="total">Subtotal </p>
-                <p className="total-price">$ {totalAmount ? totalAmount : 0}</p>
+                <p className="total">Tổng tiền </p>
+                <p className="total-price">{totalAmount ? totalAmount : 0} đ</p>
               </div>
               <div className="d-flex justify-content-between align-items-center">
-                <p className="mb-0 total">Shipping </p>
-                <p className="mb-0 total-price">$ 5</p>
+                <p className="mb-0 total">Phí vận chuyển </p>
+                <p className="mb-0 total-price">20000 đ</p>
               </div>
             </div>
-            <div className="d-flex justify-content-between align-items-center border-bottom py-4">
-              <h4 className="total">Total </h4>
-              <h5 className="total-price">
-                $ {totalAmount ? totalAmount + 5 : 0}
-              </h5>
+            <div>
+              <div className="d-flex justify-content-between align-items-center pt-4">
+                <h4 className="total">Thành tiền </h4>
+                <h5 className="total-price">
+                  {totalAmount ? totalAmount + 5 : 0} đ
+                </h5>
+              </div>
+              <button className="button w-100 mt-3" type="submit" style={{ backgroundColor: "#fd7e14" }}>
+                Thanh toán ngay
+              </button>
+              <button className="button w-100 mt-3" type="submit" style={{ backgroundColor: "#fd7e14" }}>
+                Thanh toán khi nhận hàng
+              </button>
             </div>
           </div>
         </div>
