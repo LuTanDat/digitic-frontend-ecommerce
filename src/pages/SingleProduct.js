@@ -294,6 +294,10 @@ const SingleProduct = () => {
                     <td>Tuổi thọ</td>
                     <td></td>
                   </tr>
+                  <tr>
+                    <td>Bảo hành</td>
+                    <td></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
