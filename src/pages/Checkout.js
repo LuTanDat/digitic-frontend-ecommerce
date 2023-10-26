@@ -379,8 +379,17 @@ const Checkout = () => {
             </div>
           </div>
           <div className="col-4">
-
             <div className="border-bottom py-4">
+              <h4 className="mb-3">Phương thức thanh toán</h4>
+              <div>
+                <input type="radio" id="COD" name="payment" value="COD" className="me-2" />
+                <label for="COD">Thanh toán khi nhận hàng</label><br />
+                <input type="radio" id="card" name="payment" value="card" className="me-2" />
+                <label for="card">Thanh toán online</label><br />
+              </div>
+            </div>
+            <div className="border-bottom py-4">
+              <h4 className="mb-3">Thanh toán</h4>
               <div className="d-flex justify-content-between align-items-center">
                 <p className="total">Tổng tiền </p>
                 <p className="total-price">{totalAmount ? totalAmount : 0} đ</p>
@@ -398,10 +407,7 @@ const Checkout = () => {
                 </h5>
               </div>
               <button className="button w-100 mt-3" type="submit" style={{ backgroundColor: "#fd7e14" }}>
-                Thanh toán ngay
-              </button>
-              <button className="button w-100 mt-3" type="submit" style={{ backgroundColor: "#fd7e14" }}>
-                Thanh toán khi nhận hàng
+                Đặt hàng
               </button>
             </div>
           </div>
