@@ -17,6 +17,7 @@ import { addRating, getAProduct, getAllProducts } from '../features/products/pro
 import { toast } from 'react-toastify';
 import { addProdToCart } from "../features/user/userSlice";
 import { getUserCart } from '../features/user/userSlice';
+import { getACoupon } from '../features/coupon/couponSlice';
 
 const SingleProduct = () => {
   const getTokenFromLocalStorage = localStorage.getItem("customer")
@@ -42,12 +43,14 @@ const SingleProduct = () => {
   const authState = useSelector((state) => state?.auth?.user);
   const productState = useSelector((state) => state?.product?.singleProduct);
   const productsState = useSelector((state) => state?.product?.products);
-
   const cartState = useSelector((state) => state?.auth?.cartProducts);
+  const couponState = useSelector((state) => state?.coupon?.couponDiscount);
+
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     dispatch(getUserCart(config2));
-    dispatch(getAllProducts())
+    dispatch(getAllProducts());
+    dispatch(getACoupon(getProductId));
   }, [])
   useEffect(() => {
     for (let index = 0; index < cartState?.length; index++) {
@@ -64,7 +67,7 @@ const SingleProduct = () => {
 
     dispatch(addProdToCart({
       productId: productState?._id,
-      color: color || productState?.color[0]?._id,
+      color: color || productState?.color,
       quantity,
       price: productState?.price
     }))
@@ -124,7 +127,19 @@ const SingleProduct = () => {
     return false;
   }
 
-
+  // handle price product have discount ???
+  let priceAfterDiscount = 0;
+  if (couponState) {
+    priceAfterDiscount = productState?.price * (100 - couponState) / 100;
+  }
+  const formattedPrice = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  }).format(productState?.price);
+  const formattedPriceAfterDiscount = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  }).format(priceAfterDiscount);
 
   return (
     <>
@@ -159,7 +174,18 @@ const SingleProduct = () => {
                 <h3 className='title'>{productState?.title}</h3>
               </div>
               <div className='border-bottom py-2'>
-                <h4 className='price' style={{ color: "red" }}>{productState?.price} đ</h4>
+                <div className='d-flex gap-15'>
+                  <h4 className='price' style={{ color: couponState ? "gray" : "red" }}>
+                    {
+                      couponState ? <del>{formattedPrice}</del> : formattedPrice
+                    }
+                  </h4>
+                  {// thieu so sanh ngay het han
+                    couponState && (
+                      <h4 className='price' style={{ color: "red" }}>{formattedPriceAfterDiscount}</h4>
+                    )
+                  }
+                </div>
                 <div className='d-flex justify-content-between align-items-center gap-10'>
                   <div className='d-flex align-items-center gap-10'>
                     <ReactStars
@@ -272,7 +298,7 @@ const SingleProduct = () => {
           <div className='col-4'>
             <div className='p-3 pt-0'>
               <h4 className='text-center' style={{ fontWeight: "600" }}>Thông số kỹ thuật</h4>
-              <table class="table table-striped mb-0">
+              <table className="table table-striped mb-0">
                 <tbody>
                   <tr>
                     <td>Thương hiệu</td>
