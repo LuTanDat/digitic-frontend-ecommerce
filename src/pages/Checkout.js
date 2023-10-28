@@ -321,7 +321,7 @@ const Checkout = () => {
                     {formik.touched.pincode && formik.errors.pincode}
                   </div>
                 </div>*/}
-                <div className="border-bottom py-4">
+                <div className="w-100 border-bottom py-4">
                   <h4 className="mb-3">Sản phẩm</h4>
                   {cartState &&
                     cartState?.map((item, index) => {
@@ -330,20 +330,22 @@ const Checkout = () => {
                           className="d-flex gap-10 mb-2 align-items-center"
                           key={index}
                         >
-                          <div className="w-75 d-flex gap-10">
-                            <div className="w-25 position-relative">
-                              <span
-                                style={{ top: "-10px", right: "2px" }}
-                                className="badge bg-secondary text-white rounded-circle p-2 position-absolute"
-                              >
-                                {item?.quantity}
-                              </span>
-                              <img
-                                src={item?.productId?.images[0]?.url}
-                                width={100}
-                                height={100}
-                                alt="product"
-                              />
+                          <div className="w-75 d-flex gap-30">
+                            <div className="position-relative">
+                              <div>
+                                <span
+                                  style={{ top: "-10px", right: "-10px" }}
+                                  className="badge bg-secondary text-white rounded-circle p-2 position-absolute"
+                                >
+                                  {item?.quantity}
+                                </span>
+                                <img
+                                  src={item?.productId?.images[0]?.url}
+                                  width={100}
+                                  height={100}
+                                  alt="product"
+                                />
+                              </div>
                             </div>
                             <div>
                               <h5 className="total-price">
@@ -354,7 +356,7 @@ const Checkout = () => {
                           </div>
                           <div className="flex-grow-1 text-center">
                             <h5 className="total">
-                              {item?.price * item?.quantity} đ
+                              {totalAmount ? (item?.price * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                             </h5>
                           </div>
                         </div>
@@ -382,28 +384,32 @@ const Checkout = () => {
             <div className="border-bottom py-4">
               <h4 className="mb-3">Phương thức thanh toán</h4>
               <div>
-                <input type="radio" id="COD" name="payment" value="COD" className="me-2" />
-                <label for="COD">Thanh toán khi nhận hàng</label><br />
+                <input type="radio" id="COD" name="payment" value="COD" className="me-2" defaultChecked />
+                <label htmlFor="COD">Thanh toán khi nhận hàng</label><br />
                 <input type="radio" id="card" name="payment" value="card" className="me-2" />
-                <label for="card">Thanh toán online</label><br />
+                <label htmlFor="card">Thanh toán online</label><br />
               </div>
             </div>
             <div className="border-bottom py-4">
               <h4 className="mb-3">Thanh toán</h4>
               <div className="d-flex justify-content-between align-items-center">
                 <p className="total">Tổng tiền </p>
-                <p className="total-price">{totalAmount ? totalAmount : 0} đ</p>
+                <p className="total-price">
+                  {totalAmount ? (totalAmount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                </p>
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <p className="mb-0 total">Phí vận chuyển </p>
-                <p className="mb-0 total-price">20000 đ</p>
+                <p className="mb-0 total-price">
+                  {totalAmount ? (20000).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                </p>
               </div>
             </div>
             <div>
               <div className="d-flex justify-content-between align-items-center pt-4">
                 <h4 className="total">Thành tiền </h4>
                 <h5 className="total-price">
-                  {totalAmount ? totalAmount + 5 : 0} đ
+                  {totalAmount ? ((totalAmount + 20000)).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                 </h5>
               </div>
               <button className="button w-100 mt-3" type="submit" style={{ backgroundColor: "#fd7e14" }}>
