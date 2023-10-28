@@ -82,7 +82,7 @@ const Checkout = () => {
     let items = [];
     for (let index = 0; index < cartState?.length; index++) {
       items.push({
-        product: cartState[index].productId._id,
+        product: cartState[index].productId?._id,
         quantity: cartState[index].quantity,
         color: cartState[index].color._id,
         price: cartState[index].price

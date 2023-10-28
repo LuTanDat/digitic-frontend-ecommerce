@@ -85,7 +85,7 @@ const Cart = () => {
                         <p className='d-flex gap-3'>
                           Color:
                           <ul className='colors ps-0'>
-                            <li style={{ backgroundColor: item?.color?.title }}></li>
+                            <li style={{ backgroundColor: item?.color }}></li>
                           </ul>
                         </p>
                       </div>
@@ -112,7 +112,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className='cart-col-4'>
-                      <h5 className='price'>$ {item?.price * item?.quantity}</h5>
+                      <h5 className='price'>{item?.price * item?.quantity} đ</h5>
                     </div>
                   </div>
                 )

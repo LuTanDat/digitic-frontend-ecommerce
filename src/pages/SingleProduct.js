@@ -302,27 +302,27 @@ const SingleProduct = () => {
                 <tbody>
                   <tr>
                     <td>Thương hiệu</td>
-                    <td></td>
+                    <td>{productState?.brand}</td>
                   </tr>
                   <tr>
                     <td>Kích thước</td>
-                    <td></td>
+                    <td>{productState?.size}</td>
                   </tr>
                   <tr>
                     <td>Trọng lượng</td>
-                    <td></td>
+                    <td>{productState?.weight}</td>
                   </tr>
                   <tr>
                     <td>Công suất</td>
-                    <td></td>
+                    <td>{productState?.power}</td>
                   </tr>
                   <tr>
                     <td>Tuổi thọ</td>
-                    <td></td>
+                    <td>{productState?.lifespan}</td>
                   </tr>
                   <tr>
                     <td>Bảo hành</td>
-                    <td></td>
+                    <td>{productState?.warranty}</td>
                   </tr>
                 </tbody>
               </table>
