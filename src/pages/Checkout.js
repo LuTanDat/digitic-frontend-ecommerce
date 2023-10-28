@@ -29,6 +29,7 @@ const Checkout = () => {
   const [totalAmount, setTotalAmount] = useState(null);
   const authState = useSelector((state) => state.auth);
   const [cartProductState, setCartProductState] = useState([]);
+  const [paymentMethod, setPaymentMethod] = useState("COD"); // Mặc định là thanh toán khi nhận hàng
 
   useEffect(() => {
     let sum = 0;
@@ -383,10 +384,26 @@ const Checkout = () => {
           <div className="col-4">
             <div className="border-bottom py-4">
               <h4 className="mb-3">Phương thức thanh toán</h4>
-              <div>
-                <input type="radio" id="COD" name="payment" value="COD" className="me-2" defaultChecked />
+              <div className="form-check">
+                <input
+                  type="radio"
+                  id="COD"
+                  name="payment"
+                  value="COD"
+                  className="me-2 form-check-input"
+                  checked={paymentMethod === "COD"}
+                  onChange={() => setPaymentMethod("COD")}
+                />
                 <label htmlFor="COD">Thanh toán khi nhận hàng</label><br />
-                <input type="radio" id="card" name="payment" value="card" className="me-2" />
+                <input
+                  type="radio"
+                  id="card"
+                  name="payment"
+                  value="card"
+                  className="me-2 form-check-input"
+                  checked={paymentMethod === "card"}
+                  onChange={() => setPaymentMethod("card")}
+                />
                 <label htmlFor="card">Thanh toán online</label><br />
               </div>
             </div>
