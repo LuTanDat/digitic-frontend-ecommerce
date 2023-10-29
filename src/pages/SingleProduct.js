@@ -65,13 +65,18 @@ const SingleProduct = () => {
     //   toast.error("Please Choose Color");
     //   return false;
 
-    dispatch(addProdToCart({
-      productId: productState?._id,
-      color: color || productState?.color,
-      quantity,
-      price: productState?.price
-    }))
-    navigate('/cart');
+    if (!authState?._id) {
+      navigate('/login', { state: location.pathname })// ben login lay trong location.state, de biet duong quay ve day thay vi chuyen den trang chu
+    }
+    else {
+      dispatch(addProdToCart({
+        productId: productState?._id,
+        color: color || productState?.color,
+        quantity,
+        price: productState?.price
+      }))
+      navigate('/cart');
+    }
   }
 
   const props = {
@@ -247,7 +252,7 @@ const SingleProduct = () => {
                       type='button'
                       onClick={() => { alreadyAdded ? navigate('/cart') : uploadCart() }}
                     >
-                      {alreadyAdded ? "Go to Cart" : "Add to Cart"}
+                      {alreadyAdded ? "Đi đến giỏ hàng" : "Thêm vào giỏ hàng"}
                     </button>
                   </div>
                 </div>
@@ -367,13 +372,13 @@ const SingleProduct = () => {
                     className='w-100 form-control'
                     cols="30"
                     rows="4"
-                    placeholder='Comments'
+                    placeholder='Nội dung đánh giá'
                     onChange={(e) => { setComment(e.target.value) }}
                   >
                   </textarea>
                 </div>
                 <div className='d-flex justify-content-end mt-3'>
-                  <button onClick={addRatingToProduct} className='button border-0' type='button'>Submit  Review</button>
+                  <button onClick={addRatingToProduct} className='button border-0' type='button'>Gửi đánh giá</button>
                 </div>
               </div>
               <div className='reviews mt-4'>

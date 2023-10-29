@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Container from '../components/Container';
 import CustomInput from '../components/CustomInput';
 import { useFormik } from 'formik';
@@ -20,6 +20,7 @@ let loginSchema = Yup.object().shape({
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const authState = useSelector((state) => state.auth);
 
@@ -35,7 +36,11 @@ const Login = () => {
   });
   useEffect(() => {
     if (authState.user !== null && authState.isError === false) {
-      navigate("/")
+      if (location?.state) {
+        navigate(location?.state)
+      } else {
+        navigate("/")
+      }
     }
   }, [authState])
   return (

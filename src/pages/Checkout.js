@@ -16,10 +16,11 @@ let shippingSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is Required"),
   lastName: Yup.string().required("Last Name is Required"),
   address: Yup.string().required("Address Details is Required"),
-  state: Yup.string().required("State is Required"),
-  city: Yup.string().required("City is Required"),
-  country: Yup.string().required("Country is Required"),
-  pincode: Yup.string().required("Zipcode is Required"),
+  // state: Yup.string().required("State is Required"),
+  // city: Yup.string().required("City is Required"),
+  // country: Yup.string().required("Country is Required"),
+  // pincode: Yup.string().required("Zipcode is Required"),
+  mobile: Yup.string().required("Mobile is Required"),
 });
 
 const Checkout = () => {
@@ -50,11 +51,12 @@ const Checkout = () => {
       firstName: "",
       lastName: "",
       address: "",
-      state: "",
-      city: "",
-      country: "",
-      pincode: "",
-      other: "",
+      // state: "",
+      // city: "",
+      // country: "",
+      // pincode: "",
+      // other: "",
+      mobile: "",
     },
     validationSchema: shippingSchema,
     onSubmit: (values) => {
