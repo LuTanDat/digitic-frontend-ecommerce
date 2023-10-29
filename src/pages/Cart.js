@@ -57,7 +57,7 @@ const Cart = () => {
   return (
     <>
       <Meta title={'Cart'} />
-      <BreadCrumb title='Cart' />
+      <BreadCrumb title='Giỏ hàng' />
       <Container class1='cart-wrapper home-wrapper-2 py-5'>
         <div className='row'>
           <div className='col-12'>
@@ -91,7 +91,12 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className='cart-col-2'>
-                      <h5 className='price'>{item?.price} đ</h5>
+                      <h5 className='price'>
+                        {item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                      </h5>
+                      <h5 className='price'>
+                        {item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                      </h5>
                     </div>
                     <div className='cart-col-3 d-flex align-items-center gap-15'>
                       <div>
@@ -112,7 +117,10 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className='cart-col-4'>
-                      <h5 className='price'>{item?.price * item?.quantity} đ</h5>
+                      <h5 className='price'>
+                        {item?.price * item?.quantity ? (item?.price * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+
+                      </h5>
                     </div>
                   </div>
                 )
@@ -127,7 +135,7 @@ const Cart = () => {
                 {
                   (totalAmount !== null || totalAmount !== 0) &&
                   <div className='d-flex flex-column align-items-end'>
-                    <h4>{`Tổng tiền : ${totalAmount} đ`}</h4>
+                    <h4>{`Tổng tiền : ${totalAmount ? (totalAmount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}</h4>
                     <Link to='/checkout' className='button' style={{ backgroundColor: "#fd7e14" }}>
                       Thanh toán
                     </Link>
