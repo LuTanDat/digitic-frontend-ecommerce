@@ -231,7 +231,7 @@ const SingleProduct = () => {
                           type='number'
                           name=''
                           min={1}
-                          max={10}
+                          max={100}
                           className='form-control'
                           style={{ width: '70px' }}
                           id=''

@@ -146,7 +146,7 @@ const Product = () => {
                   </select>
                 </div>
                 <div className='d-flex align-items-center gap-10'>
-                  <p className='totalproducts mb-0'>21 products</p>
+                  <p className='totalproducts mb-0'>{productState?.length} products</p>
                   <div className='d-flex gap-10 align-items-center grid'>
                     <img onClick={() => setGrid(3)}
                       src='images/gr4.svg'
