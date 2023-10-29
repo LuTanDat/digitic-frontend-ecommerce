@@ -46,6 +46,14 @@ const Checkout = () => {
     }
   }, [authState])
 
+  const deliveryPrice = () => {
+    if (totalAmount > 200000) {
+      return 10000
+    } else {
+      return 15000
+    }
+  }
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -418,9 +426,15 @@ const Checkout = () => {
                 </p>
               </div>
               <div className="d-flex justify-content-between align-items-center">
+                <p className="total">Giảm giá </p>
+                <p className="total-price">
+                  0%
+                </p>
+              </div>
+              <div className="d-flex justify-content-between align-items-center">
                 <p className="mb-0 total">Phí vận chuyển </p>
                 <p className="mb-0 total-price">
-                  {totalAmount ? (20000).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                  {totalAmount ? (deliveryPrice()).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                 </p>
               </div>
             </div>
@@ -428,7 +442,7 @@ const Checkout = () => {
               <div className="d-flex justify-content-between align-items-center pt-4">
                 <h4 className="total">Thành tiền </h4>
                 <h5 className="total-price">
-                  {totalAmount ? ((totalAmount + 20000)).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                  {totalAmount ? ((totalAmount - 0 + deliveryPrice())).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                 </h5>
               </div>
               <button className="button w-100 mt-3" type="submit" style={{ backgroundColor: "#fd7e14" }}>
