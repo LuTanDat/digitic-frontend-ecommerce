@@ -9,6 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../features/products/productSlice';
 
 const Product = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+  const type = searchParams.get('type');
+
+  const dispatch = useDispatch();
   const [grid, setGrid] = useState(4);
   const productState = useSelector((state) => state?.product?.products);
   const [brands, setBrands] = useState([]);
@@ -22,6 +26,19 @@ const Product = () => {
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
   const [sort, setSort] = useState(null);
+
+  useEffect(() => {
+    if (type) {
+      setCategory(type);
+    }
+  }, [])
+
+  useEffect(() => {
+    getProducts();
+  }, [sort, tag, brand, category, minPrice, maxPrice]);
+  const getProducts = () => {
+    dispatch(getAllProducts({ sort, tag, brand, category, minPrice, maxPrice }));
+  }
 
   useEffect(() => {
     let newBrands = [];
@@ -39,14 +56,6 @@ const Product = () => {
   }, [productState])
 
   // console.log([...new Set(brands)], [...new Set(categories)], [...new Set(tags)]);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    getProducts();
-  }, [sort, tag, brand, category, minPrice, maxPrice]);
-  const getProducts = () => {
-    dispatch(getAllProducts({ sort, tag, brand, category, minPrice, maxPrice }));
-  }
 
   return (
     <div>

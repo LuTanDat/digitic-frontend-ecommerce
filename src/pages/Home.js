@@ -187,7 +187,7 @@ const Home = () => {
           <div className="col-12">
             <div className="categories d-flex justify-content-between flex-wrap align-items-center">
               <div
-                onClick={() => navigate("/product")}
+                onClick={() => navigate("/product?type=TV")}
                 style={{ cursor: "pointer" }}
               >
                 <img src={maylockhongkhi} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
