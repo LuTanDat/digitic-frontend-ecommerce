@@ -23,6 +23,15 @@ import slider2 from '../images/slider2.webp';
 import slider3 from '../images/slider3.webp';
 import slider4 from '../images/slider4.webp';
 
+import maylockhongkhi from '../images/may_loc_khong_khi_logo.webp';
+import quat from '../images/Quat_logo.webp';
+import denthongminh from '../images/den_thong_minh_logo.webp';
+import maychieu from '../images/May_chieu_logo.webp';
+import dogiadung from '../images/do_gia_dung_logo.webp';
+import tvbox from '../images/TVBox_logo.webp';
+
+
+
 // special product
 import wish from '../images/wish.svg';
 import wishlist from '../images/wishlist.svg';
@@ -177,61 +186,47 @@ const Home = () => {
           </div>
           <div className="col-12">
             <div className="categories d-flex justify-content-between flex-wrap align-items-center">
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Music & Gaming</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
+              <div
+                onClick={() => navigate("/product")}
+                style={{ cursor: "pointer" }}
+              >
+                <img src={maylockhongkhi} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
+                <p style={{ fontWeight: "600", textAlign: "center" }}>Máy lọc không khí</p>
               </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Cameras</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
+              <div
+                onClick={() => navigate("/product")}
+                style={{ cursor: "pointer" }}
+              >
+                <img src={quat} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
+                <p style={{ fontWeight: "600", textAlign: "center" }}>Quạt</p>
               </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart TV</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/tv.jpg" alt="camera" />
+              <div
+                onClick={() => navigate("/product")}
+                style={{ cursor: "pointer" }}
+              >
+                <img src={denthongminh} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
+                <p style={{ fontWeight: "600", textAlign: "center" }}>Đèn thông minh</p>
               </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Watches</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/headphone.jpg" alt="camera" />
+              <div
+                onClick={() => navigate("/product")}
+                style={{ cursor: "pointer" }}
+              >
+                <img src={maychieu} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
+                <p style={{ fontWeight: "600", textAlign: "center" }}>Máy chiếu</p>
               </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Music & Gaming</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
+              <div
+                onClick={() => navigate("/product")}
+                style={{ cursor: "pointer" }}
+              >
+                <img src={dogiadung} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
+                <p style={{ fontWeight: "600", textAlign: "center" }}>Đồ gia dụng</p>
               </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Cameras</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart TV</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/tv.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Watches</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/headphone.jpg" alt="camera" />
+              <div
+                onClick={() => navigate("/product")}
+                style={{ cursor: "pointer" }}
+              >
+                <img src={tvbox} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
+                <p style={{ fontWeight: "600", textAlign: "center" }}>TV Box</p>
               </div>
             </div>
           </div>
