@@ -287,7 +287,7 @@ const Home = () => {
                     key={index}
                     className={"col-3"}
                   >
-                    <div
+                    <Link to={'/product/' + item?._id}
                       className='product-card position-relative'
                     >
                       <div className='wishlist-icon position-absolute'>
@@ -325,17 +325,17 @@ const Home = () => {
                       <div className='action-bar position-absolute'>
                         <div className='d-flex flex-column gap-15'>
                           {/* <button className='border-0 bg-transparent'>
-                            <img src={prodcompare} alt='compare' />
-                          </button> */}
-                          <button className='border-0 bg-transparent'>
-                            <img onClick={() => navigate("/product/" + item?._id)} src={view} alt='view' />
-                          </button>
+                    <img src={prodcompare} alt='compare' />
+                  </button>
+                  <Link to={'/product/' + item?._id} className='border-0 bg-transparent'>
+                    <img src={view} alt='view' />
+                  </Link> */}
                           {/* <button className='border-0 bg-transparent'>
-                            <img src={addcart} alt='addcart' />
-                          </button> */}
+                    <img src={addcart} alt='addcart' />
+                  </button> */}
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 )
               }
