@@ -153,11 +153,11 @@ const SingleProduct = () => {
                 <ReactImageZoom {...props} />
               </div>
             </div>
-            {/* <div className='other-prouduct-image d-flex flex-wrap gap-15'>
+            <div className='other-prouduct-image d-flex flex-wrap gap-15'>
               {
                 productState?.images.map((item, index) => {
                   return (
-                    <div key={index}>
+                    <div key={index} className='col'>
                       <img
                         src={item?.url}
                         className='img-fluid'
@@ -166,7 +166,7 @@ const SingleProduct = () => {
                   )
                 })
               }
-            </div> */}
+            </div>
           </div>
           <div className='col-5'>
             <div className='main-product-detail'>

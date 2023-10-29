@@ -7,6 +7,11 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { getAProduct } from '../features/products/productSlice';
 import { getUserCart } from '../features/user/userSlice';
 
+import logo from '../images/logo.png';
+import wishlist from '../images/wishlist.svg';
+import user from '../images/user.svg';
+import cart from '../images/cart.svg';
+
 const Header = () => {
   const getTokenFromLocalStorage = localStorage.getItem("customer")
     ? JSON.parse(localStorage.getItem("customer"))
@@ -64,7 +69,7 @@ const Header = () => {
           <div className='row align-items-center w-100'>
             <div className='col-2'>
               <Link to='/' style={{ width: "100%", padding: "0 25px" }}>
-                <img src='images/logo.png' alt='logo' style={{ width: "100%", height: "48px" }} />
+                <img src={logo} alt='logo' style={{ width: "100%", height: "48px" }} />
               </Link>
             </div>
             <div className='col-5'>
@@ -115,13 +120,13 @@ const Header = () => {
                 </div> */}
                 <div>
                   <Link to='/wishlist' className='d-flex align-items-center gap-10 text-white'>
-                    <img src='images/wishlist.svg' alt='wishlist' />
+                    <img src={wishlist} alt='wishlist' />
                     <p className='mb-0' >Yêu thích</p>
                   </Link>
                 </div>
                 <div>
                   <Link to={authState?.user === null ? '/login' : '/my-profile'} className='d-flex align-items-center gap-10 text-white'>
-                    <img src='images/user.svg' alt='user' />
+                    <img src={user} alt='user' />
                     {
                       authState?.user === null ?
                         <p className='mb-0'>Đăng nhập</p> :
@@ -134,7 +139,7 @@ const Header = () => {
                 </div>
                 <div>
                   <Link to='/cart' className='d-flex align-items-center gap-10 text-white position-relative'>
-                    <img src='images/cart.svg' alt='cart' />
+                    <img src={cart} alt='cart' />
                     <div className='d-flex flex-column gap-10 position-absolute top-0 start-100 translate-middle'>
                       <span className='badge rounded-circle bg-white text-dark'>{cartState?.length ? cartState?.length : 0}</span>
                     </div>
