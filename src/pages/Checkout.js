@@ -69,13 +69,16 @@ const Checkout = () => {
     },
     validationSchema: shippingSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify({
+      dispatch(createAnOrder({
         totalPrice: totalAmount, // loc tong gia trong cart
         totalPriceAfterDiscount: totalAmount,
         orderItems: cartProductState, // loc tung sp trong cart
         paymentInfo: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : "Thanh toán online",
         shippingInfo: values,
-      }));
+      }))
+      setTimeout(() => { dispatch(deleteUserCart()) }, 2000); // lam trong gio hang
+
+
       // setShippingInfo(values);
       // setTimeout(() => {
       //   checkOutHandler(values);
@@ -153,7 +156,7 @@ const Checkout = () => {
             shippingInfo
           }))
         }, 2000);
-        setTimeout(() => { dispatch(deleteUserCart()) }, 2000); // lam trong gio hangf
+        setTimeout(() => { dispatch(deleteUserCart()) }, 2000); // lam trong gio hang
       },
       prefill: {
         name: "Dev LuDat",

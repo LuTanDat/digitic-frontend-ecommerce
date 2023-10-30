@@ -16,7 +16,7 @@ const Orders = () => {
   return (
     <>
       <Meta title={'My Orders'} />
-      <BreadCrumb title='My Orders' />
+      <BreadCrumb title='Đơn hàng' />
       <Container class1='cart-wrapper home-wrapper-2 py-5'>
         <div className='row'>
           {/* table head */}
@@ -86,7 +86,8 @@ const Orders = () => {
                                   </div>
                                   <div className='col-3'>
                                     <ul className='colors ps-0'>
-                                      <li style={{ backgroundColor: i?.color?.title }}></li>
+                                      {/* <li style={{ backgroundColor: i?.color?.title }}></li> */}
+                                      <li style={{ backgroundColor: i?.color }}></li>
                                     </ul>
                                   </div>
                                 </div>
