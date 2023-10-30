@@ -46,12 +46,12 @@ const Signup = () => {
   return (
     <>
       <Meta title='Sign Up' />
-      <BreadCrumb title='Sign Up' />
+      <BreadCrumb title='Đăng ký' />
       <Container class1='login-wrapper py-5' style={{ backgroundColor: '#7985c9' }}>
         <div className='row'>
           <div className='col-12'>
             <div className='auth-card'>
-              <h3 className='text-center mb-3'>Sign Up</h3>
+              <h3 className='text-center mb-3'>Đăng ký</h3>
               <form
                 action=''
                 onSubmit={formik.handleSubmit}
@@ -60,7 +60,7 @@ const Signup = () => {
                 <CustomInput
                   type='text'
                   name='firstName'
-                  placeholder='First Name'
+                  placeholder='Tên'
                   value={formik.values.firstName}
                   onChange={formik.handleChange("firstName")}
                   onBlur={formik.handleBlur("firstName")}
@@ -71,7 +71,7 @@ const Signup = () => {
                 <CustomInput
                   type='text'
                   name='lastName'
-                  placeholder='Last Name'
+                  placeholder='Họ'
                   value={formik.values.lastName}
                   onChange={formik.handleChange("lastName")}
                   onBlur={formik.handleBlur("lastName")}
@@ -93,7 +93,7 @@ const Signup = () => {
                 <CustomInput
                   type='tel'
                   name='mobile'
-                  placeholder='Mobile Number'
+                  placeholder='Số điện thoại'
                   value={formik.values.mobile}
                   onChange={formik.handleChange("mobile")}
                   onBlur={formik.handleBlur("mobile")}
@@ -104,7 +104,7 @@ const Signup = () => {
                 <CustomInput
                   type='password'
                   name='password'
-                  placeholder='Password'
+                  placeholder='Mật khẩu'
                   value={formik.values.password}
                   onChange={formik.handleChange("password")}
                   onBlur={formik.handleBlur("password")}
@@ -114,7 +114,7 @@ const Signup = () => {
                 </div>
                 <div>
                   <div className='mt-3 d-flex justify-content-center align-items-center gap-15'>
-                    <button className='button border-0' type='submit'>SignUp</button>
+                    <button className='button border-0' type='submit'>Đăng ký</button>
                   </div>
                 </div>
               </form>

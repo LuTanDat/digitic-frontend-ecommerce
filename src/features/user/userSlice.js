@@ -198,7 +198,7 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.user = action.payload;
         if (state.isSuccess === true) {
-          toast.success("User Logged In Successfully");
+          toast.success("Đăng nhập thành công");
         }
       })
       .addCase(loginUser.rejected, (state, action) => {

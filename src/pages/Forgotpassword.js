@@ -30,13 +30,13 @@ const Forgotpassword = () => {
   return (
     <>
       <Meta title='Forgot Password' />
-      <BreadCrumb title='Forgot Password' />
+      <BreadCrumb title='Quên mật khẩu' />
       <Container class1='login-wrapper py-5' style={{ backgroundColor: '#7985c9' }}>
         <div className='row'>
           <div className='col-12'>
             <div className='auth-card'>
-              <h3 className='text-center mb-3'>Reset Your Password</h3>
-              <p className='text-center mt-2 mb-3'>We will send you an email to reset your password</p>
+              <h3 className='text-center mb-3'>Reset Mật khẩu của bạn</h3>
+              <p className='text-center mt-2 mb-3'>Chúng tôi sẽ gửi cho bạn một email để reset mật khẩu của bạn!</p>
               <form
                 action=''
                 onSubmit={formik.handleSubmit}
@@ -55,8 +55,8 @@ const Forgotpassword = () => {
                 </div>
                 <div>
                   <div className='mt-3 d-flex flex-column justify-content-center align-items-center gap-15'>
-                    <button className='button border-0' type='submit'>Submit</button>
-                    <Link to='/login'>Cancel</Link>
+                    <button className='button border-0' type='submit'>Gửi</button>
+                    <Link to='/login'>Hủy</Link>
                   </div>
                 </div>
               </form>

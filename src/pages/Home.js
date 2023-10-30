@@ -187,7 +187,7 @@ const Home = () => {
           <div className="col-12">
             <div className="categories d-flex justify-content-between flex-wrap align-items-center">
               <div
-                onClick={() => navigate("/product?type=TV")}
+                onClick={() => navigate("/product")}
                 style={{ cursor: "pointer" }}
               >
                 <img src={maylockhongkhi} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
@@ -282,7 +282,7 @@ const Home = () => {
                     key={index}
                     className={"col-3"}
                   >
-                    <Link to={'/product/' + item?._id}
+                    <div
                       className='product-card position-relative'
                     >
                       <div className='wishlist-icon position-absolute'>
@@ -292,45 +292,51 @@ const Home = () => {
                           <img src={wish} alt='wishlist' />
                         </button>
                       </div>
-                      <div className='product-image'>
-                        <img
-                          src={item?.images[0]?.url ? item?.images[0]?.url : watch}
-                          className='img-fluid mx-auto'
-                          alt='product image'
-                          width={160}
-                        />
-                        <img src={watch2}
-                          className='img-fluid mx-auto'
-                          alt='product image'
-                          width={160}
-                        />
-                      </div>
-                      <div className='product-details'>
-                        <h6 className='brand'>{item?.brand}</h6>
-                        <h5 className='title'> {item?.title}</h5>
-                        <ReactStars
-                          count={5}
-                          size={24}
-                          value={parseInt(item?.totalrating)}
-                          edit={false}
-                          activeColor="#ffd700"
-                        />
-                        <p className='price'>${item?.price}</p>
-                      </div>
-                      <div className='action-bar position-absolute'>
-                        <div className='d-flex flex-column gap-15'>
-                          {/* <button className='border-0 bg-transparent'>
-                    <img src={prodcompare} alt='compare' />
-                  </button>
-                  <Link to={'/product/' + item?._id} className='border-0 bg-transparent'>
-                    <img src={view} alt='view' />
-                  </Link> */}
-                          {/* <button className='border-0 bg-transparent'>
-                    <img src={addcart} alt='addcart' />
-                  </button> */}
+                      <Link to={'/product/' + item?._id}>
+                        <div className='product-image'>
+                          <img
+                            src={item?.images[0]?.url ? item?.images[0]?.url : watch}
+                            className='img-fluid mx-auto'
+                            alt='product image'
+                            width={160}
+                            style={{ width: "100%", height: "100%" }}
+
+                          />
+                          <img src={item?.images[1]?.url ? item?.images[0]?.url : watch}
+                            className='img-fluid mx-auto'
+                            alt='product image'
+                            width={160}
+                            style={{ width: "100%", height: "100%" }}
+
+                          />
                         </div>
-                      </div>
-                    </Link>
+                        <div className='product-details'>
+                          <h6 className='brand'>{item?.brand}</h6>
+                          <h5 className='title'> {item?.title}</h5>
+                          <ReactStars
+                            count={5}
+                            size={24}
+                            value={parseInt(item?.totalrating)}
+                            edit={false}
+                            activeColor="#ffd700"
+                          />
+                          <p className='price'>${item?.price}</p>
+                        </div>
+                        {/* <div className='action-bar position-absolute'>
+                          <div className='d-flex flex-column gap-15'>
+                            <button className='border-0 bg-transparent'>
+                              <img src={prodcompare} alt='compare' />
+                            </button>
+                            <Link to={'/product/' + item?._id} className='border-0 bg-transparent'>
+                              <img src={view} alt='view' />
+                            </Link>
+                              <button className='border-0 bg-transparent'>
+                              <img src={addcart} alt='addcart' />
+                            </button>
+                          </div>
+                        </div> */}
+                      </Link>
+                    </div>
                   </div>
                 )
               }

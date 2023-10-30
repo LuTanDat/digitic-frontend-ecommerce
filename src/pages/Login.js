@@ -46,12 +46,12 @@ const Login = () => {
   return (
     <>
       <Meta title='Login' />
-      <BreadCrumb title='Login' />
+      <BreadCrumb title='Đăng nhập' />
       <Container class1='login-wrapper py-5' style={{ backgroundColor: '#7985c9' }}>
         <div className='row'>
           <div className='col-12'>
             <div className='auth-card'>
-              <h3 className='text-center mb-3'>Login</h3>
+              <h3 className='text-center mb-3'>Đăng nhập</h3>
               <form
                 action=''
                 onSubmit={formik.handleSubmit}
@@ -71,7 +71,7 @@ const Login = () => {
                 <CustomInput
                   type='password'
                   name='password'
-                  placeholder='Password'
+                  placeholder='Mật khẩu'
                   value={formik.values.password}
                   onChange={formik.handleChange("password")}
                   onBlur={formik.handleBlur("password")}
@@ -80,10 +80,10 @@ const Login = () => {
                   {formik.touched.password && formik.errors.password}
                 </div>
                 <div>
-                  <Link to='/forgot-password'>Forgot Password?</Link>
+                  <Link to='/forgot-password'>Quên mật khẩu?</Link>
                   <div className='mt-3 d-flex justify-content-center align-items-center gap-15'>
-                    <button className='button border-0' type='submit'>Login</button>
-                    <Link to='/signup' className='button signup' type='submit'>SignUp</Link>
+                    <button className='button border-0' type='submit'>Đăng nhập</button>
+                    <Link to='/signup' className='button signup' type='submit'>Đăng ký</Link>
                   </div>
                 </div>
               </form>

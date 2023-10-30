@@ -56,15 +56,15 @@ const Checkout = () => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      address: "",
+      firstName: authState?.user?.firstName || "",
+      lastName: authState?.user?.lastName || "",
+      address: authState?.user?.address || "",
       // state: "",
       // city: "",
       // country: "",
       // pincode: "",
       // other: "",
-      mobile: "",
+      mobile: authState?.user?.mobile || "",
     },
     validationSchema: shippingSchema,
     onSubmit: (values) => {
@@ -383,9 +383,9 @@ const Checkout = () => {
                     <Link to="/product" className="button">
                       Tiếp tục mua sắm
                     </Link>
-                    {/* <button className="button" type="submit">
-                      Place Order
-                    </button> */}
+                    <button className="button" type="submit" style={{ backgroundColor: "#fd7e14" }}>
+                      Đặt hàng
+                    </button>
                   </div>
                 </div>
               </form>
@@ -428,7 +428,7 @@ const Checkout = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <p className="total">Giảm giá </p>
                 <p className="total-price">
-                  0%
+                  0 đ
                 </p>
               </div>
               <div className="d-flex justify-content-between align-items-center">
@@ -445,9 +445,9 @@ const Checkout = () => {
                   {totalAmount ? ((totalAmount - 0 + deliveryPrice())).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                 </h5>
               </div>
-              <button className="button w-100 mt-3" type="submit" style={{ backgroundColor: "#fd7e14" }}>
+              {/* <button className="button w-100 mt-3" type="submit" style={{ backgroundColor: "#fd7e14" }}>
                 Đặt hàng
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
