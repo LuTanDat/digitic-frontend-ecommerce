@@ -17,7 +17,7 @@ let shippingSchema = Yup.object().shape({
   lastName: Yup.string().required("Last Name is Required"),
   address: Yup.string().required("Address Details is Required"),
   // state: Yup.string().required("State is Required"),
-  // city: Yup.string().required("City is Required"),
+  city: Yup.string().required("City is Required"),
   // country: Yup.string().required("Country is Required"),
   // pincode: Yup.string().required("Zipcode is Required"),
   mobile: Yup.string().required("Mobile is Required"),
@@ -27,8 +27,9 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartState = useSelector((state) => state.auth.cartProducts);
-  const [totalAmount, setTotalAmount] = useState(null);
   const authState = useSelector((state) => state.auth);
+
+  const [totalAmount, setTotalAmount] = useState(null);
   const [cartProductState, setCartProductState] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("COD"); // Mặc định là thanh toán khi nhận hàng
 
@@ -60,7 +61,7 @@ const Checkout = () => {
       lastName: authState?.user?.lastName || "",
       address: authState?.user?.address || "",
       // state: "",
-      // city: "",
+      city: "",
       // country: "",
       // pincode: "",
       // other: "",
@@ -68,10 +69,17 @@ const Checkout = () => {
     },
     validationSchema: shippingSchema,
     onSubmit: (values) => {
+      alert(JSON.stringify({
+        totalPrice: totalAmount, // loc tong gia trong cart
+        totalPriceAfterDiscount: totalAmount,
+        orderItems: cartProductState, // loc tung sp trong cart
+        paymentInfo: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : "Thanh toán online",
+        shippingInfo: values,
+      }));
       // setShippingInfo(values);
-      setTimeout(() => {
-        checkOutHandler(values);
-      }, 300)
+      // setTimeout(() => {
+      //   checkOutHandler(values);
+      // }, 300)
     },
   });
 
@@ -257,7 +265,7 @@ const Checkout = () => {
                     {formik.touched.mobile && formik.errors.mobile}
                   </div>
                 </div>
-                <div className="w-100 pb-3 border-bottom">
+                <div className="w-100">
                   <input
                     type="text"
                     placeholder="Địa chỉ"
@@ -269,6 +277,20 @@ const Checkout = () => {
                   />
                   <div className="error ms-2 my-1">
                     {formik.touched.address && formik.errors.address}
+                  </div>
+                </div>
+                <div className="flex-grow-1 pb-3 border-bottom">
+                  <input
+                    type="text"
+                    placeholder="City"
+                    className="form-control"
+                    name='city'
+                    value={formik.values.city}
+                    onChange={formik.handleChange("city")}
+                    onBlur={formik.handleBlur("city")}
+                  />
+                  <div className="error ms-2 my-1">
+                    {formik.touched.city && formik.errors.city}
                   </div>
                 </div>
                 {/* <div className="w-100">
@@ -283,20 +305,6 @@ const Checkout = () => {
                   />
                   <div className="error ms-2 my-1">
                     {formik.touched.other && formik.errors.other}
-                  </div>
-                </div>
-                <div className="flex-grow-1">
-                  <input
-                    type="text"
-                    placeholder="City"
-                    className="form-control"
-                    name='city'
-                    value={formik.values.city}
-                    onChange={formik.handleChange("city")}
-                    onBlur={formik.handleBlur("city")}
-                  />
-                  <div className="error ms-2 my-1">
-                    {formik.touched.city && formik.errors.city}
                   </div>
                 </div>
                 <div className="flex-grow-1">
@@ -383,9 +391,9 @@ const Checkout = () => {
                     <Link to="/product" className="button">
                       Tiếp tục mua sắm
                     </Link>
-                    <button className="button" type="submit" style={{ backgroundColor: "#fd7e14" }}>
+                    {/* <button className="button" type="submit" style={{ backgroundColor: "#fd7e14" }}>
                       Đặt hàng
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </form>
@@ -402,7 +410,7 @@ const Checkout = () => {
                   value="COD"
                   className="me-2 form-check-input"
                   checked={paymentMethod === "COD"}
-                  onChange={() => setPaymentMethod("COD")}
+                  onChange={(e) => { setPaymentMethod(e.target.value) }}
                 />
                 <label htmlFor="COD">Thanh toán khi nhận hàng</label><br />
                 <input
@@ -412,7 +420,7 @@ const Checkout = () => {
                   value="card"
                   className="me-2 form-check-input"
                   checked={paymentMethod === "card"}
-                  onChange={() => setPaymentMethod("card")}
+                  onChange={(e) => { setPaymentMethod(e.target.value) }}
                 />
                 <label htmlFor="card">Thanh toán online</label><br />
               </div>
@@ -445,9 +453,14 @@ const Checkout = () => {
                   {totalAmount ? ((totalAmount - 0 + deliveryPrice())).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                 </h5>
               </div>
-              {/* <button className="button w-100 mt-3" type="submit" style={{ backgroundColor: "#fd7e14" }}>
+              <button
+                className="button w-100 mt-3"
+                type="submit"
+                style={{ backgroundColor: "#fd7e14" }}
+                onClick={formik.handleSubmit}
+              >
                 Đặt hàng
-              </button> */}
+              </button>
             </div>
           </div>
         </div>
