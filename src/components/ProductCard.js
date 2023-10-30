@@ -74,7 +74,9 @@ const ProductCard = (props) => {
                     dangerouslySetInnerHTML={{ __html: item.description }}
                   >
                   </p>
-                  <p className='price'>{item?.price} đ</p>
+                  <p className='price'>
+                    {item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                  </p>
                 </div>
                 <div className='action-bar position-absolute'>
                   <div className='d-flex flex-column gap-15'>

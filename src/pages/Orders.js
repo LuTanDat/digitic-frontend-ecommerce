@@ -46,17 +46,21 @@ const Orders = () => {
                       <p>{item?._id}</p>
                     </div>
                     <div className='col-3'>
-                      <p>{item?.totalPrice}</p>
+                      <p>
+                        {item?.totalPrice ? (item?.totalPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                      </p>
                     </div>
                     <div className='col-3'>
-                      <p>{item?.totalPriceAfterDiscount}</p>
+                      <p>
+                        {item?.totalPrice ? (item?.totalPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                      </p>
                     </div>
                     <div className='col-3'>
                       <p>{item?.orderStatus}</p>
                     </div>
                     {/* order details */}
                     <div className='col-12'>
-                      <div className='row py-3' style={{ backgroundColor: "#232f3e" }}>
+                      <div className='row py-3' style={{ backgroundColor: "#777777" }}>
                         <div className='col-3'>
                           <h6 className='text-white'>Product Name</h6>
                         </div>
@@ -82,7 +86,9 @@ const Orders = () => {
                                     <p className='text-white'>{i?.quantity}</p>
                                   </div>
                                   <div className='col-3'>
-                                    <p className='text-white'>{i?.price}</p>
+                                    <p className='text-white'>
+                                      {i?.price ? (i?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                                    </p>
                                   </div>
                                   <div className='col-3'>
                                     <ul className='colors ps-0'>

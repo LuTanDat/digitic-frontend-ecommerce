@@ -320,7 +320,9 @@ const Home = () => {
                             edit={false}
                             activeColor="#ffd700"
                           />
-                          <p className='price'>${item?.price}</p>
+                          <p className='price'>
+                            {item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                          </p>
                         </div>
                         {/* <div className='action-bar position-absolute'>
                           <div className='d-flex flex-column gap-15'>
