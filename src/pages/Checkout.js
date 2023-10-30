@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import watch from "../images/watch.jpg";
 import Container from "./../components/Container";
@@ -9,7 +9,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { config } from "../utils/axiosconfig"
-import { createAnOrder, deleteUserCart, getUserCart, resetState } from "../features/user/userSlice";
+import { createAnOrder, deleteUserCart, getUserCart, resetState, updateProfile } from "../features/user/userSlice";
 
 
 let shippingSchema = Yup.object().shape({
@@ -61,7 +61,7 @@ const Checkout = () => {
       lastName: authState?.user?.lastName || "",
       address: authState?.user?.address || "",
       // state: "",
-      city: "",
+      city: authState?.user?.city || "",
       // country: "",
       // pincode: "",
       // other: "",
@@ -69,13 +69,23 @@ const Checkout = () => {
     },
     validationSchema: shippingSchema,
     onSubmit: (values) => {
-      dispatch(createAnOrder({
-        totalPrice: totalAmount, // loc tong gia trong cart
-        totalPriceAfterDiscount: totalAmount,
-        orderItems: cartProductState, // loc tung sp trong cart
-        paymentInfo: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : "Thanh toán online",
-        shippingInfo: values,
-      }))
+      if (values.firstName !== authState?.user?.firstName ||
+        values.lastName !== authState?.user?.lastName ||
+        values.address !== authState?.user?.address ||
+        values.city !== authState?.user?.city ||
+        values.mobile !== authState?.user?.mobile
+      ) {
+        dispatch(updateProfile(values));
+      }
+      setTimeout(() => {
+        dispatch(createAnOrder({
+          totalPrice: totalAmount, // loc tong gia trong cart
+          totalPriceAfterDiscount: totalAmount,
+          orderItems: cartProductState, // loc tung sp trong cart
+          paymentInfo: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : "Thanh toán online",
+          shippingInfo: values,
+        }))
+      }, 500);
       setTimeout(() => { dispatch(deleteUserCart()) }, 2000); // lam trong gio hang
 
 
@@ -149,9 +159,9 @@ const Checkout = () => {
 
         setTimeout(() => {
           dispatch(createAnOrder({
-            totalPrice: totalAmount,
+            totalPrice: totalAmount,// loc tong gia trong cart
             totalPriceAfterDiscount: totalAmount,
-            orderItems: cartProductState,
+            orderItems: cartProductState, // loc tung sp trong cart
             paymentInfo: result.data,
             shippingInfo
           }))

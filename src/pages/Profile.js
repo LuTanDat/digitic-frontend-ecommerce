@@ -16,7 +16,6 @@ let profileSchema = Yup.object().shape({
     .email("Email không khả dụng")
     .required("Email không được để trống"),
   mobile: Yup.string().required("Số điện thoại không được để trống"),
-  // address: Yup.string().required("Địa chỉ không được để trống"),
 });
 
 const Profile = () => {
@@ -28,11 +27,12 @@ const Profile = () => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      firstName: userState?.firstName,
-      lastName: userState?.lastName,
-      email: userState?.email,
-      mobile: userState?.mobile,
-      address: userState?.address,
+      firstName: userState?.firstName || "",
+      lastName: userState?.lastName || "",
+      email: userState?.email || "",
+      mobile: userState?.mobile || "",
+      address: userState?.address || "",
+      city: userState?.city || "",
     },
     validationSchema: profileSchema,
     onSubmit: values => {
@@ -136,6 +136,22 @@ const Profile = () => {
                 />
                 <div className="error">
                   {formik.touched.address && formik.errors.address}
+                </div>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="example3" className="form-label">Thành phố</label>
+                <input
+                  type="text"
+                  name='city'
+                  disabled={edit}
+                  className="form-control"
+                  id="example3"
+                  value={formik.values.city}
+                  onChange={formik.handleChange("city")}
+                  onBlur={formik.handleBlur("city")}
+                />
+                <div className="error">
+                  {formik.touched.city && formik.errors.city}
                 </div>
               </div>
               {edit === false && <button type="submit" className="btn btn-primary">Save</button>}
