@@ -48,7 +48,7 @@ const ProductCard = (props) => {
                   alt='product image'
                   width={160}
                 />
-                <img src={watch2}
+                <img src={item?.images[0]?.url ? item?.images[1]?.url : watch}
                   className='img-fluid mx-auto'
                   alt='product image'
                   width={160}

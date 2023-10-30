@@ -57,7 +57,7 @@ const Contact = () => {
           <div className="col-12 mt-5">
             <div className="contact-inner-wrapper d-flex justify-content-between">
               <div>
-                <h3 className="contact-title mb-4">Liên hệ</h3>
+                <h3 className="contact-title mb-4">Góp ý</h3>
                 <form
                   action=""
                   onSubmit={formik.handleSubmit}
