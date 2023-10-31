@@ -52,7 +52,7 @@ const Orders = () => {
                     </div>
                     <div className='col-3'>
                       <p>
-                        {item?.totalPrice ? (item?.totalPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                        {item?.totalPriceAfterDiscount ? (item?.totalPriceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                       </p>
                     </div>
                     <div className='col-3'>

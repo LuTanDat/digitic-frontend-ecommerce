@@ -64,12 +64,12 @@ const Checkout = () => {
       firstName: authState?.user?.firstName || "",
       lastName: authState?.user?.lastName || "",
       address: authState?.user?.address || "",
-      // state: "",
       city: authState?.user?.city || "",
+      mobile: authState?.user?.mobile || "",
+      // state: "",
       // country: "",
       // pincode: "",
-      // other: "",
-      mobile: authState?.user?.mobile || "",
+      // other: "",   
     },
     validationSchema: shippingSchema,
     onSubmit: (values) => {
@@ -83,8 +83,8 @@ const Checkout = () => {
       }
       setTimeout(() => {
         dispatch(createAnOrder({
-          totalPrice: totalAmount, // loc tong gia trong cart
-          totalPriceAfterDiscount: totalAmount,
+          totalPrice: totalAmount + deliveryPrice(), // loc tong gia trong cart
+          totalPriceAfterDiscount: totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice(),
           orderItems: cartProductState, // loc tung sp trong cart
           paymentInfo: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : "Thanh toán online",
           shippingInfo: values,
