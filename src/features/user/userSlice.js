@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import { authService } from './userService';
 import { toast } from "react-toastify";
@@ -313,9 +314,19 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.orderedProduct = action.payload;
+
         if (state.isSuccess === true) {
-          toast.success("Ordered Created Successfully!");
+          if (action.payload.message === 'SUCCESS') {
+            state.orderedProduct = action.payload.createdOrder;
+            toast.success("Tạo thành công đơn hàng!");
+          } else
+            if (action.payload.message === 'ERR') {
+              {
+                action.payload?.product?.map((item) => {
+                  toast.warning(`Sản phẩm ${item} không còn đủ trong hệ thống`);
+                })
+              }
+            }
         }
       })
       .addCase(createAnOrder.rejected, (state, action) => {

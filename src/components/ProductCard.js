@@ -30,6 +30,7 @@ const ProductCard = (props) => {
           <div
             key={index}
             className={`${location.pathname === "/product" ? `gr-${grid}` : "col-3"}`}
+            disabled={item?.quantity === 0}
           >
             <div
               className='product-card position-relative'
@@ -42,7 +43,7 @@ const ProductCard = (props) => {
                   <img src={wish} alt='wishlist' />
                 </button>
               </div>
-              <Link to={'/product/' + item?._id}>
+              <Link to={item?.quantity !== 0 && '/product/' + item?._id}>
                 <div className='product-image'>
                   <img
                     src={item?.images[0]?.url ? item?.images[0]?.url : watch}
