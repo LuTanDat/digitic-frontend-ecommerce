@@ -46,7 +46,7 @@ const Checkout = () => {
   }, [cartState]);
 
   useEffect(() => {
-    if (authState?.orderedProduct?.order !== null && authState?.orderedProduct?.success === true) {
+    if (authState?.orderedProduct?.createdOrder !== null && authState?.orderedProduct?.message === 'SUCCESS') {
       navigate("/my-orders");
     }
   }, [authState])
