@@ -9,6 +9,8 @@ import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteCartProduct, getUserCart, updateCartProduct } from '../features/user/userSlice';
 import { useState } from 'react';
+import { useMemo } from 'react';
+import StepComponent from '../components/StepComponent';
 
 const Cart = () => {
   const getTokenFromLocalStorage = localStorage.getItem("customer")
@@ -54,6 +56,30 @@ const Cart = () => {
     }
   }, [userCartState])
 
+  const deliveryPrice = useMemo(() => {
+    if (totalAmount >= 2000000 && totalAmount < 5000000) {
+      return 10000
+    } if (totalAmount === null || totalAmount >= 5000000) {
+      return 0
+    } else {
+      return 20000
+    }
+  }, [totalAmount])
+  const itemsDelivery = [
+    {
+      title: '20.000 đ',
+      description: "2.000.000đ",
+    },
+    {
+      title: '10.000 đ',
+      description: "5.000.000đ",
+    },
+    {
+      title: '0 đ',
+      description: "0đ hoặc > 5.000.000đ",
+    },
+  ]
+
   return (
     <>
       <Meta title={'Cart'} />
@@ -61,6 +87,10 @@ const Cart = () => {
       <Container class1='cart-wrapper home-wrapper-2 py-5'>
         <div className='row'>
           <div className='col-12'>
+            <div className='p-2 mb-3' style={{ border: "1px solid rgb(159 150 150)", borderRadius: "10px" }}>
+              <h5 className='ps-2' style={{ fontSize: "16px", color: "#3b4149" }}>Phí vận chuyển</h5>
+              <StepComponent items={itemsDelivery} current={deliveryPrice === 20000 ? 0 : deliveryPrice === 10000 ? 1 : 2} />
+            </div>
             <div className='cart-header p-3 d-flex justify-content-between align-items-center'>
               <h4 className='cart-col-1 mb-0 text-white fs-5'>Sản phẩm</h4>
               <h4 className='cart-col-2 mb-0 text-white fs-5'>Giá</h4>
@@ -74,7 +104,7 @@ const Cart = () => {
                     <div className='cart-col-1 d-flex align-items-center gap-15'>
                       <div className='w-25'>
                         <img
-                          src={watch}
+                          src={item?.productId?.images[0]?.url}
                           className='img-fluid'
                           alt='product image'
                         />

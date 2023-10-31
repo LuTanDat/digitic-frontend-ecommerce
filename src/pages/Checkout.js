@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, json, useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import watch from "../images/watch.jpg";
@@ -51,13 +51,15 @@ const Checkout = () => {
     }
   }, [authState])
 
-  const deliveryPrice = () => {
-    if (totalAmount > 200000) {
+  const deliveryPrice = useMemo(() => {
+    if (totalAmount >= 2000000 && totalAmount < 5000000) {
       return 10000
+    } if (totalAmount === 0 || totalAmount >= 5000000) {
+      return 0
     } else {
-      return 15000
+      return 20000
     }
-  }
+  }, [totalAmount])
 
   const formik = useFormik({
     initialValues: {
@@ -83,8 +85,8 @@ const Checkout = () => {
       }
       setTimeout(() => {
         dispatch(createAnOrder({
-          totalPrice: totalAmount + deliveryPrice(), // loc tong gia trong cart
-          totalPriceAfterDiscount: totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice(),
+          totalPrice: totalAmount + deliveryPrice, // loc tong gia trong cart
+          totalPriceAfterDiscount: totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice,
           orderItems: cartProductState, // loc tung sp trong cart
           paymentMethod: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : "Thanh toán online",
           shippingInfo: values,
@@ -470,7 +472,7 @@ const Checkout = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <p className="mb-0 total">Phí vận chuyển </p>
                 <p className="mb-0 total-price">
-                  {totalAmount ? (deliveryPrice()).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : 0}
+                  {totalAmount ? (deliveryPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : 0}
                 </p>
               </div>
             </div>
@@ -478,7 +480,7 @@ const Checkout = () => {
               <div className="d-flex justify-content-between align-items-center pt-4">
                 <h4 className="total">Thành tiền </h4>
                 <h5 className="total-price">
-                  {totalAmount ? ((totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice())).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                  {totalAmount ? ((totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice)).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                 </h5>
               </div>
               <button
