@@ -60,25 +60,6 @@ const SingleProduct = () => {
     }
   }, [])
 
-  const uploadCart = () => {
-    // if (color === null) {
-    //   toast.error("Please Choose Color");
-    //   return false;
-
-    if (!authState?._id) {
-      navigate('/login', { state: location.pathname })// ben login lay trong location.state, de biet duong quay ve day thay vi chuyen den trang chu
-    }
-    else {
-      dispatch(addProdToCart({
-        productId: productState?._id,
-        color: color || productState?.color,
-        quantity,
-        price: productState?.price
-      }))
-      navigate('/cart');
-    }
-  }
-
   const props = {
     width: 400,
     height: 400,
@@ -133,7 +114,7 @@ const SingleProduct = () => {
   }
 
   // handle price product have discount ???
-  let priceAfterDiscount = 0;
+  let priceAfterDiscount = productState?.price;
   if (couponState) {
     priceAfterDiscount = productState?.price * (100 - couponState) / 100;
   }
@@ -141,10 +122,26 @@ const SingleProduct = () => {
     style: 'currency',
     currency: 'VND',
   }).format(productState?.price);
-  const formattedPriceAfterDiscount = new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND',
-  }).format(priceAfterDiscount);
+
+  const uploadCart = () => {
+    // if (color === null) {
+    //   toast.error("Please Choose Color");
+    //   return false;
+
+    if (!authState?._id) {
+      navigate('/login', { state: location.pathname })// ben login lay trong location.state, de biet duong quay ve day thay vi chuyen den trang chu
+    }
+    else {
+      dispatch(addProdToCart({
+        productId: productState?._id,
+        color: color || productState?.color,
+        quantity,
+        price: productState?.price,
+        priceAfterDiscount: priceAfterDiscount,
+      }))
+      navigate('/cart');
+    }
+  }
 
   return (
     <>
@@ -187,7 +184,9 @@ const SingleProduct = () => {
                   </h4>
                   {// thieu so sanh ngay het han
                     couponState && (
-                      <h4 className='price' style={{ color: "red" }}>{formattedPriceAfterDiscount}</h4>
+                      <h4 className='price' style={{ color: "red" }}>
+                        {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                      </h4>
                     )
                   }
                 </div>

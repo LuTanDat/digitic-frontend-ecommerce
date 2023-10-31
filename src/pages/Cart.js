@@ -91,12 +91,19 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className='cart-col-2'>
-                      <h5 className='price'>
-                        {item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                      <h5 className='price' style={{ color: item?.priceAfterDiscount !== item?.price ? "gray" : "red" }}>
+                        {
+                          item?.priceAfterDiscount !== item?.price ? <del>
+                            {item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                          </del> : item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"
+                        }
                       </h5>
-                      <h5 className='price'>
-                        {item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
-                      </h5>
+                      {
+                        item?.priceAfterDiscount !== item?.price && (
+                          <h5 className='price' style={{ color: "red" }}>
+                            {item?.priceAfterDiscount ? (item?.priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                          </h5>)
+                      }
                     </div>
                     <div className='cart-col-3 d-flex align-items-center gap-15'>
                       <div>
@@ -117,10 +124,19 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className='cart-col-4'>
-                      <h5 className='price'>
-                        {item?.price * item?.quantity ? (item?.price * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
-
+                      <h5 className='price' style={{ color: item?.priceAfterDiscount !== item?.price ? "gray" : "red" }}>
+                        {
+                          item?.priceAfterDiscount !== item?.price ? <del>
+                            {item?.price * item?.quantity ? (item?.price * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                          </del> : item?.price * item?.quantity ? (item?.price * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"
+                        }
                       </h5>
+                      {
+                        item?.priceAfterDiscount !== item?.price && (
+                          <h5 className='price' style={{ color: "red" }}>
+                            {item?.priceAfterDiscount * item?.quantity ? (item?.priceAfterDiscount * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                          </h5>)
+                      }
                     </div>
                   </div>
                 )
@@ -144,7 +160,6 @@ const Cart = () => {
               </div>
             </div>
             <div>
-
             </div>
           </div>
         </div>

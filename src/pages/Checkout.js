@@ -30,14 +30,18 @@ const Checkout = () => {
   const authState = useSelector((state) => state.auth);
 
   const [totalAmount, setTotalAmount] = useState(null);
+  const [totalAmountAfterDiscount, setTotalAmountAfterDiscount] = useState(null);
   const [cartProductState, setCartProductState] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("COD"); // Mặc định là thanh toán khi nhận hàng
 
   useEffect(() => {
-    let sum = 0;
+    let sumPrice = 0;
+    let sumPriceAfterDiscount = 0;
     for (let index = 0; index < cartState?.length; index++) {
-      sum = sum + Number(cartState[index].quantity) * cartState[index].price;
-      setTotalAmount(sum);
+      sumPrice = sumPrice + Number(cartState[index].quantity) * cartState[index].price;
+      sumPriceAfterDiscount = sumPriceAfterDiscount + Number(cartState[index].quantity) * cartState[index].priceAfterDiscount;
+      setTotalAmount(sumPrice);
+      setTotalAmountAfterDiscount(sumPriceAfterDiscount);
     }
   }, [cartState]);
 
@@ -387,9 +391,19 @@ const Checkout = () => {
                             </div>
                           </div>
                           <div className="flex-grow-1 text-center">
-                            <h5 className="total">
-                              {totalAmount ? (item?.price * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                            <h5 className='total' style={{ color: item?.priceAfterDiscount !== item?.price ? "gray" : "red" }}>
+                              {
+                                item?.priceAfterDiscount !== item?.price ? <del>
+                                  {item?.price * item?.quantity ? (item?.price * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                                </del> : item?.price * item?.quantity ? (item?.price * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"
+                              }
                             </h5>
+                            {
+                              item?.priceAfterDiscount !== item?.price && (
+                                <h5 className='total' style={{ color: "red" }}>
+                                  {item?.priceAfterDiscount * item?.quantity ? (item?.priceAfterDiscount * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                                </h5>)
+                            }
                           </div>
                         </div>
                       );
@@ -449,13 +463,13 @@ const Checkout = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <p className="total">Giảm giá </p>
                 <p className="total-price">
-                  0 đ
+                  {totalAmountAfterDiscount ? (totalAmount - totalAmountAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : 0}
                 </p>
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <p className="mb-0 total">Phí vận chuyển </p>
                 <p className="mb-0 total-price">
-                  {totalAmount ? (deliveryPrice()).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                  {totalAmount ? (deliveryPrice()).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : 0}
                 </p>
               </div>
             </div>
@@ -463,7 +477,7 @@ const Checkout = () => {
               <div className="d-flex justify-content-between align-items-center pt-4">
                 <h4 className="total">Thành tiền </h4>
                 <h5 className="total-price">
-                  {totalAmount ? ((totalAmount - 0 + deliveryPrice())).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                  {totalAmount ? ((totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice())).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                 </h5>
               </div>
               <button
