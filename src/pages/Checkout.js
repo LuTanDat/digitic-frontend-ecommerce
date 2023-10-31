@@ -86,7 +86,7 @@ const Checkout = () => {
           totalPrice: totalAmount + deliveryPrice(), // loc tong gia trong cart
           totalPriceAfterDiscount: totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice(),
           orderItems: cartProductState, // loc tung sp trong cart
-          paymentInfo: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : "Thanh toán online",
+          paymentMethod: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : "Thanh toán online",
           shippingInfo: values,
         }))
       }, 500);
@@ -121,7 +121,8 @@ const Checkout = () => {
         product: cartState[index].productId?._id,
         quantity: cartState[index].quantity,
         color: cartState[index].color,
-        price: cartState[index].price
+        price: cartState[index].price,
+        priceAfterDiscount: cartState[index].priceAfterDiscount
       })
     }
     setCartProductState(items);
@@ -166,7 +167,7 @@ const Checkout = () => {
             totalPrice: totalAmount,// loc tong gia trong cart
             totalPriceAfterDiscount: totalAmount,
             orderItems: cartProductState, // loc tung sp trong cart
-            paymentInfo: result.data,
+            paymentMethod: result.data,
             shippingInfo
           }))
         }, 2000);
