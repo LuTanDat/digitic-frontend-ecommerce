@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect } from 'react'
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
@@ -20,81 +21,93 @@ const Orders = () => {
       <Container class1='cart-wrapper home-wrapper-2 py-5'>
         <div className='row'>
           {/* table head */}
-          <div className='col-12'>
+          {/* <div className='col-12'>
             <div className='row'>
               <div className='col-3'>
-                <h5>Order Id</h5>
+                <h5>Tổng tiền</h5>
               </div>
               <div className='col-3'>
-                <h5>Total Amount</h5>
+                <h5>Tiền sau khuyến mãi</h5>
               </div>
               <div className='col-3'>
-                <h5>Total Amount after Discount</h5>
+                <h5>Thanh toán</h5>
               </div>
               <div className='col-3'>
-                <h5>Status</h5>
+                <h5>Trạng thái đơn hàng</h5>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* table body */}
-          <div className='col-12 mt-3'>
+          <div className='col-12'>
             {
               orderState && orderState?.map((item, index) => {
                 return (
-                  <div style={{ backgroundColor: "#febd69" }} className='row pt-3 my-3' key={index}>
-                    <div className='col-3'>
-                      <p>{item?._id}</p>
-                    </div>
-                    <div className='col-3'>
-                      <p>
-                        {item?.totalPrice ? (item?.totalPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                  <div style={{ backgroundColor: "#febd69" }} className='row my-3' key={index}>
+                    <div className='col-2 p-2 d-flex align-items-center'>
+                      <p className='mb-0'>
+                        {`Tổng tiền: ${item?.totalPrice ? (item?.totalPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}
                       </p>
                     </div>
-                    <div className='col-3'>
-                      <p>
-                        {item?.totalPriceAfterDiscount ? (item?.totalPriceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                    <div className='col-3 p-2 d-flex align-items-center'>
+                      <p className='mb-0'>
+                        {`Tiền sau khuyến mãi: ${item?.totalPriceAfterDiscount ? (item?.totalPriceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}
                       </p>
                     </div>
-                    <div className='col-3'>
-                      <p>{item?.orderStatus}</p>
+                    <div className='col-3 p-2 d-flex align-items-center'>
+                      <p className='mb-0'>{`Thanh toán: ${item?.paymentMethod}`}</p>
+                    </div>
+                    <div className='col-4 p-2 d-flex gap-2 align-items-center justify-content-between align-items-center'>
+                      <p className='mb-0'>Trạng thái đơn hàng: </p>
+                      <p className='mb-0'>{item?.orderStatus}</p>
+                      <button className='p-1' style={{ border: "1px solid #9255FD", borderRadius: "4px", color: "red" }}>Hủy đơn hàng</button>
                     </div>
                     {/* order details */}
                     <div className='col-12'>
                       <div className='row py-3' style={{ backgroundColor: "#777777" }}>
-                        <div className='col-3'>
-                          <h6 className='text-white'>Product Name</h6>
-                        </div>
-                        <div className='col-3'>
-                          <h6 className='text-white'>Quantity</h6>
-                        </div>
-                        <div className='col-3'>
-                          <h6 className='text-white'>Price</h6>
-                        </div>
-                        <div className='col-3'>
-                          <h6 className='text-white'>Color</h6>
+                        <div className='col-12'>
+                          <div className='row border-bottom'>
+                            <div className='col-6'>
+                              <h6 className='text-white'>Sản phẩm</h6>
+                            </div>
+                            <div className='col-2'>
+                              <h6 className='text-white'>Số lượng</h6>
+                            </div>
+                            <div className='col-2'>
+                              <h6 className='text-white'>Giá</h6>
+                            </div>
+                            <div className='col-2'>
+                              <h6 className='text-white'>Tổng tiền</h6>
+                            </div>
+                          </div>
                         </div>
                         {/* detail of order detail */}
                         {
                           item?.orderItems?.map((i, index) => {
                             return (
                               <div className='col-12' key={index}>
-                                <div className='row p-3'>
-                                  <div className='col-3'>
+                                <div className='row p-3 d-flex align-items-center' style={{ borderBottom: "1px solid rgb(140 138 138)" }}>
+                                  <div className='col-6 d-flex align-items-center gap-3'>
+                                    <div style={{ width: "15%" }}>
+                                      <img
+                                        src={i?.product?.images[0]?.url}
+                                        className='img-fluid'
+                                        alt='product image'
+                                      />
+                                    </div>
                                     <p className='text-white'>{i?.product?.title}</p>
                                   </div>
-                                  <div className='col-3'>
+                                  <div className='col-2'>
                                     <p className='text-white'>{i?.quantity}</p>
                                   </div>
-                                  <div className='col-3'>
+                                  <div className='col-2'>
                                     <p className='text-white'>
-                                      {i?.price ? (i?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                                      {i?.priceAfterDiscount ? (i?.priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                                     </p>
                                   </div>
-                                  <div className='col-3'>
-                                    <ul className='colors ps-0'>
-                                      {/* <li style={{ backgroundColor: i?.color?.title }}></li> */}
-                                      <li style={{ backgroundColor: i?.color }}></li>
-                                    </ul>
+                                  <div className='col-2'>
+                                    <p className='text-white'>
+                                      {i?.priceAfterDiscount ? (i?.priceAfterDiscount * i?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                                    </p>
                                   </div>
                                 </div>
                               </div>
