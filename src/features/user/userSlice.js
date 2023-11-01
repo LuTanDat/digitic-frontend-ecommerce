@@ -48,10 +48,32 @@ export const addProdToCart = createAsyncThunk(
 );
 
 export const createAnOrder = createAsyncThunk(
-  "user/cart/create-order",
+  "user/order/create-order",
   async (orderDetail, thunkAPI) => {
     try {
       return await authService.createOrder(orderDetail);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getOrders = createAsyncThunk(
+  "user/order/getAll",
+  async (thunkAPI) => {
+    try {
+      return await authService.getUserOrders();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const cancelOrder = createAsyncThunk(
+  "user/order/cancel",
+  async (data, thunkAPI) => {
+    try {
+      return await authService.cancelOrder(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -69,16 +91,7 @@ export const getUserCart = createAsyncThunk(
   }
 );
 
-export const getOrders = createAsyncThunk(
-  "user/order/get",
-  async (thunkAPI) => {
-    try {
-      return await authService.getUserOrders();
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
+
 
 export const deleteCartProduct = createAsyncThunk(
   "user/cart/product/delete",
@@ -350,6 +363,22 @@ export const authSlice = createSlice({
         state.getOrderedProduct = action.payload;
       })
       .addCase(getOrders.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+
+      .addCase(cancelOrder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(cancelOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.canceledOrder = action.payload;
+      })
+      .addCase(cancelOrder.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
