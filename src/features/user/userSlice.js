@@ -324,7 +324,7 @@ export const authSlice = createSlice({
               state.orderedProduct = action.payload;
               {
                 action.payload?.product?.map((item) => {
-                  toast.warning(`Sản phẩm ${item} không còn đủ trong hệ thống`);
+                  toast.warning(`Chỉ còn ${item.quantity} sản phẩm ${item.title} trong hệ thống`);
                 })
               }
             }
