@@ -47,7 +47,11 @@ const Checkout = () => {
 
   useEffect(() => {
     if (authState?.orderedProduct?.createdOrder !== null && authState?.orderedProduct?.message === 'SUCCESS') {
+      dispatch(deleteUserCart());
       navigate("/my-orders");
+    }
+    else if (authState?.orderedProduct?.message === 'ERR' && authState?.orderedProduct?.product.length > 0) {
+      navigate("/cart");
     }
   }, [authState])
 
@@ -92,8 +96,6 @@ const Checkout = () => {
           shippingInfo: values,
         }))
       }, 500);
-      setTimeout(() => { dispatch(deleteUserCart()) }, 2000); // lam trong gio hang
-
 
       // setShippingInfo(values);
       // setTimeout(() => {

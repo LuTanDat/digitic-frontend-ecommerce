@@ -321,6 +321,7 @@ export const authSlice = createSlice({
             toast.success("Tạo thành công đơn hàng!");
           } else
             if (action.payload.message === 'ERR') {
+              state.orderedProduct = action.payload;
               {
                 action.payload?.product?.map((item) => {
                   toast.warning(`Sản phẩm ${item} không còn đủ trong hệ thống`);

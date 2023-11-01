@@ -7,7 +7,7 @@ import { AiFillDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteCartProduct, getUserCart, updateCartProduct } from '../features/user/userSlice';
+import { deleteCartProduct, getUserCart, resetState, updateCartProduct } from '../features/user/userSlice';
 import { useState } from 'react';
 import { useMemo } from 'react';
 import StepComponent from '../components/StepComponent';
@@ -30,6 +30,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const userCartState = useSelector((state) => state.auth.cartProducts);
   useEffect(() => {
+    dispatch(resetState())
     dispatch(getUserCart(config2));
   }, [])
   useEffect(() => {
