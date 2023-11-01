@@ -80,7 +80,7 @@ const Orders = () => {
                         <button
                           className='p-1'
                           style={{ border: "1px solid #9255FD", borderRadius: "4px", color: "red" }}
-                          onClick={() => { dispatch(cancelOrder({ id: item?._id, config2 })) }}
+                          onClick={() => { dispatch(cancelOrder(item)) }}
                         >
                           Hủy đơn hàng
                         </button>

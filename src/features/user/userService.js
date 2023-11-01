@@ -65,7 +65,7 @@ const createOrder = async (orderDetail) => {
 };
 
 const cancelOrder = async (data) => {
-  const response = await axios.put(`${base_url}user/cancelOrder/${data.id}`, data.config2);
+  const response = await axios.put(`${base_url}user/cancelOrder/${data._id}`, { orderItems: data.orderItems }, data.config2);
   if (response.data) {
     return response.data;
   }
