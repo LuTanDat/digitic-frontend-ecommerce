@@ -52,7 +52,7 @@ const Cart = () => {
   useEffect(() => {
     let sum = 0;
     for (let index = 0; index < userCartState?.length; index++) {
-      sum = sum + (Number(userCartState[index].quantity) * userCartState[index].price)
+      sum = sum + (Number(userCartState[index].quantity) * userCartState[index].priceAfterDiscount)
       setTotalAmount(sum);
     }
   }, [userCartState])
@@ -182,8 +182,8 @@ const Cart = () => {
                 {
                   (totalAmount !== null || totalAmount !== 0) &&
                   <div className='d-flex flex-column align-items-end'>
-                    <h4>{`Tổng tiền : ${totalAmount ? (totalAmount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}</h4>
-                    <Link to='/checkout' className='button' style={{ backgroundColor: "#fd7e14" }}>
+                    <h4>{`Tổng tiền : ${userCartState?.length > 0 ? (totalAmount + deliveryPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}</h4>
+                    <Link to={userCartState?.length > 0 ? '/checkout' : ""} className='button' style={{ backgroundColor: "#fd7e14" }}>
                       Thanh toán
                     </Link>
                   </div>
