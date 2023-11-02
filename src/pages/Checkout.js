@@ -10,7 +10,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import { config } from "../utils/axiosconfig"
 import { createAnOrder, deleteUserCart, getUserCart, resetState, updateProfile } from "../features/user/userSlice";
-
+import { PayPalButton } from "react-paypal-button-v2";
+import { paymentService } from "../features/payment/paymentService";
 
 let shippingSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is Required"),
@@ -33,6 +34,7 @@ const Checkout = () => {
   const [totalAmountAfterDiscount, setTotalAmountAfterDiscount] = useState(null);
   const [cartProductState, setCartProductState] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("COD"); // Mặc định là thanh toán khi nhận hàng
+  const [sdkReady, setSdkReady] = useState(false);
 
   useEffect(() => {
     let sumPrice = 0;
@@ -92,31 +94,12 @@ const Checkout = () => {
           totalPrice: totalAmount + deliveryPrice, // loc tong gia trong cart
           totalPriceAfterDiscount: totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice,
           orderItems: cartProductState, // loc tung sp trong cart
-          paymentMethod: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : "Thanh toán online",
+          paymentMethod: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : paymentMethod === "paypal-card" ? "Thanh toán bằng Paypal" : "",
           shippingInfo: values,
         }))
       }, 500);
-
-      // setShippingInfo(values);
-      // setTimeout(() => {
-      //   checkOutHandler(values);
-      // }, 300)
     },
   });
-
-  const loadScript = (src) => {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true)
-      }
-      script.onerror = () => {
-        resolve(false)
-      }
-      document.body.appendChild(script)
-    })
-  }
 
   useEffect(() => {
     let items = [];
@@ -131,68 +114,42 @@ const Checkout = () => {
     }
     setCartProductState(items);
   }, [])
-  // console.log(cartProductState);
 
-  const checkOutHandler = async (shippingInfo) => {
 
-    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-    if (!res) {
-      alert("Razorpay SDK failed to load")
-      return;
-    }
+  // THANH TOAN PAYPAL
 
-    const result = await axios.post("http://localhost:5000/api/user/order/checkout", { amount: totalAmount + 5 }, config);
-    if (!result) {
-      alert("Something Went Wrong")
-      return
-    }
-
-    const { amount, id: order_id, currency } = result.data.order;
-
-    const options = {
-      key: "rzp_test_7VjhqlVAo807jh", // Enter the Key ID generated from the Dashboard
-      amount: amount,
-      currency: currency,
-      name: "Developer's LuDat",
-      description: "Test Transaction",
-      order_id: order_id,
-      handler: async function (response) {
-        const data = {
-          orderCreationId: order_id,
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-          // razorpaySignature: response.razorpay_signature,
-        };
-
-        const result = await axios.post("http://localhost:5000/api/user/order/paymentVerification", data, config);
-
-        setTimeout(() => {
-          dispatch(createAnOrder({
-            totalPrice: totalAmount,// loc tong gia trong cart
-            totalPriceAfterDiscount: totalAmount,
-            orderItems: cartProductState, // loc tung sp trong cart
-            paymentMethod: result.data,
-            shippingInfo
-          }))
-        }, 2000);
-        setTimeout(() => { dispatch(deleteUserCart()) }, 2000); // lam trong gio hang
-      },
-      prefill: {
-        name: "Dev LuDat",
-        email: "devludat@example.com",
-        contact: "9999999999",
-      },
-      notes: {
-        address: "Developer's LuDat Office",
-      },
-      theme: {
-        color: "#61dafb",
-      },
-    };
-
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+  const onSuccessPaypal = (details, data) => {
+    // console.log("details, data: ", details, data);
+    dispatch(createAnOrder({
+      totalPrice: totalAmount + deliveryPrice, // loc tong gia trong cart
+      totalPriceAfterDiscount: totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice,
+      orderItems: cartProductState, // loc tung sp trong cart
+      paymentMethod: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : paymentMethod === "paypal-card" ? "Thanh toán bằng Paypal" : "",
+      shippingInfo: formik.values,
+      isPaid: true,
+      paidAt: details.update_time
+    }))
   }
+
+  const addPaypalScript = async () => {
+    const { data } = await paymentService.getConfig()//get Client_id from DB
+    const script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = `https://www.paypal.com/sdk/js?client-id=${data}`
+    script.async = true;
+    script.onload = () => {
+      setSdkReady(true)
+    }
+    document.body.appendChild(script)
+  }
+
+  useEffect(() => {
+    if (!window.paypal) {
+      addPaypalScript()
+    } else {
+      setSdkReady(true)
+    }
+  }, [])
 
   return (
     <>
@@ -449,12 +406,12 @@ const Checkout = () => {
                   type="radio"
                   id="card"
                   name="payment"
-                  value="card"
+                  value="paypal-card"
                   className="me-2 form-check-input"
-                  checked={paymentMethod === "card"}
+                  checked={paymentMethod === "paypal-card"}
                   onChange={(e) => { setPaymentMethod(e.target.value) }}
                 />
-                <label htmlFor="card">Thanh toán online</label><br />
+                <label htmlFor="card">Thanh toán bằng Paypal</label><br />
               </div>
             </div>
             <div className="border-bottom py-4">
@@ -485,14 +442,27 @@ const Checkout = () => {
                   {totalAmount ? ((totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice)).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                 </h5>
               </div>
-              <button
-                className="button w-100 mt-3"
-                type="submit"
-                style={{ backgroundColor: "#fd7e14" }}
-                onClick={formik.handleSubmit}
-              >
-                Đặt hàng
-              </button>
+              {
+                paymentMethod === "paypal-card" && sdkReady ? (
+                  <PayPalButton
+                    amount={(totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice)}
+                    // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                    onSuccess={onSuccessPaypal}
+                    onError={() => {
+                      alert("Error")
+                    }}
+                  />
+                ) : (
+                  <button
+                    className="button w-100 mt-3"
+                    type="submit"
+                    style={{ backgroundColor: "#fd7e14" }}
+                    onClick={formik.handleSubmit}
+                  >
+                    Đặt hàng
+                  </button>
+                )
+              }
             </div>
           </div>
         </div>
