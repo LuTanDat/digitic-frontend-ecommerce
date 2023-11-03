@@ -65,7 +65,10 @@ const createOrder = async (orderDetail) => {
 };
 
 const cancelOrder = async (data) => {
-  const response = await axios.put(`${base_url}user/cancelOrder/${data._id}`, { orderItems: data.orderItems }, data.config2);
+  // console.log("config", config);
+  // console.log("config.headers", config.headers);
+  // console.log("config.headers.Authorization", config.headers.Authorization);
+  const response = await axios.put(`${base_url}user/cancelOrder/${data._id}`, { orderItems: data.orderItems }, config);
   if (response.data) {
     return response.data;
   }
