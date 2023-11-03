@@ -210,9 +210,11 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.user = action.payload;
-        if (state.isSuccess === true) {
+        if (state.isSuccess === true && action.payload.isBlocked === false) {
+          state.user = action.payload;
           toast.success("Đăng nhập thành công");
+        } else {
+          toast.warning("Tài khoản đang bị khóa!");
         }
       })
       .addCase(loginUser.rejected, (state, action) => {
