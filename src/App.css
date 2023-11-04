@@ -414,6 +414,15 @@ footer .input-group-text{
   color: var(--color-1c1c1b);
 }
 
+.btn-filter {
+  background: #fef2f2;
+  border: 1px solid #d70018;
+  color: #d70018;
+  border-radius: 10px;
+  padding: 3px 6px;
+
+}
+
 .filter-card ul,
 .filter-card .form-check-label {
   list-style-type: none;

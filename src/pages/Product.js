@@ -11,7 +11,6 @@ import { useLocation } from 'react-router-dom';
 
 const Product = () => {
   const location = useLocation();
-  console.log(location);
 
   const dispatch = useDispatch();
   const [grid, setGrid] = useState(4);
@@ -58,6 +57,18 @@ const Product = () => {
 
   // console.log([...new Set(brands)], [...new Set(categories)], [...new Set(tags)]);
 
+  const removeAllFilter = () => {
+    setTag(null);
+    setCategory(null);
+    setBrand(null);
+    setMinPrice(null);
+    setMaxPrice(null);
+    setSort(null);
+    if (location.state) {
+      delete location.state;
+    }
+  }
+
   return (
     <div>
       <Meta title='Our Store' />
@@ -87,6 +98,7 @@ const Product = () => {
                       className="form-control"
                       id="floatingInput"
                       placeholder="from"
+                      value={minPrice || ''}
                       onChange={(e) => setMinPrice(e.target.value)}
                     />
                     <label htmlFor="floatingInput">Từ</label>
@@ -96,6 +108,7 @@ const Product = () => {
                       className="form-control"
                       id="floatingInput1"
                       placeholder="to"
+                      value={maxPrice || ''}
                       onChange={(e) => setMaxPrice(e.target.value)}
                     />
                     <label htmlFor="floatingInput1">Đến</label>
@@ -137,7 +150,7 @@ const Product = () => {
             </div>
           </div>
           <div className='col-9'>
-            <div className='filter-sort-grid mb-4'>
+            <div className='filter-sort-grid mb-3'>
               <div className='d-flex justify-content-between align-items-center'>
                 <div className='d-flex align-items-center gap-10'>
                   <p className='mb-0 d-block' style={{ width: "100px" }}>Sắp xếp </p>
@@ -182,6 +195,29 @@ const Product = () => {
                 </div>
               </div>
             </div>
+            {
+              (tag !== null || category !== null || brand !== null || minPrice !== null || maxPrice !== null || sort !== null) && (
+                <div className='filter-sort-grid mb-3'>
+                  <div className='filter-title mb-2'>Đang lọc theo</div>
+                  <div className='d-flex align-items-center gap-2 flex-wrap'>
+                    {
+                      tag !== null && <button className="btn-filter" onClick={() => { setTag(null) }}>× {tag}</button>
+                    }{
+                      category !== null && <button className="btn-filter" onClick={() => { setCategory(null) }}>× {category}</button>
+                    }{
+                      brand !== null && <button className="btn-filter" onClick={() => { setBrand(null) }}>× {brand}</button>
+                    }{
+                      minPrice !== null && <button className="btn-filter" onClick={() => { setMinPrice(null) }}>× {minPrice}</button>
+                    }{
+                      maxPrice !== null && <button className="btn-filter" onClick={() => { setMaxPrice(null) }}>× {maxPrice}</button>
+                    }{
+                      sort !== null && <button className="btn-filter" onClick={() => { setSort(null) }}>× {sort}</button>
+                    }
+                    <button className="btn-filter" onClick={() => { removeAllFilter() }}>× Bỏ chọn tất cả</button>
+                  </div>
+                </div>
+              )
+            }
             <div className='products-list pb-5'>
               <div className='d-flex gap-10 flex-wrap'>
                 <ProductCard data={productState ? productState : []} grid={grid} />
