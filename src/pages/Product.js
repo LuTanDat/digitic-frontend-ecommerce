@@ -7,10 +7,11 @@ import Color from '../components/Color';
 import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../features/products/productSlice';
+import { useLocation } from 'react-router-dom';
 
 const Product = () => {
-  const searchParams = new URLSearchParams(window.location.search);
-  const type = searchParams.get('type');
+  const location = useLocation();
+  console.log(location);
 
   const dispatch = useDispatch();
   const [grid, setGrid] = useState(4);
@@ -28,8 +29,8 @@ const Product = () => {
   const [sort, setSort] = useState(null);
 
   useEffect(() => {
-    if (type) {
-      setCategory(type);
+    if (location.state) {
+      setCategory(location.state);
     }
   }, [])
 
@@ -65,7 +66,7 @@ const Product = () => {
         <div className='row'>
           <div className='col-3'>
             <div className='filter-card mb-3'>
-              <h3 className='filter-title'>Shop By Categories</h3>
+              <h3 className='filter-title'>Lọc theo Danh mục</h3>
               <div>
                 <ul className='ps-0'>
                   {
@@ -77,9 +78,9 @@ const Product = () => {
               </div>
             </div>
             <div className='filter-card mb-3'>
-              <h3 className='filter-title'>Filter By</h3>
+              <h3 className='filter-title'>Lọc theo</h3>
               <div>
-                <h5 className="sub-title">Price</h5>
+                <h5 className="sub-title">Giá</h5>
                 <div className='d-flex align-items-center gap-10'>
                   <div className="form-floating">
                     <input type="number"
@@ -88,7 +89,7 @@ const Product = () => {
                       placeholder="from"
                       onChange={(e) => setMinPrice(e.target.value)}
                     />
-                    <label htmlFor="floatingInput">From</label>
+                    <label htmlFor="floatingInput">Từ</label>
                   </div>
                   <div className="form-floating">
                     <input type="number"
@@ -97,12 +98,12 @@ const Product = () => {
                       placeholder="to"
                       onChange={(e) => setMaxPrice(e.target.value)}
                     />
-                    <label htmlFor="floatingInput1">To</label>
+                    <label htmlFor="floatingInput1">Đến</label>
                   </div>
                 </div>
               </div>
               <div className='mt-4 mb-3'>
-                <h3 className='sub-title'>Product Tag</h3>
+                <h3 className='sub-title'>Tag</h3>
                 <div>
                   <div className='product-tags d-flex flex-wrap align-items-center gap-10'>
                     {
@@ -118,7 +119,7 @@ const Product = () => {
                 </div>
               </div>
               <div className=' mb-3'>
-                <h3 className='sub-title'>Product Brand</h3>
+                <h3 className='sub-title'>Thương hiệu</h3>
                 <div>
                   <div className='product-tags d-flex flex-wrap align-items-center gap-10'>
                     {
@@ -139,23 +140,23 @@ const Product = () => {
             <div className='filter-sort-grid mb-4'>
               <div className='d-flex justify-content-between align-items-center'>
                 <div className='d-flex align-items-center gap-10'>
-                  <p className='mb-0 d-block' style={{ width: "100px" }}>Sort By: </p>
+                  <p className='mb-0 d-block' style={{ width: "100px" }}>Sắp xếp </p>
                   <select
                     name=''
                     className='form-control form-select'
                     id=''
                     onChange={(e) => setSort(e.target.value)}
                   >
-                    <option value="title">Alphabetically, A-Z</option>
-                    <option value="-title">Alphabetically, Z-A</option>
-                    <option value="price">Price, low to high</option>
-                    <option value="-price">Price, high to low</option>
-                    <option value="createdAt">Date, old to new</option>
-                    <option value="-createdAt">Date, new to old</option>
+                    <option value="title">Ký tự, A-Z</option>
+                    <option value="-title">Ký tự, Z-A</option>
+                    <option value="price">Giá, thấp đến cao</option>
+                    <option value="-price">Giá, cao đến thấp</option>
+                    <option value="createdAt">Ngày, cũ đến mới</option>
+                    <option value="-createdAt">Ngày, mới đến cũ</option>
                   </select>
                 </div>
                 <div className='d-flex align-items-center gap-10'>
-                  <p className='totalproducts mb-0'>{productState?.length} products</p>
+                  <p className='totalproducts mb-0'>{productState?.length} sản phẩm</p>
                   <div className='d-flex gap-10 align-items-center grid'>
                     <img onClick={() => setGrid(3)}
                       src='images/gr4.svg'

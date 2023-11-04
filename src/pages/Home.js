@@ -187,42 +187,42 @@ const Home = () => {
           <div className="col-12">
             <div className="categories d-flex justify-content-between flex-wrap align-items-center">
               <div
-                onClick={() => navigate("/product")}
+                onClick={() => navigate("/product", { state: "Máy lọc không khí" })}
                 style={{ cursor: "pointer" }}
               >
                 <img src={maylockhongkhi} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
                 <p style={{ fontWeight: "600", textAlign: "center" }}>Máy lọc không khí</p>
               </div>
               <div
-                onClick={() => navigate("/product")}
+                onClick={() => navigate("/product", { state: "Quạt" })}
                 style={{ cursor: "pointer" }}
               >
                 <img src={quat} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
                 <p style={{ fontWeight: "600", textAlign: "center" }}>Quạt</p>
               </div>
               <div
-                onClick={() => navigate("/product")}
+                onClick={() => navigate("/product", { state: "Đèn thông minh" })}
                 style={{ cursor: "pointer" }}
               >
                 <img src={denthongminh} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
                 <p style={{ fontWeight: "600", textAlign: "center" }}>Đèn thông minh</p>
               </div>
               <div
-                onClick={() => navigate("/product")}
+                onClick={() => navigate("/product", { state: "Máy chiếu" })}
                 style={{ cursor: "pointer" }}
               >
                 <img src={maychieu} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
                 <p style={{ fontWeight: "600", textAlign: "center" }}>Máy chiếu</p>
               </div>
               <div
-                onClick={() => navigate("/product")}
+                onClick={() => navigate("/product", { state: "Đồ gia dụng" })}
                 style={{ cursor: "pointer" }}
               >
                 <img src={dogiadung} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
                 <p style={{ fontWeight: "600", textAlign: "center" }}>Đồ gia dụng</p>
               </div>
               <div
-                onClick={() => navigate("/product")}
+                onClick={() => navigate("/product", { state: "TV Box" })}
                 style={{ cursor: "pointer" }}
               >
                 <img src={tvbox} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
