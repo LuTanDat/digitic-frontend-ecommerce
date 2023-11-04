@@ -12,7 +12,7 @@ import Container from "./../components/Container";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { createQuery } from "../features/contact/contactSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 let contactSchema = Yup.object().shape({
   name: Yup.string().required("Name is Required"),
@@ -25,12 +25,15 @@ let contactSchema = Yup.object().shape({
 
 const Contact = () => {
   const dispatch = useDispatch();
+
+  const userState = useSelector((state) => state?.auth?.user);
+
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      mobile: '',
-      password: '',
+      name: `${userState.lastName} ${userState.firstName}` || '',
+      email: userState.email || '',
+      mobile: userState.mobile || '',
+      comment: '',
     },
     validationSchema: contactSchema,
     onSubmit: values => {
