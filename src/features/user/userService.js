@@ -15,6 +15,12 @@ const login = async (userData) => {
   return response.data;
 };
 
+const changePassword = async (userData) => {
+  const response = await axios.put(`${base_url}user/password`, userData, config);
+
+  return response.data;
+};
+
 const getUserWishlist = async () => {
   const response = await axios.get(`${base_url}user/wishlist`, config);
   if (response.data) {
@@ -107,6 +113,7 @@ const resetPass = async (data) => {
 export const authService = {
   register,
   login,
+  changePassword,
   getUserWishlist,
   addToCart,
   getCart,

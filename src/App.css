@@ -804,3 +804,11 @@ footer .input-group-text{
   color: var(--color-777777);
 }
 /* Checkout Shipping Page end here*/
+
+.btn-change-password {
+  background: #fef2f2;
+  border: 1px solid #000000;
+  color: #000000;
+  border-radius: 10px;
+  padding: 3px 6px;
+}

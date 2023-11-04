@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../features/user/userSlice';
 import { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 let profileSchema = Yup.object().shape({
   firstName: Yup.string().required("Họ không được để trống"),
@@ -48,8 +49,11 @@ const Profile = () => {
         <div className='row'>
           <div className='col-12'>
             <div className='d-flex justify-content-between align-items-center'>
-              <h3 className='my-3 section-heading'>Cập nhật hồ sơ</h3>
-              <FiEdit className='fs-3' onClick={() => setEdit(false)} />
+              <div className='d-flex align-items-center gap-3'>
+                <h3 className='my-3 section-heading'>Hồ sơ của tôi</h3>
+                <FiEdit className='fs-3' onClick={() => setEdit(false)} title='Chỉnh sửa thông tin' />
+              </div>
+              <Link to='/change-password' className='btn-change-password'>Đổi mật khẩu?</Link>
             </div>
           </div>
           <div className='col-12'>

@@ -25,6 +25,17 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async (userData, thunkAPI) => {
+    try {
+      return await authService.changePassword(userData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const getUserProductWishlist = createAsyncThunk(
   "user/wishlist",
   async (thunkAPI) => {
@@ -218,6 +229,30 @@ export const authSlice = createSlice({
         }
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        if (state.isError === true) {
+          toast.error(action.payload.response.data.message);
+        }
+      })
+
+      .addCase(changePassword.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        if (state.isSuccess === true && action.payload.message === "Updated Successfully") {
+          state.updatedPassword = action.payload.updatedPassword;
+          toast.success("Cập nhật mật khẩu thành công");
+        } else {
+          toast.warning("Mật khẩu cũ không chính xác!");
+        }
+      })
+      .addCase(changePassword.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;

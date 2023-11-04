@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Forgotpassword from './pages/Forgotpassword';
 import Signup from './pages/Signup';
 import Resetpassword from './pages/Resetpassword';
+import ChangePassword from './pages/ChangePassword';
 import SingleBlog from './pages/SingleBlog';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import RefundPolicy from './pages/RefundPolicy';
@@ -49,6 +50,7 @@ function App() {
             <Route path='forgot-password' element={<Forgotpassword />} />
             <Route path='signup' element={<OpenRoutes><Signup /></OpenRoutes>} />
             <Route path='reset-password/:token' element={<Resetpassword />} />
+            <Route path='change-password/' element={<ChangePassword />} />
             <Route path='privacy-policy' element={<PrivacyPolicy />} />
             <Route path='refund-policy' element={<RefundPolicy />} />
             <Route path='shipping-policy' element={<ShippingPolicy />} />
