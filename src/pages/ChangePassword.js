@@ -8,11 +8,11 @@ import CustomInput from '../components/CustomInput';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { changePassword, loginUser } from '../features/user/userSlice';
+import { changePassword, resetState } from '../features/user/userSlice';
 
 let Schema = Yup.object().shape({
-  oldPassword: Yup.string().required("Password is Required"),
-  newPassword: Yup.string().required("Password is Required"),
+  oldPassword: Yup.string().required("Mật khẩu cũ không được để trống"),
+  newPassword: Yup.string().required("Mật khẩu mới không được để trống"),
 });
 
 const ChangePassword = () => {
@@ -20,6 +20,10 @@ const ChangePassword = () => {
   const navigate = useNavigate();
 
   const authState = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(resetState());
+  }, [])
 
   const formik = useFormik({
     initialValues: {

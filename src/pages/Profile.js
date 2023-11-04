@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
 import Container from '../components/Container';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProfile } from '../features/user/userSlice';
+import { resetState, updateProfile } from '../features/user/userSlice';
 import { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -24,6 +24,10 @@ const Profile = () => {
   const [edit, setEdit] = useState(true);
 
   const userState = useSelector((state) => state?.auth?.user);
+
+  useEffect(() => {
+    dispatch(resetState());
+  }, [])
 
   const formik = useFormik({
     enableReinitialize: true,
