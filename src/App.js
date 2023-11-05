@@ -27,7 +27,12 @@ import Orders from './pages/Orders';
 import Profile from './pages/Profile';
 import Introduce from './pages/Introduce';
 
+import { jwtDecode } from 'jwt-decode';
+
 function App() {
+
+  console.log(jwtDecode("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmIyYTczMzNmMzk5MmYwZjNkYzY2MSIsImlhdCI6MTY5OTEwNjQyMywiZXhwIjoxNjk5MTkyODIzfQ.uKIsTjXUqsPO5-Ur6iWDxh2yBDHOUFi3AWC3r0Q2u8c"));
+
   return (
     <>
       <BrowserRouter>
