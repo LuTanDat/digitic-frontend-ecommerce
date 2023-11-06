@@ -110,6 +110,13 @@ const resetPass = async (data) => {
   }
 };
 
+const refreshToken = async (refreshToken) => {
+  const response = await axios.post(`${base_url}user/refresh`, { refreshToken: refreshToken });
+  if (response.data) {
+    return response.data;
+  }
+};
+
 export const authService = {
   register,
   login,
@@ -126,5 +133,5 @@ export const authService = {
   forgotPassToken,
   resetPass,
   emptyCart,
-
+  refreshToken,
 }
