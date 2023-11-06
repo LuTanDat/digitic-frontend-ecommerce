@@ -300,6 +300,7 @@ const Home = () => {
                   <div
                     key={index}
                     className={"col-3"}
+                    disabled={item?.quantity === 0}
                   >
                     <div
                       className='product-card position-relative'
@@ -335,7 +336,7 @@ const Home = () => {
                           <ReactStars
                             count={5}
                             size={24}
-                            value={parseInt(item?.totalrating)}
+                            value={parseInt(item?.totalrating) || 5}
                             edit={false}
                             activeColor="#ffd700"
                           />

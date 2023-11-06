@@ -91,14 +91,15 @@ const SingleProduct = () => {
     }
   }, [productsState]);
 
-  const [star, setStar] = useState(null);
+  const [star, setStar] = useState(5);
   const [comment, setComment] = useState(null);
+
   const addRatingToProduct = () => {
     if (star === null) {
-      toast.error("Please add star rating");
+      toast.error("Vui lòng chọn số sao");
       return false;
     } else if (comment === null) {
-      toast.error("Please Write Review About the Product.")
+      toast.error("Vui lòng viết đánh giá về sản phẩm này.")
       return false;
     } else {
       dispatch(addRating({
@@ -201,9 +202,9 @@ const SingleProduct = () => {
                   <div className='d-flex align-items-center gap-10'>
                     <ReactStars
                       count={5}
-                      size={24}
-                      value={parseInt(productState?.totalrating)}
+                      value={Number(productState?.totalrating) || 5}
                       edit={false}
+                      size={24}
                       activeColor="#ffd700"
                     />
                     <p className='mb-0'>{`${productState?.ratings?.length} đánh giá`}</p>

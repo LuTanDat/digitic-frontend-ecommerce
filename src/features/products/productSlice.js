@@ -118,9 +118,9 @@ export const productSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.rating = action.payload;
-        state.message = "Rating Added Successfully";
+        state.message = "Đánh giá thành công";
         if (state.isSuccess === true) {
-          toast.success("Rating Added Successfully");
+          toast.success("Đánh giá thành công");
         }
       })
       .addCase(addRating.rejected, (state, action) => {
