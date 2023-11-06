@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactStars from "react-rating-stars-component";
 import { Link, useLocation } from 'react-router-dom';
 
@@ -10,8 +10,9 @@ import watch from '../images/watch.jpg';
 import watch2 from '../images/watch-1.avif';
 import addcart from '../images/add-cart.svg';
 import view from '../images/view.svg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist } from '../features/products/productSlice';
+import { getAllCoupons } from '../features/coupon/couponSlice';
 
 const ProductCard = (props) => {
   const dispatch = useDispatch();
@@ -19,13 +20,33 @@ const ProductCard = (props) => {
   // console.log(Array.isArray(data));
 
   let location = useLocation();
+  const couponState = useSelector((state) => state.coupon?.coupons);
+
+  useEffect(() => {
+    dispatch(getAllCoupons());
+  }, [])
+
   const addToWishList = (id) => {
     dispatch(addToWishlist(id));
   }
 
   return (
     <>
-      {data?.map((item, index) => {
+      {data && data?.map((item, index) => {
+        let priceAfterDiscount = item?.price;
+        let isShowPriceDiscount = false;
+        for (let j = 0; j < couponState.length; j++) {
+          if (item._id === couponState[j].product?._id) {// co ma giam gia ko
+            const currentDate = new Date();
+            const startDate = new Date(couponState[j].start);
+            const endDate = new Date(couponState[j].expiry);
+            if (currentDate >= startDate && currentDate <= endDate) {// ma con han su dung ko
+              priceAfterDiscount = priceAfterDiscount * (100 - couponState[j].discount) / 100;
+              isShowPriceDiscount = true;
+            }
+            break;
+          }
+        }
         return (
           <div
             key={index}
@@ -75,9 +96,21 @@ const ProductCard = (props) => {
                     dangerouslySetInnerHTML={{ __html: item.description }}
                   >
                   </p>
-                  <p className='price'>
-                    {item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
-                  </p>
+                  <div className="d-flex gap-2">
+                    <p className='price' style={{ color: isShowPriceDiscount ? "gray" : "red" }}>
+                      {
+                        isShowPriceDiscount ? <del>{(item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</del> :
+                          (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })
+                      }
+                    </p>
+                    {
+                      isShowPriceDiscount && (
+                        <p className='price' style={{ color: "red" }}>
+                          {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                        </p>
+                      )
+                    }
+                  </div>
                 </div>
                 <div className='action-bar position-absolute'>
                   <div className='d-flex flex-column gap-15'>

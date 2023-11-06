@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -41,6 +42,7 @@ import ReactStars from "react-rating-stars-component";
 import prodcompare from '../images/prodcompare.svg';
 import addcart from '../images/add-cart.svg';
 import view from '../images/view.svg';
+import { getAllCoupons } from "../features/coupon/couponSlice";
 // special product end
 
 
@@ -58,12 +60,15 @@ const Home = () => {
 
   const blogState = useSelector((state) => state?.blog?.blogs);
   const productState = useSelector((state) => state?.product?.products);
+  const couponState = useSelector((state) => state.coupon?.coupons);
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   useEffect(() => {
     getBlogs();
     getProducts();
+    dispatch(getAllCoupons());
   }, [])
   const getBlogs = () => {
     dispatch(getAllBlogs());
@@ -277,6 +282,20 @@ const Home = () => {
           {
             productState && productState?.map((item, index) => {
               if (item.tags === "featured") {
+                let priceAfterDiscount = item?.price;
+                let isShowPriceDiscount = false;
+                for (let j = 0; j < couponState.length; j++) {
+                  if (item._id === couponState[j].product?._id) {// co ma giam gia ko
+                    const currentDate = new Date();
+                    const startDate = new Date(couponState[j].start);
+                    const endDate = new Date(couponState[j].expiry);
+                    if (currentDate >= startDate && currentDate <= endDate) {// ma con han su dung ko
+                      priceAfterDiscount = priceAfterDiscount * (100 - couponState[j].discount) / 100;
+                      isShowPriceDiscount = true;
+                    }
+                    break;
+                  }
+                }
                 return (
                   <div
                     key={index}
@@ -292,7 +311,7 @@ const Home = () => {
                           <img src={wish} alt='wishlist' />
                         </button>
                       </div>
-                      <Link to={'/product/' + item?._id}>
+                      <Link to={item?.quantity !== 0 && '/product/' + item?._id}>
                         <div className='product-image'>
                           <img
                             src={item?.images[0]?.url ? item?.images[0]?.url : watch}
@@ -320,9 +339,21 @@ const Home = () => {
                             edit={false}
                             activeColor="#ffd700"
                           />
-                          <p className='price'>
-                            {item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
-                          </p>
+                          <div className="d-flex gap-2">
+                            <p className='price' style={{ color: isShowPriceDiscount ? "gray" : "red" }}>
+                              {
+                                isShowPriceDiscount ? <del>{(item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</del> :
+                                  (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })
+                              }
+                            </p>
+                            {
+                              isShowPriceDiscount && (
+                                <p className='price' style={{ color: "red" }}>
+                                  {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                                </p>
+                              )
+                            }
+                          </div>
                         </div>
                         {/* <div className='action-bar position-absolute'>
                           <div className='d-flex flex-column gap-15'>

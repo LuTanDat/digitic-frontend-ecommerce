@@ -44,7 +44,7 @@ const SingleProduct = () => {
   const productState = useSelector((state) => state?.product?.singleProduct);
   const productsState = useSelector((state) => state?.product?.products);
   const cartState = useSelector((state) => state?.auth?.cartProducts);
-  const couponState = useSelector((state) => state?.coupon?.couponDiscount);
+  const couponState = useSelector((state) => state?.coupon);
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
@@ -115,8 +115,15 @@ const SingleProduct = () => {
 
   // handle price product have discount ???
   let priceAfterDiscount = productState?.price;
-  if (couponState) {
-    priceAfterDiscount = productState?.price * (100 - couponState) / 100;
+  let isShowPriceDiscount = false;
+  if (couponState.couponDiscount) {
+    const currentDate = new Date();
+    const startDate = new Date(couponState.couponStart);
+    const endDate = new Date(couponState.couponExpiry);
+    if (currentDate >= startDate && currentDate <= endDate) {
+      priceAfterDiscount = productState?.price * (100 - couponState.couponDiscount) / 100;
+      isShowPriceDiscount = true;
+    }
   }
   const formattedPrice = new Intl.NumberFormat('vi-VN', {
     style: 'currency',
@@ -177,13 +184,13 @@ const SingleProduct = () => {
               </div>
               <div className='border-bottom py-2'>
                 <div className='d-flex gap-15'>
-                  <h4 className='price' style={{ color: couponState ? "gray" : "red" }}>
+                  <h4 className='price' style={{ color: isShowPriceDiscount ? "gray" : "red" }}>
                     {
-                      couponState ? <del>{formattedPrice}</del> : formattedPrice
+                      isShowPriceDiscount ? <del>{formattedPrice}</del> : formattedPrice
                     }
                   </h4>
-                  {// thieu so sanh ngay het han
-                    couponState && (
+                  {
+                    isShowPriceDiscount && (
                       <h4 className='price' style={{ color: "red" }}>
                         {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                       </h4>
