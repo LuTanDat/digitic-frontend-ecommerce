@@ -26,6 +26,13 @@ import { Image } from 'antd';
 
 
 const SingleProduct = () => {
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [sliderKey, setSliderKey] = useState(0); // Thêm sliderKey
+  // Xử lý sự kiện khi ảnh ở "other-prouduct-image" được click
+  const handleOtherProductImageClick = (index) => {
+    setSelectedImageIndex(index); // Cập nhật vị trí ảnh được chọn
+    setSliderKey(sliderKey + 1); // Cập nhật sliderKey để cập nhật lại Slider
+  }
   const settings = {
     dots: true,
     infinite: true,
@@ -33,7 +40,8 @@ const SingleProduct = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 1500
+    autoplaySpeed: 1500,
+    initialSlide: selectedImageIndex, // Sử dụng vị trí được lưu để đặt ảnh ban đầu
   };
 
 
@@ -168,6 +176,16 @@ const SingleProduct = () => {
     }
   }
 
+  const [starRating, setStarRating] = useState(5); // Sử dụng state để theo dõi giá trị
+  const [starKey, setStarKey] = useState(0); // Thêm starKey
+  useEffect(() => {
+    // Cập nhật giá trị starRating mỗi khi productState?.totalrating thay đổi
+    if (productState?.totalrating && productState.totalrating !== "0") {
+      setStarRating(Number(productState?.totalrating));
+      setStarKey(starKey + 1); // Cập nhật sliderKey để cập nhật lại Slider
+    }
+  }, [productState?.totalrating]);
+
   return (
     <>
       <Meta title='Product Name' />
@@ -178,12 +196,14 @@ const SingleProduct = () => {
             <div className='main-product-image'>
               <div>
                 {/* <ReactImageZoom {...props} /> */}
-                <Slider {...settings}>
+                <Slider // mac dinh khong reder lai
+                  key={sliderKey} // Sử dụng key để đảm bảo Slider được cập nhật khi sliderKey thay đổi
+                  {...settings}>
                   {
                     productState?.images.map((item, index) => {
                       return (
                         <div key={index}>
-                          <Image src={item?.url} alt="slider" width="100%" preview={false} height="100%" />
+                          <Image src={item?.url} alt="slider" width="100%" preview={true} height="100%" />
                         </div>
                       )
                     })
@@ -195,7 +215,11 @@ const SingleProduct = () => {
               {
                 productState?.images.map((item, index) => {
                   return (
-                    <div key={index}>
+                    <div
+                      key={index}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleOtherProductImageClick(index)} // Gọi hàm khi ảnh được click
+                    >
                       <img
                         src={item?.url}
                         className='img-fluid'
@@ -228,9 +252,10 @@ const SingleProduct = () => {
                 </div>
                 <div className='d-flex justify-content-between align-items-center gap-10'>
                   <div className='d-flex align-items-center gap-10'>
-                    <ReactStars
+                    <ReactStars // mac dinh khong reder lai
+                      key={starKey} // Sử dụng key để đảm bảo ReactStarts được cập nhật khi starKey thay đổi
                       count={5}
-                      value={Number(productState?.totalrating) || 5}
+                      value={starRating}
                       edit={false}
                       size={24}
                       activeColor="#ffd700"
@@ -379,7 +404,8 @@ const SingleProduct = () => {
                 <div>
                   <h4 className='mb-2'>Tổng đánh giá</h4>
                   <div className='d-flex align-items-center gap-10'>
-                    <ReactStars
+                    <ReactStars // mac dinh khong reder lai
+                      key={starKey} // Sử dụng key để đảm bảo ReactStarts được cập nhật khi starKey thay đổi
                       count={5}
                       size={24}
                       value={parseInt(productState?.totalrating)}
@@ -423,7 +449,8 @@ const SingleProduct = () => {
                       <div key={index} className='review'>
                         <div className='d-flex gap-10 align-items-center'>
                           <h6 className='mb-0'>{authState?.firstName}</h6>
-                          <ReactStars
+                          <ReactStars // mac dinh khong reder lai
+                            key={starKey} // Sử dụng key để đảm bảo ReactStarts được cập nhật khi starKey thay đổi
                             count={5}
                             size={24}
                             value={item?.star}
