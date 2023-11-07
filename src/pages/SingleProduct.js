@@ -19,7 +19,24 @@ import { addProdToCart } from "../features/user/userSlice";
 import { getUserCart } from '../features/user/userSlice';
 import { getACoupon } from '../features/coupon/couponSlice';
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { Image } from 'antd';
+
+
 const SingleProduct = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1500
+  };
+
+
   const getTokenFromLocalStorage = localStorage.getItem("customer")
     ? JSON.parse(localStorage.getItem("customer"))
     : null;
@@ -160,14 +177,25 @@ const SingleProduct = () => {
           <div className='col-7'>
             <div className='main-product-image'>
               <div>
-                <ReactImageZoom {...props} />
+                {/* <ReactImageZoom {...props} /> */}
+                <Slider {...settings}>
+                  {
+                    productState?.images.map((item, index) => {
+                      return (
+                        <div key={index}>
+                          <Image src={item?.url} alt="slider" width="100%" preview={false} height="100%" />
+                        </div>
+                      )
+                    })
+                  }
+                </Slider>
               </div>
             </div>
-            <div className='other-prouduct-image d-flex flex-wrap gap-15'>
+            <div className='other-prouduct-image d-flex flex-wrap gap-3 pt-0'>
               {
                 productState?.images.map((item, index) => {
                   return (
-                    <div key={index} className='col'>
+                    <div key={index}>
                       <img
                         src={item?.url}
                         className='img-fluid'
