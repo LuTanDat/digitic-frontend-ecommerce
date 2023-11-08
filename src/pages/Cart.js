@@ -28,7 +28,7 @@ const Cart = () => {
   const [productUpdateDetail, setProductUpdateDetail] = useState(null);
   const [totalAmount, setTotalAmount] = useState(null);
   const dispatch = useDispatch();
-  const userCartState = useSelector((state) => state.auth.cartProducts);
+  const userCartState = useSelector((state) => state?.auth?.cartProducts);
   useEffect(() => {
     dispatch(resetState())
     dispatch(getUserCart(config2));
@@ -100,6 +100,7 @@ const Cart = () => {
             </div>
             {
               userCartState && userCartState?.map((item, index) => {
+                let discountPercent = 100 - ((item?.priceAfterDiscount / item?.price) * 100);
                 return (
                   <div key={index} className='cart-data py-3 mb-2 d-flex justify-content-between align-items-center'>
                     <div className='cart-col-1 d-flex align-items-center gap-15'>
@@ -131,9 +132,13 @@ const Cart = () => {
                       </h5>
                       {
                         item?.priceAfterDiscount !== item?.price && (
-                          <h5 className='price' style={{ color: "red" }}>
-                            {item?.priceAfterDiscount ? (item?.priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
-                          </h5>)
+                          <div className='d-flex gap-1'>
+                            <h5 className='price' style={{ color: "red" }}>
+                              {item?.priceAfterDiscount ? (item?.priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                            </h5>
+                            <h6 style={{ color: "#434141", fontSize: "14px" }}>{`(-${discountPercent}%)`}</h6>
+                          </div>
+                        )
                       }
                     </div>
                     <div className='cart-col-3 d-flex align-items-center gap-15'>
@@ -164,9 +169,13 @@ const Cart = () => {
                       </h5>
                       {
                         item?.priceAfterDiscount !== item?.price && (
-                          <h5 className='price' style={{ color: "red" }}>
-                            {item?.priceAfterDiscount * item?.quantity ? (item?.priceAfterDiscount * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
-                          </h5>)
+                          <div className='d-flex gap-1'>
+                            <h5 className='price' style={{ color: "red" }}>
+                              {item?.priceAfterDiscount * item?.quantity ? (item?.priceAfterDiscount * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                            </h5>
+                            <h6 style={{ color: "#434141", fontSize: "14px" }}>{`(-${discountPercent}%)`}</h6>
+                          </div>
+                        )
                       }
                     </div>
                   </div>

@@ -425,6 +425,9 @@ export const authSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.canceledOrder = action.payload;
+        if (state.isSuccess === true) {
+          toast.success("Hủy thành công đơn hàng!");
+        }
       })
       .addCase(cancelOrder.rejected, (state, action) => {
         state.isLoading = false;

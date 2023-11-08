@@ -141,12 +141,14 @@ const SingleProduct = () => {
 
   // handle price product have discount ???
   let priceAfterDiscount = productState?.price;
+  let discountPercent = 0;
   let isShowPriceDiscount = false;
   if (couponState.couponDiscount) {
     const currentDate = new Date();
     const startDate = new Date(couponState.couponStart);
     const endDate = new Date(couponState.couponExpiry);
     if (currentDate >= startDate && currentDate <= endDate) {
+      discountPercent = couponState.couponDiscount;
       priceAfterDiscount = productState?.price * (100 - couponState.couponDiscount) / 100;
       isShowPriceDiscount = true;
     }
@@ -245,9 +247,12 @@ const SingleProduct = () => {
                   </h4>
                   {
                     isShowPriceDiscount && (
-                      <h4 className='price' style={{ color: "red" }}>
-                        {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
-                      </h4>
+                      <div className='d-flex gap-1'>
+                        <h4 className='price' style={{ color: "red" }}>
+                          {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                        </h4>
+                        <h6 style={{ color: "#434141" }}>{`(-${discountPercent}%)`}</h6>
+                      </div>
                     )
                   }
                 </div>

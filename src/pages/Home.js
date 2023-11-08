@@ -283,6 +283,7 @@ const Home = () => {
             productState && productState?.map((item, index) => {
               if (item.tags === "featured") {
                 let priceAfterDiscount = item?.price;
+                let discountPercent = 0;
                 let isShowPriceDiscount = false;
                 for (let j = 0; j < couponState.length; j++) {
                   if (item._id === couponState[j].product?._id) {// co ma giam gia ko
@@ -290,6 +291,7 @@ const Home = () => {
                     const startDate = new Date(couponState[j].start);
                     const endDate = new Date(couponState[j].expiry);
                     if (currentDate >= startDate && currentDate <= endDate) {// ma con han su dung ko
+                      discountPercent = couponState[j].discount;
                       priceAfterDiscount = priceAfterDiscount * (100 - couponState[j].discount) / 100;
                       isShowPriceDiscount = true;
                     }
@@ -349,9 +351,12 @@ const Home = () => {
                             </p>
                             {
                               isShowPriceDiscount && (
-                                <p className='price' style={{ color: "red" }}>
-                                  {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
-                                </p>
+                                <div className='d-flex gap-1'>
+                                  <p className='price' style={{ color: "red" }}>
+                                    {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                                  </p>
+                                  <h6 style={{ color: "#434141" }}>{`(-${discountPercent}%)`}</h6>
+                                </div>
                               )
                             }
                           </div>

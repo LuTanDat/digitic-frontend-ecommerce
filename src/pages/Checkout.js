@@ -27,7 +27,7 @@ let shippingSchema = Yup.object().shape({
 const Checkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const cartState = useSelector((state) => state.auth.cartProducts);
+  const cartState = useSelector((state) => state?.auth?.cartProducts);
   const authState = useSelector((state) => state.auth);
 
   const [totalAmount, setTotalAmount] = useState(null);
@@ -321,8 +321,9 @@ const Checkout = () => {
                 </div>*/}
                 <div className="w-100 border-bottom py-4">
                   <h4 className="mb-3">Sản phẩm</h4>
-                  {cartState &&
-                    cartState?.map((item, index) => {
+                  {
+                    cartState && cartState?.map((item, index) => {
+                      let discountPercent = 100 - ((item?.priceAfterDiscount / item?.price) * 100);
                       return (
                         <div
                           className="d-flex gap-10 mb-2 align-items-center"
@@ -362,9 +363,13 @@ const Checkout = () => {
                             </h5>
                             {
                               item?.priceAfterDiscount !== item?.price && (
-                                <h5 className='total' style={{ color: "red" }}>
-                                  {item?.priceAfterDiscount * item?.quantity ? (item?.priceAfterDiscount * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
-                                </h5>)
+                                <div className='d-flex gap-1'>
+                                  <h5 className='total' style={{ color: "red" }}>
+                                    {item?.priceAfterDiscount * item?.quantity ? (item?.priceAfterDiscount * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                                  </h5>
+                                  <h6 style={{ color: "#434141", fontSize: "14px" }}>{`(-${discountPercent}%)`}</h6>
+                                </div>
+                              )
                             }
                           </div>
                         </div>
