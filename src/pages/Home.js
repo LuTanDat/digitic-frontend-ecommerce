@@ -246,28 +246,25 @@ const Home = () => {
             <div className="marquee-inner-wrapper card-wrapper">
               <Marquee className="d-flex">
                 <div className="mx-4 w-25">
-                  <img src="images/brand-01.png" alt="brand" />
+                  <img src="images/brand-xiaomi.png" alt="xiaomi" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="images/brand-02.png" alt="brand" />
+                  <img src="images/brand-levoit.png" alt="levoit" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="images/brand-03.png" alt="brand" />
+                  <img src="images/brand-sharp.png" alt="sharp" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="images/brand-04.png" alt="brand" />
+                  <img src="images/brand-dyson.png" alt="dyson" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="images/brand-05.png" alt="brand" />
+                  <img src="images/brand-06.png" alt="LG" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="images/brand-06.png" alt="brand" />
+                  <img src="images/brand-07.png" alt="samsung" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="images/brand-07.png" alt="brand" />
-                </div>
-                <div className="mx-4 w-25">
-                  <img src="images/brand-08.png" alt="brand" />
+                  <img src="images/brand-01.png" alt="apple" />
                 </div>
               </Marquee>
             </div>
