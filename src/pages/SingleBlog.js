@@ -28,7 +28,7 @@ const SingleBlog = () => {
           <div className='col-12'>
             <div className='single-blog-card'>
               <Link to='/blogs' className='d-flex align-items-center gap-10'>
-                <HiOutlineArrowLeft className='fs-4' /> Go back to Blogs
+                <HiOutlineArrowLeft className='fs-4' /> Trở lại
               </Link>
               <h3 className='title'>{blogState?.title}</h3>
               <img src={blogState?.images[0].url ? blogState?.images[0].url : blog} alt='blog'

@@ -12,9 +12,9 @@ import { loginUser } from '../features/user/userSlice';
 
 let loginSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Email should be valid")
-    .required("Email is Required"),
-  password: Yup.string().required("Password is Required"),
+    .email("Email không khả dụng")
+    .required("Email không được để trống"),
+  password: Yup.string().required("Password không được để trống"),
 });
 
 const Login = () => {
@@ -82,7 +82,7 @@ const Login = () => {
                 <div>
                   <Link to='/forgot-password'>Quên mật khẩu?</Link>
                   <div className='mt-3 d-flex justify-content-center align-items-center gap-15'>
-                    <button className='button border-0' type='submit'>Đăng nhập</button>
+                    <button className='button border-0 signIn' type='submit'>Đăng nhập</button>
                     <Link to='/signup' className='button signup' type='submit'>Đăng ký</Link>
                   </div>
                 </div>

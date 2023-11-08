@@ -340,7 +340,7 @@ const SingleProduct = () => {
                   </p>
                 </div>
                 <div className='d-flex gap-10 align-items-center mt-2'>
-                  <h3 className='product-heading'>Chia sẻ :</h3>
+                  <h3 className='product-heading'>Chia sẻ </h3>
                   <a
                     href='javascript:void(0);'
                     onClick={() => {
@@ -349,7 +349,7 @@ const SingleProduct = () => {
                       );
                     }}
                   >
-                    Sao chép đường dẫn sản phẩm
+                    Chọn vào đây để chia sẻ sản phẩm này cho bạn bè và người thân của bạn !
                   </a>
                 </div>
               </div>

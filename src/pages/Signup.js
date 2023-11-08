@@ -6,18 +6,18 @@ import CustomInput from '../components/CustomInput';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../features/user/userSlice';
 import { useEffect } from 'react';
 
 let signUpSchema = Yup.object().shape({
-  firstName: Yup.string().required("First Name is Required"),
-  lastName: Yup.string().required("Last Name is Required"),
+  firstName: Yup.string().required("Tên không được để trống"),
+  lastName: Yup.string().required("Họ không được để trống"),
   email: Yup.string()
-    .email("Email should be valid")
-    .required("Email is Required"),
-  mobile: Yup.string().required("Mobile is Required"),
-  password: Yup.string().required("Password is Required"),
+    .email("Email không khả dụng")
+    .required("Email không được để trống"),
+  mobile: Yup.string().required("Số điện thoại không được để trống"),
+  password: Yup.string().required("Mật khẩu không được để trống"),
 });
 
 const Signup = () => {
@@ -113,8 +113,9 @@ const Signup = () => {
                   {formik.touched.password && formik.errors.password}
                 </div>
                 <div>
-                  <div className='mt-3 d-flex justify-content-center align-items-center gap-15'>
-                    <button className='button border-0' type='submit'>Đăng ký</button>
+                  <div className='d-flex justify-content-center align-items-center gap-15'>
+                    <button className='button border-0 signIn' type='submit'>Đăng ký</button>
+                    <Link to='/login' className='button signup' type='submit'>Đăng nhập</Link>
                   </div>
                 </div>
               </form>

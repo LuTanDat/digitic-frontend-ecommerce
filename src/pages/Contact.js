@@ -15,12 +15,12 @@ import { createQuery } from "../features/contact/contactSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 let contactSchema = Yup.object().shape({
-  name: Yup.string().required("Name is Required"),
+  name: Yup.string().required("Name không được để trống"),
   email: Yup.string()
-    .email("Email should be valid")
-    .required("Email is Required"),
-  mobile: Yup.string().required("Mobile is Required"),
-  comment: Yup.string().required("Comment is Required"),
+    .email("Email không khả dụng")
+    .required("Email không được để trống"),
+  mobile: Yup.string().required("Mobile không được để trống"),
+  comment: Yup.string().required("Comment không được để trống"),
 });
 
 const Contact = () => {

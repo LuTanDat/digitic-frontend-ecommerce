@@ -615,15 +615,27 @@ footer .input-group-text{
   font-size: 13px;
   color: var(--color-777777);
 }
-.signup{
+.signIn{
   background-color: var(--color-febd69);
   color: var(--color-131921);
 }
-.signup:hover{
+.signIn:hover{
   background-color: var(--color-131921);
   color: white;
   border: none;
 }
+
+.signup{
+  background-color: var(--color-131921) !important;
+  color: white !important;
+}
+
+.signup:hover{
+  background-color: var(--color-febd69) !important;
+  color: var(--color-131921) !important;
+  border: none !important;
+}
+
 .error{
   color: red;
   font-size: 12px;

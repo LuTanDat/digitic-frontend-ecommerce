@@ -84,7 +84,7 @@ const Introduce = () => {
             </section>
             <footer class="p-2 bg-primary text-white text-center">
               <p>Cảm ơn bạn đã đến với trang web thương mại điện tử của chúng tôi.</p>
-              <p className="mb-0">Chúc bạn có một trải nghiệm mua sắm thật tuyệt vời.</p>
+              <p className="mb-0">Chúc bạn có một trải nghiệm mua sắm thật tuyệt vời !</p>
             </footer>
           </div>
         </div>

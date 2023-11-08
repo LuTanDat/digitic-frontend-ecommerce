@@ -30,7 +30,7 @@ const Orders = () => {
   return (
     <>
       <Meta title={'My Orders'} />
-      <BreadCrumb title='Đơn hàng' />
+      <BreadCrumb title='Đơn hàng của tôi' />
       <Container class1='cart-wrapper home-wrapper-2 py-3'>
         <div className='row'>
           {/* table head */}

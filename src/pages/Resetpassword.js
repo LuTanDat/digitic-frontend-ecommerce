@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetPassword } from '../features/user/userSlice';
 
 let passwordSchema = Yup.object().shape({
-  password: Yup.string().required("Password is Required"),
+  password: Yup.string().required("Mật khẩu không được để trống"),
 });
 
 const Resetpassword = () => {
@@ -36,12 +36,12 @@ const Resetpassword = () => {
   return (
     <>
       <Meta title='Reset Password' />
-      <BreadCrumb title='Reset Password' />
+      <BreadCrumb title='Reset Mật khẩu' />
       <Container class1='login-wrapper py-5' style={{ backgroundColor: '#7985c9' }}>
         <div className='row'>
           <div className='col-12'>
             <div className='auth-card'>
-              <h3 className='text-center mb-3'>Reset Password</h3>
+              <h3 className='text-center mb-3'>Reset Mật khẩu</h3>
               <form
                 action=''
                 onSubmit={formik.handleSubmit}

@@ -8,7 +8,7 @@ const CompareProduct = () => {
   return (
     <>
       <Meta title='Compare Products' />
-      <BreadCrumb title='Compare Products' />
+      <BreadCrumb title='So sánh sản phẩm' />
       <Container class1='compare-product-wrapper home-wrapper-2 py-5'>
         <div className='row'>
           <div className='col-3'>

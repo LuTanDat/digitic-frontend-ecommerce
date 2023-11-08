@@ -11,8 +11,8 @@ import { forgotPasswordToken } from '../features/user/userSlice';
 
 let emailSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Email should be valid")
-    .required("Email is Required"),
+    .email("Email không khả dụng")
+    .required("Email không được để trống"),
 });
 
 const Forgotpassword = () => {

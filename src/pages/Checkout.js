@@ -12,16 +12,18 @@ import { config } from "../utils/axiosconfig"
 import { createAnOrder, deleteUserCart, getUserCart, resetState, updateProfile } from "../features/user/userSlice";
 import { PayPalButton } from "react-paypal-button-v2";
 import { paymentService } from "../features/payment/paymentService";
+import Meta from "../components/Meta";
+import BreadCrumb from "../components/BreadCrumb";
 
 let shippingSchema = Yup.object().shape({
-  firstName: Yup.string().required("First Name is Required"),
-  lastName: Yup.string().required("Last Name is Required"),
-  address: Yup.string().required("Address Details is Required"),
-  // state: Yup.string().required("State is Required"),
-  city: Yup.string().required("City is Required"),
-  // country: Yup.string().required("Country is Required"),
-  // pincode: Yup.string().required("Zipcode is Required"),
-  mobile: Yup.string().required("Mobile is Required"),
+  firstName: Yup.string().required("Tên không được để trống"),
+  lastName: Yup.string().required("Họ không được để trống"),
+  address: Yup.string().required("Địa chỉ không được để trống"),
+  // state: Yup.string().required("State không được để trống"),
+  city: Yup.string().required("Thành phố không được để trống"),
+  // country: Yup.string().required("Country không được để trống"),
+  // pincode: Yup.string().required("Zipcode không được để trống"),
+  mobile: Yup.string().required("Số điện thoại không được để trống"),
 });
 
 const Checkout = () => {
@@ -153,11 +155,13 @@ const Checkout = () => {
 
   return (
     <>
-      <Container class1="checkout-wrapper home-wrapper-2 py-5" style={{ marginTop: "70px" }}>
+      <Meta title={'Checkout'} />
+      <BreadCrumb title='Thanh toán' />
+      <Container class1="checkout-wrapper home-wrapper-2 py-5">
         <div className="row">
           <div className="col-8">
             <div className="checkout-left-data">
-              <nav
+              {/* <nav
                 style={{ "--bs-breadcrumb-divider": ">" }}
                 aria-label="breadcrumb"
               >
@@ -175,7 +179,7 @@ const Checkout = () => {
                     Payment
                   </li>
                 </ol>
-              </nav>
+              </nav> */}
 
               <h4 className="mb-3">Thông tin giao hàng</h4>
               <form

@@ -20,12 +20,12 @@ const Blog = () => {
   return (
     <>
       <Meta title='Blogs' />
-      <BreadCrumb title='Blogs' />
+      <BreadCrumb title='Bài viết' />
       <Container class1='blog-wrapper home-wrapper-2 py-5'>
         <div className='row'>
           <div className='col-3'>
             <div className='filter-card mb-3'>
-              <h3 className='filter-title'>Shop By Categories</h3>
+              <h3 className='filter-title'>Lọc theo danh mục</h3>
               <div>
                 <ul className='ps-0'>
                   <li>Watch</li>
