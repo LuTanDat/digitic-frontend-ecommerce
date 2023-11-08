@@ -217,12 +217,13 @@ const SingleProduct = () => {
                   return (
                     <div
                       key={index}
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer", width: "127px", height: "127px" }}
                       onClick={() => handleOtherProductImageClick(index)} // Gọi hàm khi ảnh được click
                     >
                       <img
                         src={item?.url}
                         className='img-fluid'
+                        style={{ width: "100%", height: "100%", objectFit: "contain" }}
                         alt='' />
                     </div>
                   )
@@ -267,6 +268,9 @@ const SingleProduct = () => {
                       <a href='#review' className='review-btn text-decoration-underline'>Viết đánh giá</a>
                     </div>)
                   }
+                </div>
+                <div>
+                  <p className='review-btn m-2'>{`${productState?.numViews} lượt xem`}</p>
                 </div>
               </div>
               <div className='pt-2'>
