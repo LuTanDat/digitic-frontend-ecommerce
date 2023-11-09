@@ -101,7 +101,7 @@ export const productSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.addToWishlist = action.payload;
-        state.message = "Product Added to Wishlist";
+        state.message = "Product Updated to Wishlist";
         if (state.isSuccess === true) {
           toast.success("Cập nhật thành công danh sách yêu thích!");
         }

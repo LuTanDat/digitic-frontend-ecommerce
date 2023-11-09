@@ -13,7 +13,7 @@ const Product = () => {
   const location = useLocation();
 
   const dispatch = useDispatch();
-  const [grid, setGrid] = useState(4);
+  const [grid, setGrid] = useState(3);
   const productState = useSelector((state) => state?.product?.products);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);

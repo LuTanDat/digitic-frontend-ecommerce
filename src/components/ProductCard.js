@@ -63,7 +63,9 @@ const ProductCard = (props) => {
                 <button className='border-0 bg-transparent'
                   onClick={(e) => { addToWishList(item?._id) }}
                 >
-                  <img src={wish} alt='wishlist' />
+                  {
+                    location.pathname === "/wishlist" ? <button type='button' className='btn-close'></button> : <img src={wish} alt='wishlist' />
+                  }
                 </button>
               </div>
               <Link to={item?.quantity !== 0 && '/product/' + item?._id}>
