@@ -298,7 +298,7 @@ const Home = () => {
                 return (
                   <div
                     key={index}
-                    className={"col-3"}
+                    className="col-3 mt-3"
                     disabled={item?.quantity === 0}
                   >
                     <div
@@ -311,7 +311,7 @@ const Home = () => {
                           <img src={wish} alt='wishlist' />
                         </button>
                       </div>
-                      <Link to={item?.quantity !== 0 && '/product/' + item?._id}>
+                      <Link to={item?.quantity !== 0 && '/product/' + item?._id} className='w-100'>
                         <div className='product-image'>
                           <img
                             src={item?.images[0]?.url ? item?.images[0]?.url : watch}
@@ -329,9 +329,9 @@ const Home = () => {
 
                           />
                         </div>
-                        <div className='product-details'>
-                          <h6 className='brand'>{item?.brand}</h6>
-                          <h5 className='title'> {item?.title}</h5>
+                        <div className='product-details' style={{ height: "124px" }}>
+                          <h6 className='brand mt-2'>{item?.brand}</h6>
+                          <h5 className='title mb-1'> {item?.title}</h5>
                           <ReactStars
                             count={5}
                             size={24}
@@ -339,8 +339,8 @@ const Home = () => {
                             edit={false}
                             activeColor="#ffd700"
                           />
-                          <div className="d-flex gap-2">
-                            <p className='price' style={{ color: isShowPriceDiscount ? "gray" : "red" }}>
+                          <div className="d-flex gap-1">
+                            <p className='price mb-0' style={{ color: isShowPriceDiscount ? "gray" : "red", fontSize: isShowPriceDiscount ? "14px" : "" }}>
                               {
                                 isShowPriceDiscount ? <del>{(item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</del> :
                                   (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })
@@ -349,7 +349,7 @@ const Home = () => {
                             {
                               isShowPriceDiscount && (
                                 <div className='d-flex gap-1'>
-                                  <p className='price' style={{ color: "red" }}>
+                                  <p className='price mb-0' style={{ color: "red" }}>
                                     {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                                   </p>
                                   <h6 style={{ color: "#434141" }}>{`(-${discountPercent}%)`}</h6>

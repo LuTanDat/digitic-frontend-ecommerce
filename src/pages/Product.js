@@ -25,7 +25,7 @@ const Product = () => {
   const [brand, setBrand] = useState(null);
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
-  const [sort, setSort] = useState(null);
+  const [sort, setSort] = useState("title");
 
   useEffect(() => {
     if (location.state) {
@@ -63,7 +63,7 @@ const Product = () => {
     setBrand(null);
     setMinPrice(null);
     setMaxPrice(null);
-    setSort(null);
+    setSort("title");
     if (location.state) {
       delete location.state;
     }
@@ -158,6 +158,7 @@ const Product = () => {
                     name=''
                     className='form-control form-select'
                     id=''
+                    value={sort}
                     onChange={(e) => setSort(e.target.value)}
                   >
                     <option value="title">Ký tự, A-Z</option>
@@ -196,7 +197,7 @@ const Product = () => {
               </div>
             </div>
             {
-              (tag !== null || category !== null || brand !== null || minPrice !== null || maxPrice !== null || sort !== null) && (
+              (tag !== null || category !== null || brand !== null || minPrice !== null || maxPrice !== null || sort !== "title") && (
                 <div className='filter-sort-grid mb-3'>
                   <div className='filter-title mb-2'>Đang lọc theo</div>
                   <div className='d-flex align-items-center gap-2 flex-wrap'>
@@ -211,14 +212,14 @@ const Product = () => {
                     }{
                       maxPrice !== null && <button className="btn-filter" onClick={() => { setMaxPrice(null) }}>× {maxPrice}</button>
                     }{
-                      sort !== null && <button className="btn-filter" onClick={() => { setSort(null) }}>× {sort}</button>
+                      sort !== "title" && <button className="btn-filter" onClick={() => { setSort("title") }}>× {sort}</button>
                     }
                     <button className="btn-filter" onClick={() => { removeAllFilter() }}>× Bỏ chọn tất cả</button>
                   </div>
                 </div>
               )
             }
-            <div className='products-list pb-5'>
+            <div className='products-list pb-3'>
               <div className='d-flex gap-10 flex-wrap'>
                 <ProductCard data={productState ? productState : []} grid={grid} />
               </div>

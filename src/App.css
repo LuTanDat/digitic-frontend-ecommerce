@@ -306,7 +306,7 @@ footer .input-group-text{
 
 /* Product Card */
 .product-card {
-  padding: 15px;
+  padding: 10px;
   background-color: white;
   border-radius: 10px;
   overflow: hidden;
@@ -353,7 +353,7 @@ footer .input-group-text{
 }
 .wishlist-icon{
   top: 2%;
-  right: 15px;
+  right: 20px;
 }
 /* Product Card Ends here */
 
@@ -505,7 +505,7 @@ footer .input-group-text{
   gap: 20px;
 }
 .gr-12 .product-card .product-image {
-  width: 270px;
+  width: 35%;
   height: auto;
 }
 .gr-12 .action-bar{

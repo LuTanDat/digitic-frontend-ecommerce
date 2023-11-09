@@ -68,68 +68,82 @@ const ProductCard = (props) => {
                   }
                 </button>
               </div>
-              <Link to={item?.quantity !== 0 && '/product/' + item?._id}>
-                <div className='product-image'>
-                  <img
-                    src={item?.images[0]?.url ? item?.images[0]?.url : watch}
-                    className='img-fluid mx-auto'
-                    alt='product image'
-                    width={160}
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                  <img src={item?.images[0]?.url ? item?.images[1]?.url : watch}
-                    className='img-fluid mx-auto'
-                    alt='product image'
-                    width={160}
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                </div>
-                <div className='product-details'>
-                  <h6 className='brand'>{item?.brand}</h6>
-                  <h5 className='title'> {item?.title}</h5>
-                  <ReactStars
-                    count={5}
-                    size={24}
-                    value={Number(item?.totalrating) || 5}
-                    edit={false}
-                    activeColor="#ffd700"
-                  />
-                  <p
-                    style={{ wordWrap: 'break-word' }}
-                    className={`description ${grid === 12 ? "d-block" : "d-none"}`}
-                    dangerouslySetInnerHTML={{ __html: item.description }}
-                  >
-                  </p>
-                  <div className="d-flex gap-2">
-                    <p className='price' style={{ color: isShowPriceDiscount ? "gray" : "red" }}>
-                      {
-                        isShowPriceDiscount ? <del>{(item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</del> :
-                          (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })
-                      }
-                    </p>
-                    {
-                      isShowPriceDiscount && (
-                        <div className='d-flex gap-1'>
-                          <p className='price' style={{ color: "red" }}>
-                            {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
-                          </p>
-                          <h6 style={{ color: "#434141" }}>{`(-${discountPercent}%)`}</h6>
-                        </div>
-                      )
-                    }
+              <Link
+                to={item?.quantity !== 0 && '/product/' + item?._id}
+                className={`w-100`}
+              >
+                <div className={`${grid === 12 ? "d-flex gap-3" : ""}`}>
+                  <div className={`product-image ${grid === 12 ? "w-25" : ""}`}>
+                    <img
+                      src={item?.images[0]?.url ? item?.images[0]?.url : watch}
+                      className='img-fluid mx-auto'
+                      alt='product image'
+                      width={160}
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                    <img src={item?.images[0]?.url ? item?.images[1]?.url : watch}
+                      className='img-fluid mx-auto'
+                      alt='product image'
+                      width={160}
+                      style={{ width: "100%", height: "100%" }}
+                    />
                   </div>
-                </div>
-                <div className='action-bar position-absolute'>
-                  <div className='d-flex flex-column gap-15'>
-                    {/* <button className='border-0 bg-transparent'>
+                  <div
+                    className={`product-details ${grid === 12 ? "w-75" : ""}`}
+                    style={{
+                      height: `${grid === 3 ? "142px" :
+                        grid === 4 ? "124px" :
+                          grid === 6 ? "124px" :
+                            grid === 12 ? "234px" :
+                              "124px"}`
+                    }}
+                  >
+                    <h6 className='brand mt-2'>{item?.brand}</h6>
+                    <h5 className='title mb-1'> {item?.title}</h5>
+                    <ReactStars
+                      count={5}
+                      size={24}
+                      value={Number(item?.totalrating) || 5}
+                      edit={false}
+                      activeColor="#ffd700"
+                    />
+                    <p
+                      style={{ wordWrap: 'break-word' }}
+                      className={`description ${grid === 12 ? "d-block" : "d-none"}`}
+                      dangerouslySetInnerHTML={{ __html: item.description }}
+                    >
+                    </p>
+                    <div className="d-flex gap-1">
+                      <p className='price mb-0' style={{ color: isShowPriceDiscount ? "gray" : "red", fontSize: isShowPriceDiscount ? "14px" : "" }}>
+                        {
+                          isShowPriceDiscount ? <del>{(item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</del> :
+                            (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })
+                        }
+                      </p>
+                      {
+                        isShowPriceDiscount && (
+                          <div className='d-flex gap-1'>
+                            <p className='price mb-0' style={{ color: "red" }}>
+                              {priceAfterDiscount ? (priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                            </p>
+                            <h6 style={{ color: "#434141" }}>{`(-${discountPercent}%)`}</h6>
+                          </div>
+                        )
+                      }
+                    </div>
+                  </div>
+                  <div className='action-bar position-absolute'>
+                    <div className='d-flex flex-column gap-15'>
+                      {/* <button className='border-0 bg-transparent'>
                     <img src={prodcompare} alt='compare' />
                   </button>
                   <Link to={'/product/' + item?._id} className='border-0 bg-transparent'>
                     <img src={view} alt='view' />
                   </Link> */}
-                    {/* <button className='border-0 bg-transparent'>
+                      {/* <button className='border-0 bg-transparent'>
                     <img src={addcart} alt='addcart' />
                   </button> */}
+                    </div>
                   </div>
                 </div>
               </Link>
