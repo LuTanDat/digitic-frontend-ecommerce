@@ -6,6 +6,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { getAProduct } from '../features/products/productSlice';
 import { getUserCart } from '../features/user/userSlice';
+import { FaBars } from 'react-icons/fa';
 
 import logo from '../images/logo.png';
 import wishlist from '../images/wishlist.svg';
@@ -66,14 +67,20 @@ const Header = () => {
     <>
       <header className='header-upper p-2 fixed-header'>
         <div className=''>
-          <div className='row align-items-center w-100'>
-            <div className='col-2'>
-              <Link to='/' style={{ width: "100%", padding: "0 25px" }}>
-                <img src={logo} alt='logo' style={{ width: "100%", height: "48px" }} />
+          <div className='row align-items-center justify-content-between w-100'>
+            <div className='col-md-1 col-2 d-block d-xl-none nav__bars-btn fs-2 text-white'>
+              <FaBars />
+            </div>
+            <div className='col-2 d-block d-md-none nav__bars-btn fs-2 text-white'>
+              <BsSearch />
+            </div>
+            <div className='col-xl-2 col-md-3 col-4 p-0 ps-md-3 pe-md-3'>
+              <Link to='/' style={{ width: "100%" }}>
+                <img src={logo} alt='logo' style={{ width: "100%", height: "48px", maxWidth: "180px" }} />
               </Link>
             </div>
-            <div className='col-5'>
-              <div className='menu-links'>
+            <div className='col-xl-5 d-none d-xl-block'>
+              <div className='menu-links hide-on-mobile-tablet'>
                 <div className='d-flex align-items-center gap-15'>
                   <NavLink to="/">Trang chủ</NavLink>
                   <NavLink to="/product">Sản phẩm</NavLink>
@@ -83,7 +90,7 @@ const Header = () => {
                   {
                     authState?.user === null ?
                       "" :
-                      <NavLink to="/my-orders">Đơn hàng của tôi</NavLink>}
+                      <NavLink to="/my-orders">Đơn hàng</NavLink>}
                   {
                     authState?.user === null ?
                       "" :
@@ -92,49 +99,38 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            <div className='col-5'>
-              <div className='header-upper-links d-flex align-items-center justify-content-between gap-30'>
-                <div className="input-group">
-                  <Typeahead
-                    id="pagination-example"
-                    onPaginate={() => console.log('Results paginated')}
-                    onChange={(selected) => {
-                      navigate(`/product/${selected[0]?.prod}`)
-                      dispatch(getAProduct(selected[0]?.prod))
-                    }}
-                    options={productOpt}
-                    paginate={paginate}
-                    labelKey={"name"}
-                    minLength={2}
-                    placeholder="Search for Products here..."
-                  />
-                  <span className="input-group-text" id="basic-addon2">
-                    <BsSearch className='fs-5' />
-                  </span>
-                </div>
-                {/* <div>
+            <div className='col-xl-2 col-md-5 d-none d-md-block'>
+              <div className="input-group">
+                <Typeahead
+                  id="pagination-example"
+                  onPaginate={() => console.log('Results paginated')}
+                  onChange={(selected) => {
+                    navigate(`/product/${selected[0]?.prod}`)
+                    dispatch(getAProduct(selected[0]?.prod))
+                  }}
+                  options={productOpt}
+                  paginate={paginate}
+                  labelKey={"name"}
+                  minLength={2}
+                  placeholder="Nhập tên sản phẩm muốn tìm..."
+                />
+                <span className="input-group-text" id="basic-addon2">
+                  <BsSearch className='fs-5' />
+                </span>
+              </div>
+              {/* <div>
                   <Link to='/compare-product' className='d-flex align-items-center gap-10 text-white'>
                     <img src='images/compare.svg' alt='compare' />
                     <p className='mb-0'>Compare <br /> Products</p>
                   </Link>
                 </div> */}
+            </div>
+            <div className='col-xl-2 col-md-3 col-4'>
+              <div className='header-upper-links d-flex align-items-center gap-3'>
                 <div>
                   <Link to='/wishlist' className='d-flex align-items-center gap-10 text-white'>
                     <img src={wishlist} alt='wishlist' />
-                    <p className='mb-0' >Yêu thích</p>
-                  </Link>
-                </div>
-                <div>
-                  <Link to={authState?.user === null ? '/login' : '/my-profile'} className='d-flex align-items-center gap-10 text-white'>
-                    <img src={user} alt='user' />
-                    {
-                      authState?.user === null ?
-                        <p className='mb-0'>Đăng nhập</p> :
-                        <div>
-                          <p className='mb-0'>Xin chào</p>
-                          <p className='mb-0'>{authState?.user?.firstName}</p>
-                        </div>
-                    }
+                    <p className='mb-0 d-none d-md-block' >Yêu thích</p>
                   </Link>
                 </div>
                 <div>
@@ -145,6 +141,21 @@ const Header = () => {
                     </div>
                   </Link>
                 </div>
+              </div>
+            </div>
+            <div className='col-xl-1 d-none d-xl-block p-0'>
+              <div className='hide-on-mobile-tablet'>
+                <Link to={authState?.user === null ? '/login' : '/my-profile'} className='d-flex align-items-center gap-1 text-white'>
+                  <img src={user} alt='user' />
+                  {
+                    authState?.user === null ?
+                      <p className='mb-0'>Đăng nhập</p> :
+                      <div>
+                        <p className='mb-0' style={{ whiteSpace: "nowrap" }}>Xin chào</p>
+                        <p className='mb-0'>{authState?.user?.firstName}</p>
+                      </div>
+                  }
+                </Link>
               </div>
             </div>
           </div>
