@@ -68,13 +68,13 @@ const Header = () => {
       <header className='header-upper p-2 fixed-header'>
         <div className=''>
           <div className='row align-items-center justify-content-between w-100'>
-            <div className='col-md-1 col-2 d-block d-xl-none nav__bars-btn fs-2 text-white'>
+            <div className='col-md-1 col-2 d-block d-xl-none ps-md-4 nav__bars-btn fs-2 text-white'>
               <FaBars />
             </div>
             <div className='col-2 d-block d-md-none nav__bars-btn fs-2 text-white'>
               <BsSearch />
             </div>
-            <div className='col-xl-2 col-md-3 col-4 p-0 ps-md-3 pe-md-3'>
+            <div className='col-xl-2 col-md-3 col-4 p-0 ps-md-3 pe-md-3 ps-xl-5 pe-xl-4'>
               <Link to='/' style={{ width: "100%" }}>
                 <img src={logo} alt='logo' style={{ width: "100%", height: "48px", maxWidth: "180px" }} />
               </Link>
@@ -126,7 +126,7 @@ const Header = () => {
                 </div> */}
             </div>
             <div className='col-xl-2 col-md-3 col-4'>
-              <div className='header-upper-links d-flex align-items-center gap-3'>
+              <div className='header-upper-links d-flex align-items-center justify-content-center gap-3'>
                 <div>
                   <Link to='/wishlist' className='d-flex align-items-center gap-10 text-white'>
                     <img src={wishlist} alt='wishlist' />
