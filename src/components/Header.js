@@ -7,6 +7,7 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { getAProduct } from '../features/products/productSlice';
 import { getUserCart } from '../features/user/userSlice';
 import { FaBars } from 'react-icons/fa';
+import { AiOutlineClose } from 'react-icons/ai';
 
 import logo from '../images/logo.png';
 import wishlist from '../images/wishlist.svg';
@@ -68,11 +69,11 @@ const Header = () => {
       <header className='header-upper p-2 fixed-header'>
         <div className=''>
           <div className='row align-items-center justify-content-between w-100'>
-            <div className='col-md-1 col-2 d-block d-xl-none ps-md-4 nav__bars-btn fs-2 text-white'>
-              <FaBars />
+            <div className='col-md-1 col-2 d-block d-xl-none ps-3 ps-md-4 fs-2 text-white'>
+              <label htmlFor='mobile-bars-checkbox'><FaBars /></label>
             </div>
-            <div className='col-2 d-block d-md-none nav__bars-btn fs-2 text-white'>
-              <BsSearch />
+            <div className='col-2 d-block d-md-none fs-2 text-white'>
+              <label htmlFor='mobile-search-checkbox'><BsSearch /></label>
             </div>
             <div className='col-xl-2 col-md-3 col-4 p-0 ps-md-3 pe-md-3 ps-xl-5 pe-xl-4'>
               <Link to='/' style={{ width: "100%" }}>
@@ -90,7 +91,8 @@ const Header = () => {
                   {
                     authState?.user === null ?
                       "" :
-                      <NavLink to="/my-orders">Đơn hàng</NavLink>}
+                      <NavLink to="/my-orders">Đơn hàng</NavLink>
+                  }
                   {
                     authState?.user === null ?
                       "" :
@@ -99,7 +101,67 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            <div className='col-xl-2 col-md-5 d-none d-md-block'>
+
+            {/* OVERLAY */}
+            <input type="checkbox" hidden className="header__mobile-bars-checkbox" id="mobile-bars-checkbox"></input>
+            <input type="checkbox" hidden className="header__mobile-search-checkbox" id="mobile-search-checkbox"></input>
+
+            <label htmlFor="mobile-bars-checkbox" className="header__overlay"></label>
+
+            <div className="header__mobile">
+              <label htmlFor="mobile-bars-checkbox" className="header__mobile-close">
+                <AiOutlineClose />
+              </label>
+              <ul className="header__mobile-list">
+                <li>
+                  <NavLink to="/" className="header__mobile-link">Trang chủ</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/product" className="header__mobile-link">Sản phẩm</NavLink>
+                </li>
+                {/* <li>
+                  <NavLink to="/blogs" className="header__mobile-link">Bài viết</NavLink>
+                </li> */}
+                <li>
+                  <NavLink to="/contact" className="header__mobile-link">Liên hệ</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/introduce" className="header__mobile-link">Giới thiệu</NavLink>
+                </li>
+                <li>
+                  {
+                    authState?.user === null ?
+                      "" :
+                      <NavLink to="/my-orders" className="header__mobile-link">Đơn hàng</NavLink>
+                  }
+                </li>
+                <li>
+                  {
+                    authState?.user === null ?
+                      <NavLink to="/login" className="header__mobile-link" style={{ borderBottom: "0" }}>
+                        <button
+                          type='button'
+                          className='border mt-5 bg-success text-white text-uppercase header__mobile-link'
+                          style={{ borderRadius: "10px" }}
+                        >
+                          Đăng Nhập
+                        </button>
+                      </NavLink> :
+                      <button
+                        type='button'
+                        onClick={handleLogout}
+                        className='border mt-5 bg-danger text-white text-uppercase header__mobile-link'
+                        style={{ borderRadius: "10px" }}
+                      >
+                        Đăng Xuất
+                      </button>
+                  }
+                </li>
+              </ul>
+            </div>
+            {/* END OVERLAY */}
+
+            <div className='col-xl-2 col-md-5 header__search'>
               <div className="input-group">
                 <Typeahead
                   id="pagination-example"
