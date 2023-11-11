@@ -184,7 +184,7 @@ const Home = () => {
           </div> */}
         </div>
       </Container>
-      <Container class1="home-wrapper-2 py-5">
+      <Container class1="home-wrapper-2 py-5 home-page">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Danh mục sản phẩm</h3>
@@ -237,7 +237,7 @@ const Home = () => {
           </div>
         </div>
       </Container>
-      <Container class1="marquee-wrapper py-5 home-wrapper-2">
+      <Container class1="marquee-wrapper py-5 home-wrapper-2 home-page">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Thương hiệu nổi bật</h3>
@@ -271,7 +271,7 @@ const Home = () => {
           </div>
         </div>
       </Container>
-      <Container class1="featured-wrapper py-5 home-wrapper-2">
+      <Container class1="featured-wrapper py-5 home-wrapper-2 home-page">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Sản phẩm nổi bật</h3>
@@ -298,7 +298,7 @@ const Home = () => {
                 return (
                   <div
                     key={index}
-                    className="col-3 mt-3"
+                    className="col-xl-2-4 col-lg-3 col-md-4 col-sm-6 col-xs-6 mt-3 home-product-card"
                     disabled={item?.quantity === 0}
                   >
                     <div
@@ -329,7 +329,7 @@ const Home = () => {
 
                           />
                         </div>
-                        <div className='product-details' style={{ height: "124px" }}>
+                        <div className='product-details'>
                           <h6 className='brand mt-2'>{item?.brand}</h6>
                           <h5 className='title mb-1'> {item?.title}</h5>
                           <ReactStars
@@ -339,7 +339,7 @@ const Home = () => {
                             edit={false}
                             activeColor="#ffd700"
                           />
-                          <div className="d-flex gap-1">
+                          <div className="d-flex gap-1 price-on-mobile-home">
                             <p className='price mb-0' style={{ color: isShowPriceDiscount ? "gray" : "red", fontSize: isShowPriceDiscount ? "14px" : "" }}>
                               {
                                 isShowPriceDiscount ? <del>{(item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</del> :

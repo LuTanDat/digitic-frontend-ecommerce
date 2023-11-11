@@ -30,9 +30,9 @@ const Contact = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: `${userState.lastName} ${userState.firstName}` || '',
-      email: userState.email || '',
-      mobile: userState.mobile || '',
+      name: `${userState?.lastName} ${userState?.firstName}` || '',
+      email: userState?.email || '',
+      mobile: userState?.mobile || '',
       comment: '',
     },
     validationSchema: contactSchema,

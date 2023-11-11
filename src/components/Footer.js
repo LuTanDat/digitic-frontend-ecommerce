@@ -37,7 +37,7 @@ const Footer = () => {
         <div className="container-xxl">
           <div className='row'>
             <div className='col-12'>
-              <div className='d-flex align-items-center justify-content-center gap-30'>
+              <div className='d-flex align-items-center justify-content-center gap-30 footer-mobile-head'>
                 <h4 className='text-white text-center mb-0'>Liên lạc với chúng tôi</h4>
                 <div className='social-icons d-flex align-items-center gap-15 justify-content-center'>
                   <a href='#' className='text-white'><BsFacebook className='fs-4' /></a>
@@ -79,7 +79,7 @@ const Footer = () => {
         <div className="container-xxl">
           <div className='row'>
             <div className='col-12'>
-              <p className='text-center mb-0 text-white'>
+              <p className='text-center mb-0 text-white footer-mobile-second'>
                 &copy; {new Date().getFullYear()}; Powered by Developer's Lu Tan Dat
               </p>
             </div>
