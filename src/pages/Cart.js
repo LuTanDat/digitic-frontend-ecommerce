@@ -114,7 +114,7 @@ const Cart = () => {
                       <div className='w-75'>
                         <p>{item?.productId?.title}</p>
                         {/* <p>Size: L</p> */}
-                        <p className='d-flex gap-3'>
+                        <p className='cart-data-color d-flex gap-3'>
                           Color:
                           <ul className='colors ps-0'>
                             <li style={{ backgroundColor: item?.color }}></li>
@@ -178,13 +178,54 @@ const Cart = () => {
                         )
                       }
                     </div>
+
+
+                    <div className='cart-data-on-mobile d-none gap-2 mt-2'>
+                      <div className='cart-col-mobile d-flex gap-2 align-items-center'>
+                        <h5 className='price mb-0' style={{ color: item?.priceAfterDiscount !== item?.price ? "gray" : "red" }}>
+                          {
+                            item?.priceAfterDiscount !== item?.price ? <del>
+                              {item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                            </del> : item?.price ? (item?.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"
+                          }
+                        </h5>
+                        {
+                          item?.priceAfterDiscount !== item?.price && (
+                            <div className='d-flex gap-1'>
+                              <h5 className='price mb-0' style={{ color: "red" }}>
+                                {item?.priceAfterDiscount ? (item?.priceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                              </h5>
+                              <h6 className='mb-0' style={{ color: "#434141", fontSize: "14px" }}>{`(-${discountPercent}%)`}</h6>
+                            </div>
+                          )
+                        }
+                      </div>
+                      <div className='cart-col-mobile d-flex align-items-center gap-2'>
+                        <div>
+                          <input
+                            type='number'
+                            name={'quantity' + item?._id}
+                            min={1}
+                            max={10}
+                            className='form-control'
+                            id={"cart" + item?._id}
+                            value={item?.quantity}
+                            onChange={(e) => { setProductUpdateDetail({ cartItemId: item?._id, quantity: e.target.value }) }}
+                          // style={{ width: '70px' }}
+                          />
+                        </div>
+                        <div>
+                          <AiFillDelete onClick={() => { deleteACartProduct(item?._id) }} className='text-danger' />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )
               })
             }
 
             <div className='col-12 py-2 mt-4'>
-              <div className='d-flex justify-content-between align-items-baseline'>
+              <div className='d-flex justify-content-between align-items-baseline toalprice-mobile'>
                 <Link to='/product' className='button'>
                   Tiếp tục mua sắm
                 </Link>

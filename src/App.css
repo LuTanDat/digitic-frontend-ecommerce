@@ -934,6 +934,13 @@ footer .input-group-text{
   .home-page .card-wrapper {
     padding: 0;
   }
+  .contact-inner-wrapper {
+    flex-direction: column-reverse;
+    justify-content: center !important;
+  }
+  .contact-inner-wrapper > div {
+    width: 100%;
+  }
 }
 @media(max-width: 575px) {
   .col-xs-6 {
@@ -964,6 +971,14 @@ footer .input-group-text{
   .footer-mobile-second {
     font-size: 14px;
   }
+  .contact-inner-wrapper {
+    flex-direction: column-reverse;
+    justify-content: center !important;
+  }
+  .contact-inner-wrapper > div {
+    width: 100%;
+  }
+
 }
 
 
@@ -1043,82 +1058,27 @@ footer .input-group-text{
   .hide-on-mobile {
       display: none;
   }
-  /* .header-with-search {
-      justify-content: space-between;
+  .cart-header {
+    display: none !important;
   }
-  .header__cart,
-  .header__logo {
-      width: unset;
+  .cart-data {
+    display: block !important;
   }
-  .header__mobile-search {
-      display: block;
-  }*/
-  .header__search {
-      position: fixed;
-      top: 66px;
-      height: 46px;
-      left: 0;
-      width: 100%;
-      box-shadow: 0 1px 2px rgb(0, 0, 0, 0.05);
-      padding: 0 12px;
-      z-index: 1;
-      display: none;
-      animation: mobileSearchSideIn linear 0.3s;
+  .cart-data .cart-col-1 {
+    width: 100%;
   }
-
-  @keyframes mobileSearchSideIn {
-      from {
-          opacity: 0;
-          top: calc(66px / 2);
-      }
-      to {
-          opacity: 1;
-          top: 66px;
-      }
+  .cart-data .cart-col-2,
+  .cart-data .cart-col-3,
+  .cart-data .cart-col-4 {
+    display: none !important;
   }
-    .header__mobile-search-checkbox:checked ~ .header__search {
-      display: block;
+  .cart-data-on-mobile{
+    display: flex !important;
   }
-/*
-  .header___search-history {
-      position: fixed;
-      left: 0;
-      top: calc(var(--header-height) + var(--header-sort-bar-height));
-      width: 100%;
-      box-shadow: 0 1px 2px rgb(0, 0, 0, 0.05);
+  .cart-data-color{
+    display: none !important;
   }
-*/
-/*
-  .pagination-item {
-      margin: 0;
+  .toalprice-mobile {
+    gap: 22px;
   }
-  .pagination-item__link {
-      --height: 28px;
-      font-size: 1.6rem;
-      min-width: 34px;
-  }
-  .app__content {
-      margin: 0 4px;
-  }
-  .header__logo-img {
-      width: 120px;
-  }
-  .footer__content {
-      padding: 0 16px;
-  }
-
-  .footer__heading {
-      text-align: center;
-  }
-  .footer__download,
-  .footer-item__link {
-      justify-content: center;
-  }
-  .footer__download-apps {
-      flex: unset;
-  }
-  .footer__download-app-link {
-      display: block;
-      padding: 6px 8px;
-  } */
 }
