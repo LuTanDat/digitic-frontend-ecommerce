@@ -1054,10 +1054,37 @@ footer .input-group-text{
 }
 
 /* Mobile */
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .hide-on-mobile {
       display: none;
   }
+  .header__search {
+    position: fixed;
+    top: 66px;
+    height: 46px;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 1px 2px rgb(0, 0, 0, 0.05);
+    padding: 0 12px;
+    z-index: 1;
+    display: none;
+    animation: mobileSearchSideIn linear 0.3s;
+}
+
+@keyframes mobileSearchSideIn {
+    from {
+        opacity: 0;
+        top: calc(66px / 2);
+    }
+    to {
+        opacity: 1;
+        top: 66px;
+    }
+}
+  .header__mobile-search-checkbox:checked ~ .header__search {
+    display: block;
+}
+
   .cart-header {
     display: none !important;
   }
