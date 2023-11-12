@@ -593,6 +593,7 @@ footer .input-group-text{
   padding: 20px;
   background-color: white;
   width: 500px;
+  max-width: 100%;
   margin: 30px auto;
   border-radius: 10px;
 }
@@ -1154,6 +1155,12 @@ footer .input-group-text{
   }
   .edit-profile{
     width: 100%;
+  }
+  .signIn {
+    padding: 12px 25px !important;
+  }
+  .signup {
+    padding: 12px 25px !important;
   }
 }
 /*RESPONSIVE CHILDREN END*/
