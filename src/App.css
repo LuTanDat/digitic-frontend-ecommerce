@@ -647,6 +647,40 @@ footer .input-group-text{
 
 
 
+/* Profile */
+.my-profile-card{
+  padding: 20px;
+  background-color: white;
+  width: 500px;
+  max-width: 100%;
+  margin: 30px auto;
+  border-radius: 10px;
+}
+.my-profile-card .form-control{
+  height: 50px;
+  background-color: var(--color-f5f5f7);
+  color: #000000;
+  font-size: 17px;
+  border-radius: 10px;
+  border-color: var(--color-777777);;
+}
+.btn-change-password {
+  background: #fef2f2;
+  border: 1px solid #000000;
+  color: #000000;
+  border-radius: 10px;
+  padding: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.edit-profile{
+  border-radius: 10px !important;
+  padding: 8px 25px !important;
+}
+/* Profile ends*/
+
+
+
 /* Policy Pages */
 .policy{
   background-color: white;
@@ -819,19 +853,14 @@ footer .input-group-text{
 }
 /* Checkout Shipping Page end here*/
 
-.btn-change-password {
-  background: #fef2f2;
-  border: 1px solid #000000;
-  color: #000000;
-  border-radius: 10px;
-  padding: 3px 6px;
-}
+
 
 /* product featured*/
 .home-page .product-details{
     height: 139px;
 }
 /* product featured end*/
+
 
 
 /* OVERLAY */
@@ -902,6 +931,8 @@ footer .input-group-text{
 
 
 /* ----------------------------------RESPONSIVE ---------------------------------------------------*/
+
+/*RESPONSIVE PARENT*/
 
 /* Mobile and Tablet */
 @media (max-width: 1199px) {
@@ -1031,8 +1062,11 @@ footer .input-group-text{
     gap: 22px;
   }
 }
+/*RESPONSIVE PARENT END */
 
 
+
+/*RESPONSIVE CHILDREN*/
 @media(min-width: 1200px) {
   .col-xl-2-4 {
     flex: 0 0 auto;
@@ -1115,4 +1149,11 @@ footer .input-group-text{
   .cart-data-on-mobile .cart-col-mobile-totalprice {
     display: none !important;
   }
+  .btn-change-password{
+    padding: 8px 3px;
+  }
+  .edit-profile{
+    width: 100%;
+  }
 }
+/*RESPONSIVE CHILDREN END*/
