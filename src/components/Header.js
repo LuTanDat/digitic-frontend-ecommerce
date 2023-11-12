@@ -138,6 +138,13 @@ const Header = () => {
                 <li>
                   {
                     authState?.user === null ?
+                      "" :
+                      <NavLink to="/my-profile" className="header__mobile-link">Hồ sơ</NavLink>
+                  }
+                </li>
+                <li>
+                  {
+                    authState?.user === null ?
                       <NavLink to="/login" className="header__mobile-link" style={{ borderBottom: "0" }}>
                         <button
                           type='button'
