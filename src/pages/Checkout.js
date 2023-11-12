@@ -159,7 +159,7 @@ const Checkout = () => {
       <BreadCrumb title='Thanh toán' />
       <Container class1="checkout-wrapper home-wrapper-2 py-5">
         <div className="row">
-          <div className="col-8">
+          <div className="col-md-8">
             <div className="checkout-left-data">
               {/* <nav
                 style={{ "--bs-breadcrumb-divider": ">" }}
@@ -209,20 +209,6 @@ const Checkout = () => {
                 <div className="flex-grow-1">
                   <input
                     type="text"
-                    placeholder="Tên"
-                    className="form-control"
-                    name='firstName'
-                    value={formik.values.firstName}
-                    onChange={formik.handleChange("firstName")}
-                    onBlur={formik.handleBlur("firstName")}
-                  />
-                  <div className="error ms-2 my-1">
-                    {formik.touched.firstName && formik.errors.firstName}
-                  </div>
-                </div>
-                <div className="flex-grow-1">
-                  <input
-                    type="text"
                     placeholder="Họ"
                     className="form-control"
                     name='lastName'
@@ -234,21 +220,51 @@ const Checkout = () => {
                     {formik.touched.lastName && formik.errors.lastName}
                   </div>
                 </div>
-                <div className="w-100">
+                <div className="flex-grow-1">
                   <input
                     type="text"
-                    placeholder="Số điện thoại"
+                    placeholder="Tên"
                     className="form-control"
-                    name='mobile'
-                    value={formik.values.mobile}
-                    onChange={formik.handleChange("mobile")}
-                    onBlur={formik.handleBlur("mobile")}
+                    name='firstName'
+                    value={formik.values.firstName}
+                    onChange={formik.handleChange("firstName")}
+                    onBlur={formik.handleBlur("firstName")}
                   />
                   <div className="error ms-2 my-1">
-                    {formik.touched.mobile && formik.errors.mobile}
+                    {formik.touched.firstName && formik.errors.firstName}
                   </div>
                 </div>
-                <div className="w-100">
+                <div className="d-flex justify-content-between gap-15 w-100">
+                  <div className="flex-grow-1">
+                    <input
+                      type="text"
+                      placeholder="Số điện thoại"
+                      className="form-control"
+                      name='mobile'
+                      value={formik.values.mobile}
+                      onChange={formik.handleChange("mobile")}
+                      onBlur={formik.handleBlur("mobile")}
+                    />
+                    <div className="error ms-2 my-1">
+                      {formik.touched.mobile && formik.errors.mobile}
+                    </div>
+                  </div>
+                  <div className="flex-grow-1">
+                    <input
+                      type="text"
+                      placeholder="Thành phố"
+                      className="form-control"
+                      name='city'
+                      value={formik.values.city}
+                      onChange={formik.handleChange("city")}
+                      onBlur={formik.handleBlur("city")}
+                    />
+                    <div className="error ms-2 my-1">
+                      {formik.touched.city && formik.errors.city}
+                    </div>
+                  </div>
+                </div>
+                <div className="w-100 pb-3 border-bottom">
                   <input
                     type="text"
                     placeholder="Địa chỉ"
@@ -262,20 +278,7 @@ const Checkout = () => {
                     {formik.touched.address && formik.errors.address}
                   </div>
                 </div>
-                <div className="flex-grow-1 pb-3 border-bottom">
-                  <input
-                    type="text"
-                    placeholder="City"
-                    className="form-control"
-                    name='city'
-                    value={formik.values.city}
-                    onChange={formik.handleChange("city")}
-                    onBlur={formik.handleBlur("city")}
-                  />
-                  <div className="error ms-2 my-1">
-                    {formik.touched.city && formik.errors.city}
-                  </div>
-                </div>
+
                 {/* <div className="w-100">
                   <input
                     type="text"
@@ -330,7 +333,7 @@ const Checkout = () => {
                       let discountPercent = 100 - ((item?.priceAfterDiscount / item?.price) * 100);
                       return (
                         <div
-                          className="d-flex gap-10 mb-2 align-items-center"
+                          className="d-flex gap-10 py-3 align-items-center border-bottom checkout-product-mobile"
                           key={index}
                         >
                           <div className="w-75 d-flex gap-30">
@@ -357,7 +360,7 @@ const Checkout = () => {
                               <p className="total-price">{item?.color?.title}</p>
                             </div>
                           </div>
-                          <div className="flex-grow-1 text-center">
+                          <div className="w-25 text-center price-product-mobile">
                             <h5 className='total' style={{ color: item?.priceAfterDiscount !== item?.price ? "gray" : "red" }}>
                               {
                                 item?.priceAfterDiscount !== item?.price ? <del>
@@ -381,12 +384,12 @@ const Checkout = () => {
                     })}
                 </div>
                 <div className="w-100">
-                  <div className="d-flex justify-content-between align-items-center">
+                  <div className="d-flex justify-content-between align-items-center checkout-navigate-mobile">
                     <Link to="/cart" className="text-dark">
                       <BiArrowBack className="me-2" />
                       Trở về giỏ hàng
                     </Link>
-                    <Link to="/product" className="button">
+                    <Link to="/product" className="button button-navigate">
                       Tiếp tục mua sắm
                     </Link>
                     {/* <button className="button" type="submit" style={{ backgroundColor: "#fd7e14" }}>
@@ -397,51 +400,53 @@ const Checkout = () => {
               </form>
             </div>
           </div>
-          <div className="col-4">
-            <div className="border-bottom py-4">
-              <h4 className="mb-3">Phương thức thanh toán</h4>
-              <div className="form-check">
-                <input
-                  type="radio"
-                  id="COD"
-                  name="payment"
-                  value="COD"
-                  className="me-2 form-check-input"
-                  checked={paymentMethod === "COD"}
-                  onChange={(e) => { setPaymentMethod(e.target.value) }}
-                />
-                <label htmlFor="COD">Thanh toán khi nhận hàng</label><br />
-                <input
-                  type="radio"
-                  id="card"
-                  name="payment"
-                  value="paypal-card"
-                  className="me-2 form-check-input"
-                  checked={paymentMethod === "paypal-card"}
-                  onChange={(e) => { setPaymentMethod(e.target.value) }}
-                />
-                <label htmlFor="card">Thanh toán bằng Paypal</label><br />
+          <div className="col-md-4">
+            <div className="row">
+              <div className="col-sm-6 col-md-12 border-bottom py-4">
+                <h4 className="mb-3">Phương thức thanh toán</h4>
+                <div className="form-check">
+                  <input
+                    type="radio"
+                    id="COD"
+                    name="payment"
+                    value="COD"
+                    className="me-2 form-check-input"
+                    checked={paymentMethod === "COD"}
+                    onChange={(e) => { setPaymentMethod(e.target.value) }}
+                  />
+                  <label htmlFor="COD">Thanh toán khi nhận hàng</label><br />
+                  <input
+                    type="radio"
+                    id="card"
+                    name="payment"
+                    value="paypal-card"
+                    className="me-2 form-check-input"
+                    checked={paymentMethod === "paypal-card"}
+                    onChange={(e) => { setPaymentMethod(e.target.value) }}
+                  />
+                  <label htmlFor="card">Thanh toán bằng Paypal</label><br />
+                </div>
               </div>
-            </div>
-            <div className="border-bottom py-4">
-              <h4 className="mb-3">Thanh toán</h4>
-              <div className="d-flex justify-content-between align-items-center">
-                <p className="total">Tổng tiền </p>
-                <p className="total-price">
-                  {totalAmount ? (totalAmount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
-                </p>
-              </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <p className="total">Giảm giá </p>
-                <p className="total-price">
-                  {totalAmountAfterDiscount ? (totalAmount - totalAmountAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : 0}
-                </p>
-              </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <p className="mb-0 total">Phí vận chuyển </p>
-                <p className="mb-0 total-price">
-                  {totalAmount ? (deliveryPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : 0}
-                </p>
+              <div className="col-sm-6 col-md-12 border-bottom py-4">
+                <h4 className="mb-3">Thanh toán</h4>
+                <div className="d-flex justify-content-between align-items-center">
+                  <p className="total">Tổng tiền </p>
+                  <p className="total-price">
+                    {totalAmount ? (totalAmount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                  </p>
+                </div>
+                <div className="d-flex justify-content-between align-items-center">
+                  <p className="total">Giảm giá </p>
+                  <p className="total-price">
+                    {totalAmountAfterDiscount ? (totalAmount - totalAmountAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : 0}
+                  </p>
+                </div>
+                <div className="d-flex justify-content-between align-items-center">
+                  <p className="mb-0 total">Phí vận chuyển </p>
+                  <p className="mb-0 total-price">
+                    {totalAmount ? (deliveryPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : 0}
+                  </p>
+                </div>
               </div>
             </div>
             <div>

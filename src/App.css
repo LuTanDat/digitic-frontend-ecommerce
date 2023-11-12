@@ -1062,6 +1062,7 @@ footer .input-group-text{
   .toalprice-mobile {
     gap: 22px;
   }
+
 }
 /*RESPONSIVE PARENT END */
 
@@ -1164,6 +1165,21 @@ footer .input-group-text{
   }
   .signup {
     padding: 12px 25px !important;
+  }
+  .checkout-product-mobile {
+    display: block !important;
+  }
+  .checkout-product-mobile > div {
+    width: 100% !important;
+  }
+  .checkout-product-mobile .price-product-mobile{
+    display: flex;
+    gap: 22px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .checkout-navigate-mobile .button-navigate {
+    padding: 10px 12px;
   }
 }
 /*RESPONSIVE CHILDREN END*/
