@@ -114,46 +114,83 @@ const Header = () => {
               </label>
               <ul className="header__mobile-list">
                 <li>
-                  <NavLink to="/" className="header__mobile-link">Trang chủ</NavLink>
+                  <label htmlFor="mobile-bars-checkbox"
+                    className="header__mobile-link" onClick={() => navigate("/")}
+                  >
+                    Trang chủ
+                  </label>
                 </li>
                 <li>
-                  <NavLink to="/product" className="header__mobile-link">Sản phẩm</NavLink>
+                  <label htmlFor="mobile-bars-checkbox"
+                    className="header__mobile-link" onClick={() => navigate("/product")}
+                  >
+                    Sản phẩm
+                  </label>
                 </li>
                 {/* <li>
-                  <NavLink to="/blogs" className="header__mobile-link">Bài viết</NavLink>
+                  <label htmlFor="mobile-bars-checkbox"
+                    className="header__mobile-link" onClick={() => navigate("/blogs")}
+                  >
+                    Bài viết
+                  </label>
                 </li> */}
                 <li>
-                  <NavLink to="/contact" className="header__mobile-link">Liên hệ</NavLink>
+                  <label htmlFor="mobile-bars-checkbox"
+                    className="header__mobile-link" onClick={() => navigate("/contact")}
+                  >
+                    Liên hệ
+                  </label>
                 </li>
                 <li>
-                  <NavLink to="/introduce" className="header__mobile-link">Giới thiệu</NavLink>
+                  <label htmlFor="mobile-bars-checkbox"
+                    className="header__mobile-link" onClick={() => navigate("/introduce")}
+                  >
+                    Giới thiệu
+                  </label>
                 </li>
                 <li>
                   {
                     authState?.user === null ?
                       "" :
-                      <NavLink to="/my-orders" className="header__mobile-link">Đơn hàng</NavLink>
+                      <label htmlFor="mobile-bars-checkbox"
+                        className="header__mobile-link" onClick={() => navigate("/my-orders")}
+                      >
+                        Đơn hàng
+                      </label>
                   }
                 </li>
                 <li>
                   {
                     authState?.user === null ?
                       "" :
-                      <NavLink to="/my-profile" className="header__mobile-link">Hồ sơ</NavLink>
+                      <label htmlFor="mobile-bars-checkbox"
+                        className="header__mobile-link" onClick={() => navigate("/wishlist")}
+                      >
+                        Yêu thích
+                      </label>
                   }
                 </li>
                 <li>
                   {
                     authState?.user === null ?
-                      <NavLink to="/login" className="header__mobile-link" style={{ borderBottom: "0" }}>
-                        <button
-                          type='button'
-                          className='border mt-5 bg-success text-white text-uppercase header__mobile-link'
-                          style={{ borderRadius: "10px" }}
-                        >
-                          Đăng Nhập
-                        </button>
-                      </NavLink> :
+                      "" :
+                      <label htmlFor="mobile-bars-checkbox"
+                        className="header__mobile-link" onClick={() => navigate("/my-profile")}
+                      >
+                        Hồ sơ
+                      </label>
+                  }
+                </li>
+                <li>
+                  {
+                    authState?.user === null ?
+                      <label htmlFor="mobile-bars-checkbox"
+                        className="border mt-5 bg-success text-white text-uppercase text-center header__mobile-link"
+                        onClick={() => navigate("/login")}
+                        style={{ borderRadius: "10px" }}
+                      >
+                        Đăng nhập
+                      </label> :
                       <button
                         type='button'
                         onClick={handleLogout}

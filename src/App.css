@@ -1089,7 +1089,7 @@ footer .input-group-text{
     height: 139px;
   }
 }
-@media(min-width: 576px) and (max-width: 767px) {
+@media(min-width: 576px) and (max-width: 767.98px) {
   .col-sm-6 {
     flex: 0 0 auto;
     width: 50%;
@@ -1106,6 +1106,9 @@ footer .input-group-text{
   }
   .contact-inner-wrapper > div {
     width: 100%;
+  }
+  .cart-data-on-mobile {
+    justify-content: center;
   }
 }
 @media(max-width: 575.98px) {
