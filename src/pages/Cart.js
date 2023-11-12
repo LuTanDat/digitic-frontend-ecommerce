@@ -181,7 +181,7 @@ const Cart = () => {
 
 
                     <div className='cart-data-on-mobile d-none gap-2 mt-2'>
-                      <div className='cart-col-mobile d-flex gap-2 align-items-center'>
+                      <div className='cart-col-mobile-price d-flex gap-2 align-items-center'>
                         <h5 className='price mb-0' style={{ color: item?.priceAfterDiscount !== item?.price ? "gray" : "red" }}>
                           {
                             item?.priceAfterDiscount !== item?.price ? <del>
@@ -200,7 +200,7 @@ const Cart = () => {
                           )
                         }
                       </div>
-                      <div className='cart-col-mobile d-flex align-items-center gap-2'>
+                      <div className='cart-col-mobile-quantity d-flex align-items-center gap-2'>
                         <div>
                           <input
                             type='number'
@@ -217,6 +217,25 @@ const Cart = () => {
                         <div>
                           <AiFillDelete onClick={() => { deleteACartProduct(item?._id) }} className='text-danger' />
                         </div>
+                      </div>
+                      <div className='cart-col-mobile-totalprice gap-2 align-items-center'>
+                        <h5 className='price mb-0' style={{ color: item?.priceAfterDiscount !== item?.price ? "gray" : "red" }}>
+                          {
+                            item?.priceAfterDiscount !== item?.price ? <del>
+                              {item?.price * item?.quantity ? (item?.price * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                            </del> : item?.price * item?.quantity ? (item?.price * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"
+                          }
+                        </h5>
+                        {
+                          item?.priceAfterDiscount !== item?.price && (
+                            <div className='d-flex gap-1'>
+                              <h5 className='price mb-0' style={{ color: "red" }}>
+                                {item?.priceAfterDiscount * item?.quantity ? (item?.priceAfterDiscount * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
+                              </h5>
+                              <h6 className='mb-0' style={{ color: "#434141", fontSize: "14px" }}>{`(-${discountPercent}%)`}</h6>
+                            </div>
+                          )
+                        }
                       </div>
                     </div>
                   </div>
