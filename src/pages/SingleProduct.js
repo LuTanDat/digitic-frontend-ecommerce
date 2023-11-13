@@ -480,7 +480,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </Container>
-      <Container class1="popular-wrapper home-wrapper-2 py-4">
+      <Container class1="popular-wrapper home-wrapper-2 py-4 home-page">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Sản phẩm phổ biến</h3>

@@ -25,7 +25,7 @@ const Wishlist = () => {
     <>
       <Meta title='Wishlist' />
       <BreadCrumb title='Yêu thích' />
-      <Container class1='wishlist-wrapper home-wrapper-2 py-5'>
+      <Container class1='wishlist-wrapper home-wrapper-2 py-5 home-page'>
         <div className='row'>
           {wishlistState && wishlistState.length === 0 && <div className='text-center fs-3'>Không có sản phẩm yêu thích</div>}
           <ProductCard data={wishlistState} />
