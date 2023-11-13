@@ -15,7 +15,7 @@ const Product = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const [grid, setGrid] = useState(3);
+  const [grid, setGrid] = useState(4);
   const productState = useSelector((state) => state?.product?.products);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -77,11 +77,7 @@ const Product = () => {
       <BreadCrumb title='Sản phẩm' />
       <Container class1='store-wrapper home-wrapper-2 py-5'>
         <div className='row'>
-          <div className='col-1 col-lg-3'>
-            <div className='d-block d-lg-none ps-3 ps-md-4 fs-2 text-dark'>
-              <label htmlFor='mobile-filter-checkbox'><AiFillFilter /></label>
-            </div>
-
+          <div className='col-lg-3'>
             <div className='d-none d-lg-block'>
               <div className='filter-card mb-3'>
                 <h3 className='filter-title'>Lọc theo Danh mục</h3>
@@ -251,29 +247,34 @@ const Product = () => {
             {/* END OVERLAY */}
 
           </div>
-          <div className='col-9'>
-            <div className='filter-sort-grid mb-3'>
+          <div className='col-12 col-lg-9'>
+            <div className='filter-sort-grid col-12'>
               <div className='d-flex justify-content-between align-items-center'>
-                <div className='d-flex align-items-center gap-10'>
-                  <p className='mb-0 d-block' style={{ width: "100px" }}>Sắp xếp </p>
-                  <select
-                    name=''
-                    className='form-control form-select'
-                    id=''
-                    value={sort}
-                    onChange={(e) => setSort(e.target.value)}
-                  >
-                    <option value="title">Ký tự, A-Z</option>
-                    <option value="-title">Ký tự, Z-A</option>
-                    <option value="price">Giá, thấp đến cao</option>
-                    <option value="-price">Giá, cao đến thấp</option>
-                    <option value="createdAt">Ngày, cũ đến mới</option>
-                    <option value="-createdAt">Ngày, mới đến cũ</option>
-                  </select>
+                <div className='d-flex align-items-center gap-3'>
+                  <div className='d-block d-lg-none ps-sm-2 ps-md-4 fs-2 text-dark'>
+                    <label htmlFor='mobile-filter-checkbox'><AiFillFilter /></label>
+                  </div>
+                  <div className='d-flex align-items-center gap-10'>
+                    <p className='mb-0 d-block' style={{ whiteSpace: "nowrap" }}>Sắp xếp </p>
+                    <select
+                      name=''
+                      className='form-control form-select'
+                      id=''
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value)}
+                    >
+                      <option value="title">Ký tự, A-Z</option>
+                      <option value="-title">Ký tự, Z-A</option>
+                      <option value="price">Giá, thấp đến cao</option>
+                      <option value="-price">Giá, cao đến thấp</option>
+                      <option value="createdAt">Ngày, cũ đến mới</option>
+                      <option value="-createdAt">Ngày, mới đến cũ</option>
+                    </select>
+                  </div>
                 </div>
                 <div className='d-flex align-items-center gap-10'>
                   <p className='totalproducts mb-0'>{productState?.length} sản phẩm</p>
-                  <div className='d-flex gap-10 align-items-center grid'>
+                  <div className='d-none d-xl-flex gap-10 align-items-center grid'>
                     <img onClick={() => setGrid(3)}
                       src='images/gr4.svg'
                       className='d-block img-fluid'
@@ -321,8 +322,8 @@ const Product = () => {
                 </div>
               )
             }
-            <div className='products-list pb-3'>
-              <div className='d-flex gap-10 flex-wrap'>
+            <div className='products-list pb-3 col-12 home-page'>
+              <div className='row'>
                 <ProductCard data={productState ? productState : []} grid={grid} />
               </div>
             </div>

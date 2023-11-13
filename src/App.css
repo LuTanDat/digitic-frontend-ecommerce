@@ -488,16 +488,20 @@ footer .input-group-text{
   cursor: pointer;
 }
 .gr-12{
+  flex: 0 0 auto;
   width: 100%;
 }
 .gr-6{
-  width: 49%;
+  flex: 0 0 auto;
+  width: 50%;
 }
 .gr-4{
-  width: 32%;
+  flex: 0 0 auto;
+  width: 33.33333%;
 }
 .gr-3{
-  width: 24%;
+  flex: 0 0 auto;
+  width: 25%;
 }
 .gr-6 .product-image{
   width: 100%;
@@ -512,7 +516,10 @@ footer .input-group-text{
 }
 .gr-12 .product-card .product-image {
   width: 35%;
-  height: auto;
+  height: 232.5px;
+}
+.gr-12 .product-card .product-details {
+  height: 232.5px;
 }
 .gr-12 .action-bar{
   top: 17%;
@@ -990,9 +997,13 @@ footer .input-group-text{
 }
 
 /* Tablet */
-@media (min-width: 768px) and (max-width: 1199px) {
+@media (min-width: 768px) and (max-width: 1199.98px) {
   .hide-on-tablet {
-      display: none;
+    display: none;
+  }
+  .col-md-4 {
+    flex: 0 0 auto;
+    width: 33.33333%;
   }
   /* .header__cart {
       width: 80px;
@@ -1095,6 +1106,9 @@ footer .input-group-text{
   .col-xl-2-4 {
     flex: 0 0 auto;
     width: 20%;
+  }
+  .home-page .gr-3.home-product-card {
+    padding: 0 3px !important;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -1230,6 +1244,10 @@ footer .input-group-text{
   }
   .order-totalprice-order{
     padding-top: 16px;
+  }
+  .filter-sort-grid {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 /*RESPONSIVE CHILDREN END*/
