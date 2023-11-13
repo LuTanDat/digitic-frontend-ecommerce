@@ -7,10 +7,12 @@ import Color from '../components/Color';
 import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../features/products/productSlice';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AiFillFilter, AiOutlineClose } from 'react-icons/ai';
 
 const Product = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const [grid, setGrid] = useState(3);
@@ -75,79 +77,179 @@ const Product = () => {
       <BreadCrumb title='Sản phẩm' />
       <Container class1='store-wrapper home-wrapper-2 py-5'>
         <div className='row'>
-          <div className='col-3'>
-            <div className='filter-card mb-3'>
-              <h3 className='filter-title'>Lọc theo Danh mục</h3>
-              <div>
-                <ul className='ps-0'>
+          <div className='col-1 col-lg-3'>
+            <div className='d-block d-lg-none ps-3 ps-md-4 fs-2 text-dark'>
+              <label htmlFor='mobile-filter-checkbox'><AiFillFilter /></label>
+            </div>
+
+            <div className='d-none d-lg-block'>
+              <div className='filter-card mb-3'>
+                <h3 className='filter-title'>Lọc theo Danh mục</h3>
+                <div>
+                  <ul className='ps-0'>
+                    {
+                      categories && [...new Set(categories)].map((item, index) => {
+                        return <li key={index} onClick={() => setCategory(item)}>{item}</li>
+                      })
+                    }
+                  </ul>
+                </div>
+              </div>
+              <div className='filter-card mb-3'>
+                <h3 className='filter-title'>Lọc theo</h3>
+                <div>
+                  <h5 className="sub-title">Giá</h5>
+                  <div className='d-flex align-items-center gap-10'>
+                    <div className="form-floating">
+                      <input type="number"
+                        className="form-control"
+                        id="floatingInput"
+                        placeholder="from"
+                        value={minPrice || ''}
+                        onChange={(e) => setMinPrice(e.target.value)}
+                      />
+                      <label htmlFor="floatingInput">Từ</label>
+                    </div>
+                    <div className="form-floating">
+                      <input type="number"
+                        className="form-control"
+                        id="floatingInput1"
+                        placeholder="to"
+                        value={maxPrice || ''}
+                        onChange={(e) => setMaxPrice(e.target.value)}
+                      />
+                      <label htmlFor="floatingInput1">Đến</label>
+                    </div>
+                  </div>
+                </div>
+                <div className='mt-4 mb-3'>
+                  <h3 className='sub-title'>Tag</h3>
+                  <div>
+                    <div className='product-tags d-flex flex-wrap align-items-center gap-10'>
+                      {
+                        tags && [...new Set(tags)].map((item, index) => {
+                          return (
+                            <span onClick={() => setTag(item)} key={index} className='badge bg-light text-secondary rounded-3 py-2 px-3'>
+                              {item}
+                            </span>
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div className=' mb-3'>
+                  <h3 className='sub-title'>Thương hiệu</h3>
+                  <div>
+                    <div className='product-tags d-flex flex-wrap align-items-center gap-10'>
+                      {
+                        brands && [...new Set(brands)].map((item, index) => {
+                          return (
+                            <span onClick={() => setBrand(item)} key={index} className='badge bg-light text-secondary rounded-3 py-2 px-3'>
+                              {item}
+                            </span>
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* OVERLAY */}
+            <input type="checkbox" hidden className="header__mobile-filter-checkbox" id="mobile-filter-checkbox"></input>
+
+            <label htmlFor="mobile-filter-checkbox" className="header__overlay"></label>
+
+            <div className="header__mobile">
+              <label htmlFor="mobile-filter-checkbox" className="header__mobile-close">
+                <AiOutlineClose />
+              </label>
+              <ul className="header__mobile-list">
+                <li>
+                  <h3 className='filter-title header__mobile-link mb-0' style={{ borderBottom: "0" }}>Danh mục</h3>
+                </li>
+                {
+                  categories && [...new Set(categories)].map((item, index) => {
+                    return <li className="header__mobile-link py-2" key={index} onClick={() => setCategory(item)}>{item}</li>
+                  })
+                }
+
+                <li>
+                  <h3 className='filter-title header__mobile-link mb-0 mt-2' style={{ borderBottom: "0" }}>Giá</h3>
+                </li>
+                <li>
+                  <div className="header__mobile-link pt-0">
+                    <div className='d-flex align-items-center gap-10'>
+                      <div className="form-floating">
+                        <input type="number"
+                          className="form-control"
+                          id="floatingInput"
+                          placeholder="from"
+                          value={minPrice || ''}
+                          onChange={(e) => setMinPrice(e.target.value)}
+                        />
+                        <label htmlFor="floatingInput">Từ</label>
+                      </div>
+                      <div className="form-floating">
+                        <input type="number"
+                          className="form-control"
+                          id="floatingInput1"
+                          placeholder="to"
+                          value={maxPrice || ''}
+                          onChange={(e) => setMaxPrice(e.target.value)}
+                        />
+                        <label htmlFor="floatingInput1">Đến</label>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <h3 className='filter-title header__mobile-link mb-0 mt-2' style={{ borderBottom: "0" }}>Tag</h3>
+                </li>
+                <li className="header__mobile-link">
                   {
-                    categories && [...new Set(categories)].map((item, index) => {
-                      return <li key={index} onClick={() => setCategory(item)}>{item}</li>
+                    tags && [...new Set(tags)].map((item, index) => {
+                      return (
+                        <span onClick={() => setTag(item)} key={index} className='badge bg-light text-secondary rounded-3 py-2 px-3'>
+                          {item}
+                        </span>
+                      )
                     })
                   }
-                </ul>
-              </div>
+                </li>
+
+                <li>
+                  <h3 className='filter-title header__mobile-link mb-0 mt-2' style={{ borderBottom: "0" }}>Thương hiệu</h3>
+                </li>
+                <li className="header__mobile-link">
+                  {
+                    brands && [...new Set(brands)].map((item, index) => {
+                      return (
+                        <span onClick={() => setBrand(item)} key={index} className='badge bg-light text-secondary rounded-3 py-2 px-3'>
+                          {item}
+                        </span>
+                      )
+                    })
+                  }
+                </li>
+
+                <li>
+                  {
+                    (tag !== null || category !== null || brand !== null || minPrice !== null || maxPrice !== null || sort !== "title") &&
+                    <label htmlFor="mobile-filter-checkbox"
+                      className="border mt-2 bg-success text-white text-uppercase text-center header__mobile-link"
+                    >
+                      OK
+                    </label>
+                  }
+                </li>
+              </ul>
             </div>
-            <div className='filter-card mb-3'>
-              <h3 className='filter-title'>Lọc theo</h3>
-              <div>
-                <h5 className="sub-title">Giá</h5>
-                <div className='d-flex align-items-center gap-10'>
-                  <div className="form-floating">
-                    <input type="number"
-                      className="form-control"
-                      id="floatingInput"
-                      placeholder="from"
-                      value={minPrice || ''}
-                      onChange={(e) => setMinPrice(e.target.value)}
-                    />
-                    <label htmlFor="floatingInput">Từ</label>
-                  </div>
-                  <div className="form-floating">
-                    <input type="number"
-                      className="form-control"
-                      id="floatingInput1"
-                      placeholder="to"
-                      value={maxPrice || ''}
-                      onChange={(e) => setMaxPrice(e.target.value)}
-                    />
-                    <label htmlFor="floatingInput1">Đến</label>
-                  </div>
-                </div>
-              </div>
-              <div className='mt-4 mb-3'>
-                <h3 className='sub-title'>Tag</h3>
-                <div>
-                  <div className='product-tags d-flex flex-wrap align-items-center gap-10'>
-                    {
-                      tags && [...new Set(tags)].map((item, index) => {
-                        return (
-                          <span onClick={() => setTag(item)} key={index} className='badge bg-light text-secondary rounded-3 py-2 px-3'>
-                            {item}
-                          </span>
-                        )
-                      })
-                    }
-                  </div>
-                </div>
-              </div>
-              <div className=' mb-3'>
-                <h3 className='sub-title'>Thương hiệu</h3>
-                <div>
-                  <div className='product-tags d-flex flex-wrap align-items-center gap-10'>
-                    {
-                      brands && [...new Set(brands)].map((item, index) => {
-                        return (
-                          <span onClick={() => setBrand(item)} key={index} className='badge bg-light text-secondary rounded-3 py-2 px-3'>
-                            {item}
-                          </span>
-                        )
-                      })
-                    }
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* END OVERLAY */}
+
           </div>
           <div className='col-9'>
             <div className='filter-sort-grid mb-3'>

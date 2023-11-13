@@ -904,6 +904,8 @@ footer .input-group-text{
   padding: 0;
   list-style: none;
   margin-top: 30px;
+  height: 100%;
+  overflow: auto;
 }
 .header__mobile-link {
   font-size: 16px;
@@ -920,6 +922,15 @@ footer .input-group-text{
 .header__mobile-bars-checkbox:checked ~ .header__mobile {
   transform: translateX(0%);
   opacity: 1;
+}
+
+.header__mobile-filter-checkbox:checked ~ .header__overlay {
+  display: block;
+}
+.header__mobile-filter-checkbox:checked ~ .header__mobile {
+  transform: translateX(0%);
+  opacity: 1;
+  margin-top: 64px;
 }
 
 @keyframes fadeIn {
