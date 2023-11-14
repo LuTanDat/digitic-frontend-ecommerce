@@ -4,7 +4,7 @@ const Color = (props) => {
   const { colorData, setColor } = props;
   return (
     <>
-      <ul className='colors ps-0'>
+      <ul className='colors ps-0 mb-0'>
         {/* {
           colorData && colorData?.map((item, index) => {
             return (
@@ -12,7 +12,7 @@ const Color = (props) => {
             )
           })
         } */}
-        <li onClick={() => setColor(colorData)} style={{ backgroundColor: colorData }}></li>
+        <li onClick={() => setColor(colorData)} style={{ backgroundColor: colorData, border: "1px solid #333" }}></li>
       </ul>
     </>
   )

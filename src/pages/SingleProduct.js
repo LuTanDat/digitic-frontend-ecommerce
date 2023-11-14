@@ -194,32 +194,31 @@ const SingleProduct = () => {
       <BreadCrumb title={productState?.title} />
       <Container class1='main-product-wrapper home-wrapper-2 py-4'>
         <div className='row'>
-          <div className='col-7'>
-            <div className='main-product-image'>
-              <div>
-                {/* <ReactImageZoom {...props} /> */}
-                <Slider // mac dinh khong reder lai
-                  key={sliderKey} // Sử dụng key để đảm bảo Slider được cập nhật khi sliderKey thay đổi
-                  {...settings}>
-                  {
-                    productState?.images.map((item, index) => {
-                      return (
-                        <div key={index}>
-                          <Image src={item?.url} alt="slider" width="100%" preview={true} height="100%" />
-                        </div>
-                      )
-                    })
-                  }
-                </Slider>
-              </div>
+          <div className='col-md-6 col-lg-7'>
+            <div className='main-product-image row'>
+              {/* <ReactImageZoom {...props} /> */}
+              <Slider // mac dinh khong reder lai
+                key={sliderKey} // Sử dụng key để đảm bảo Slider được cập nhật khi sliderKey thay đổi
+                {...settings}>
+                {
+                  productState?.images.map((item, index) => {
+                    return (
+                      <div key={index}>
+                        <Image src={item?.url} alt="slider" width="100%" preview={true} height="100%" />
+                      </div>
+                    )
+                  })
+                }
+              </Slider>
             </div>
-            <div className='other-prouduct-image d-flex flex-wrap gap-3 pt-0'>
+            <div className='other-prouduct-image pt-0 row'>
               {
                 productState?.images.map((item, index) => {
                   return (
                     <div
                       key={index}
-                      style={{ cursor: "pointer", width: "127px", height: "127px" }}
+                      style={{ cursor: "pointer", maxWidth: "146px", maxHeight: "122px" }}
+                      class="col-2-4"
                       onClick={() => handleOtherProductImageClick(index)} // Gọi hàm khi ảnh được click
                     >
                       <img
@@ -233,13 +232,13 @@ const SingleProduct = () => {
               }
             </div>
           </div>
-          <div className='col-5'>
+          <div className='col-md-6 col-lg-5 product-details-mobile'>
             <div className='main-product-detail'>
               <div className='border-bottom'>
                 <h3 className='title'>{productState?.title}</h3>
               </div>
               <div className='border-bottom py-2'>
-                <div className='d-flex gap-15'>
+                <div className='d-flex gap-15 price-product-mobile'>
                   <h4 className='price' style={{ color: isShowPriceDiscount ? "gray" : "red" }}>
                     {
                       isShowPriceDiscount ? <del>{formattedPrice}</del> : formattedPrice
@@ -256,7 +255,7 @@ const SingleProduct = () => {
                     )
                   }
                 </div>
-                <div className='d-flex justify-content-between align-items-center gap-10'>
+                <div className='d-flex justify-content-between align-items-center gap-10 rating-product-mobile'>
                   <div className='d-flex align-items-center gap-10'>
                     <ReactStars // mac dinh khong reder lai
                       key={starKey} // Sử dụng key để đảm bảo ReactStarts được cập nhật khi starKey thay đổi
@@ -274,8 +273,9 @@ const SingleProduct = () => {
                     </div>)
                   }
                 </div>
-                <div>
-                  <p className='review-btn m-2'>{`${productState?.numViews} lượt xem`}</p>
+                <div className='d-flex'>
+                  <p className='review-btn mt-1 mb-2 pe-2' style={{ borderRight: "1px solid #333" }}>{`${productState?.numViews} lượt xem`}</p>
+                  <p className='review-btn mt-1 mb-2 ps-2' >{`Đã bán ${productState?.sold}`}</p>
                 </div>
               </div>
               <div className='pt-2'>
@@ -299,7 +299,7 @@ const SingleProduct = () => {
                 <div className='d-flex gap-15 align-items-center flex-row mt-2 mb-3'>
                   {
                     alreadyAdded === false && <>
-                      <h3 className='product-heading'>Số lượng :</h3>
+                      <h3 className='product-heading'>Số lượng</h3>
                       <div>
                         <input
                           type='number'
@@ -317,7 +317,7 @@ const SingleProduct = () => {
                   }
                   <div className={'d-flex justify-content-center gap-30 ms-5' + alreadyAdded ? "ms-0" : "ms-5"}>
                     <button
-                      className='button border-0'
+                      className='button border-0 cart-siProduct-mobile'
                       type='button'
                       onClick={() => { alreadyAdded ? navigate('/cart') : uploadCart() }}
                     >
@@ -325,14 +325,14 @@ const SingleProduct = () => {
                     </button>
                   </div>
                 </div>
-                <div className='d-flex gap-15 align-items-center'>
-                  {/* <div>
+                {/* <div className='d-flex gap-15 align-items-center'>
+                  <div>
                     <a href=''><TbGitCompare className='fs-5 me-2' /> Add to Compare</a>
-                  </div> */}
-                  {/* <div>
+                  </div>
+                  <div>
                     <a href=''><AiOutlineHeart className='fs-5 me-2' /> Thêm vào danh sách mong muốn</a>
-                  </div> */}
-                </div>
+                  </div>
+                </div> */}
                 <div className='d-flex gap-10 flex-column my-3'>
                   <h3 className='product-heading'>Vận chuyển và Trả hàng :</h3>
                   <p className='product-data'>
@@ -349,7 +349,7 @@ const SingleProduct = () => {
                       );
                     }}
                   >
-                    Chọn vào đây để chia sẻ sản phẩm này cho bạn bè và người thân của bạn !
+                    Chọn vào đây để sao chép đường dẫn sản phẩm này dùng để chia sẻ cho bạn bè và người thân của bạn !
                   </a>
                 </div>
               </div>
@@ -357,11 +357,44 @@ const SingleProduct = () => {
           </div>
         </div>
       </Container>
-      <Container class1='description-wrapper home-wrapper-2 py-4'>
+      <Container class1='description-wrapper home-wrapper-2 py-1'>
         <div className='row'>
-          <div className='col-8'>
+          <div className='specifications d-block d-md-none col-md-5 col-lg-4 pb-3'>
+            <div className='p-2 p-lg-3 pt-0'>
+              <h4 className='text-center' style={{ fontWeight: "600" }}>Thông số kỹ thuật</h4>
+              <table className="table table-striped mb-0">
+                <tbody>
+                  <tr>
+                    <td>Thương hiệu</td>
+                    <td>{productState?.brand}</td>
+                  </tr>
+                  <tr>
+                    <td>Kích thước</td>
+                    <td>{productState?.size}</td>
+                  </tr>
+                  <tr>
+                    <td>Trọng lượng</td>
+                    <td>{productState?.weight}</td>
+                  </tr>
+                  <tr>
+                    <td>Công suất</td>
+                    <td>{productState?.power}</td>
+                  </tr>
+                  <tr>
+                    <td>Tuổi thọ</td>
+                    <td>{productState?.lifespan}</td>
+                  </tr>
+                  <tr>
+                    <td>Bảo hành</td>
+                    <td>{productState?.warranty}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className='description col-md-7 col-lg-8'>
             <h4 style={{ fontWeight: "600" }}>Mô tả</h4>
-            <div className='bg-white p-3'>
+            <div className='bg-white p-2 p-lg-3'>
               <p
                 style={{ wordWrap: 'break-word' }}
                 dangerouslySetInnerHTML={{ __html: productState?.description }}
@@ -369,8 +402,8 @@ const SingleProduct = () => {
               </p>
             </div>
           </div>
-          <div className='col-4'>
-            <div className='p-3 pt-0'>
+          <div className='specifications d-none d-md-block col-md-5 col-lg-4'>
+            <div className='p-2 p-lg-3 pt-0'>
               <h4 className='text-center' style={{ fontWeight: "600" }}>Thông số kỹ thuật</h4>
               <table className="table table-striped mb-0">
                 <tbody>
@@ -480,10 +513,10 @@ const SingleProduct = () => {
           </div>
         </div>
       </Container>
-      <Container class1="popular-wrapper home-wrapper-2 py-4 home-page">
+      <Container class1="popular-wrapper home-wrapper-2 py-2 home-page">
         <div className="row">
           <div className="col-12">
-            <h3 className="section-heading">Sản phẩm phổ biến</h3>
+            <h3 className="section-heading mb-0">Sản phẩm phổ biến</h3>
           </div>
         </div>
         <div className="row">
