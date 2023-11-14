@@ -59,17 +59,6 @@ const Signup = () => {
               >
                 <CustomInput
                   type='text'
-                  name='firstName'
-                  placeholder='Tên'
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange("firstName")}
-                  onBlur={formik.handleBlur("firstName")}
-                />
-                <div className="error">
-                  {formik.touched.firstName && formik.errors.firstName}
-                </div>
-                <CustomInput
-                  type='text'
                   name='lastName'
                   placeholder='Họ'
                   value={formik.values.lastName}
@@ -78,6 +67,17 @@ const Signup = () => {
                 />
                 <div className="error">
                   {formik.touched.lastName && formik.errors.lastName}
+                </div>
+                <CustomInput
+                  type='text'
+                  name='firstName'
+                  placeholder='Tên'
+                  value={formik.values.firstName}
+                  onChange={formik.handleChange("firstName")}
+                  onBlur={formik.handleBlur("firstName")}
+                />
+                <div className="error">
+                  {formik.touched.firstName && formik.errors.firstName}
                 </div>
                 <CustomInput
                   type='email'

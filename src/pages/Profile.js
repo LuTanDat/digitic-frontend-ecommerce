@@ -66,22 +66,6 @@ const Profile = () => {
                   onSubmit={formik.handleSubmit}
                 >
                   <div className="mb-3">
-                    <label htmlFor="example1" className="form-label">Tên</label>
-                    <input
-                      type="text"
-                      name='firstName'
-                      disabled={edit}
-                      className="form-control"
-                      id="example1"
-                      value={formik.values.firstName}
-                      onChange={formik.handleChange("firstName")}
-                      onBlur={formik.handleBlur("firstName")}
-                    />
-                    <div className="error">
-                      {formik.touched.firstName && formik.errors.firstName}
-                    </div>
-                  </div>
-                  <div className="mb-3">
                     <label htmlFor="example2" className="form-label">Họ</label>
                     <input
                       type="text"
@@ -95,6 +79,22 @@ const Profile = () => {
                     />
                     <div className="error">
                       {formik.touched.lastName && formik.errors.lastName}
+                    </div>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="example1" className="form-label">Tên</label>
+                    <input
+                      type="text"
+                      name='firstName'
+                      disabled={edit}
+                      className="form-control"
+                      id="example1"
+                      value={formik.values.firstName}
+                      onChange={formik.handleChange("firstName")}
+                      onBlur={formik.handleBlur("firstName")}
+                    />
+                    <div className="error">
+                      {formik.touched.firstName && formik.errors.firstName}
                     </div>
                   </div>
                   <div className="mb-3">

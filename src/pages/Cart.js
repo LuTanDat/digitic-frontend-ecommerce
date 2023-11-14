@@ -245,7 +245,7 @@ const Cart = () => {
 
             <div className='col-12 py-2 mt-4'>
               <div className='d-flex justify-content-between align-items-baseline toalprice-mobile'>
-                <Link to='/product' className='button'>
+                <Link to='/product' className='button continue-shopping-mobile'>
                   Tiếp tục mua sắm
                 </Link>
                 {

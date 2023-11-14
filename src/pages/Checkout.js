@@ -370,7 +370,7 @@ const Checkout = () => {
                             </h5>
                             {
                               item?.priceAfterDiscount !== item?.price && (
-                                <div className='d-flex gap-1'>
+                                <div className='d-flex gap-1 justify-content-center'>
                                   <h5 className='total' style={{ color: "red" }}>
                                     {item?.priceAfterDiscount * item?.quantity ? (item?.priceAfterDiscount * item?.quantity).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "đ"}
                                   </h5>

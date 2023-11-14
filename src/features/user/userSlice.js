@@ -381,7 +381,7 @@ export const authSlice = createSlice({
         if (state.isSuccess === true) {
           if (action.payload.message === 'SUCCESS') {
             state.orderedProduct = action.payload;
-            toast.success("Tạo thành công đơn hàng!");
+            toast.success("Đặt hàng thành công!");
           } else
             if (action.payload.message === 'ERR') {
               state.orderedProduct = action.payload;

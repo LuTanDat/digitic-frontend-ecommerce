@@ -1192,6 +1192,9 @@ footer .input-group-text{
   .cart-data-on-mobile .cart-col-mobile-totalprice {
     display: none !important;
   }
+  .continue-shopping-mobile{
+    padding: 13px 8px !important
+  }
   .btn-change-password{
     padding: 8px 3px;
   }
