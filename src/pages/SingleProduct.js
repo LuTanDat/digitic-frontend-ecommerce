@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRating, getAProduct, getAllProducts } from '../features/products/productSlice';
 import { toast } from 'react-toastify';
-import { addProdToCart } from "../features/user/userSlice";
+import { addProdToCart, getOrders } from "../features/user/userSlice";
 import { getUserCart } from '../features/user/userSlice';
 import { getACoupon } from '../features/coupon/couponSlice';
 
@@ -60,6 +60,7 @@ const SingleProduct = () => {
   const [color, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [alreadyAdded, setAlreadyAdded] = useState(false); // prouduct da add vao cart chua ?
+  const [alreadyRating, setAlreadyRating] = useState(false); // co the danh gia hay chua, user chi đc danh gia khi da mua hang và nhan hang ?
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -70,12 +71,14 @@ const SingleProduct = () => {
   const productsState = useSelector((state) => state?.product?.products);
   const cartState = useSelector((state) => state?.auth?.cartProducts);
   const couponState = useSelector((state) => state?.coupon);
+  const orderState = useSelector((state) => state?.auth?.getOrderedProduct?.orders);
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
+    dispatch(getACoupon(getProductId));
     dispatch(getUserCart(config2));
     dispatch(getAllProducts());
-    dispatch(getACoupon(getProductId));
+    dispatch(getOrders())
   }, [])
   useEffect(() => {
     for (let index = 0; index < cartState?.length; index++) {
@@ -85,14 +88,25 @@ const SingleProduct = () => {
     }
   }, [])
 
+  useEffect(() => {
+    for (let i = 0; i < orderState?.length; i++) {
+      if (orderState[i]?.orderStatus === "Đã nhận hàng") {
+        for (let j = 0; j < orderState[i]?.orderItems?.length; j++) {
+          if (getProductId === orderState[i]?.orderItems[j]?.product?._id) {
+            setAlreadyRating(true);
+            break;
+          }
+        }
+      }
+    }
+  }, [orderState])
+
   const props = {
     width: 400,
     height: 400,
     zoomWidth: 400,
     img: productState?.images[0]?.url ? productState?.images[0]?.url : "https://www.apple.com/newsroom/images/2023/09/apple-introduces-the-advanced-new-apple-watch-series-9/article/Apple-Watch-S9-hero-230912_Full-Bleed-Image.jpg.xlarge.jpg"
   };
-
-  const [orderedProduct, setorderedProduct] = useState(true);
 
   const copyToClipboard = (text) => {
     console.log('text', text)
@@ -120,8 +134,8 @@ const SingleProduct = () => {
   const [comment, setComment] = useState(null);
 
   const addRatingToProduct = () => {
-    if (star === null) {
-      toast.error("Vui lòng chọn số sao");
+    if (alreadyRating === false) {
+      toast.warning("Bạn dùng thử sản phẩm này!");
       return false;
     } else if (comment === null) {
       toast.error("Vui lòng viết đánh giá về sản phẩm này.")
@@ -267,10 +281,11 @@ const SingleProduct = () => {
                     />
                     <p className='mb-0'>{`${productState?.ratings?.length} đánh giá`}</p>
                   </div>
-                  {orderedProduct && (
-                    <div>
-                      <a href='#review' className='review-btn text-decoration-underline'>Viết đánh giá</a>
-                    </div>)
+                  {
+                    alreadyRating && (
+                      <div>
+                        <a href='#review' className='review-btn text-decoration-underline'>Viết đánh giá</a>
+                      </div>)
                   }
                 </div>
                 <div className='d-flex'>
@@ -450,7 +465,7 @@ const SingleProduct = () => {
                       key={starKey} // Sử dụng key để đảm bảo ReactStarts được cập nhật khi starKey thay đổi
                       count={5}
                       size={24}
-                      value={parseInt(productState?.totalrating)}
+                      value={starRating}
                       edit={false}
                       activeColor="#ffd700"
                     />
@@ -476,12 +491,17 @@ const SingleProduct = () => {
                     cols="30"
                     rows="4"
                     placeholder='Nội dung đánh giá'
+                    disabled={alreadyRating === false ? true : false}
                     onChange={(e) => { setComment(e.target.value) }}
                   >
                   </textarea>
                 </div>
                 <div className='d-flex justify-content-end mt-3'>
-                  <button onClick={addRatingToProduct} className='button border-0' type='button'>Gửi đánh giá</button>
+                  <button onClick={addRatingToProduct}
+                    className='button border-0' type='button'
+                  >
+                    Gửi đánh giá
+                  </button>
                 </div>
               </div>
               <div className='reviews mt-4'>
@@ -490,7 +510,7 @@ const SingleProduct = () => {
                     return (
                       <div key={index} className='review'>
                         <div className='d-flex gap-10 align-items-center'>
-                          <h6 className='mb-0'>{authState?.firstName}</h6>
+                          <h6 className='mb-0'>{`${item?.postedby?.lastName} ${item?.postedby?.firstName}`}</h6>
                           <ReactStars // mac dinh khong reder lai
                             key={starKey} // Sử dụng key để đảm bảo ReactStarts được cập nhật khi starKey thay đổi
                             count={5}
