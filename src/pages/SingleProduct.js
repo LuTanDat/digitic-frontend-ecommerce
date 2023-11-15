@@ -24,6 +24,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Image } from 'antd';
 
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 const SingleProduct = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -315,17 +316,27 @@ const SingleProduct = () => {
                   {
                     alreadyAdded === false && <>
                       <h3 className='product-heading'>Số lượng</h3>
-                      <div>
+                      <div className='d-flex align-items-center gap-1' style={{ border: "1px solid #ccc", borderRadius: "10px" }}>
+                        <AiOutlineMinus
+                          style={{ width: "25px", height: "35px" }}
+                          onClick={() => { quantity > 1 && setQuantity(quantity - 1) }}
+                        />
                         <input
                           type='number'
                           name=''
                           min={1}
                           max={100}
                           className='form-control'
-                          style={{ width: '70px' }}
+                          style={{ width: "53px", height: "35px", borderTop: "none", borderBottom: "none", background: "transparent" }}
                           id=''
-                          onChange={(e) => setQuantity(e.target.value)}
+                          onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
                           value={quantity}
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                        />
+                        <AiOutlinePlus
+                          style={{ width: "25px", height: "35px" }}
+                          onClick={() => { quantity < 100 && setQuantity(quantity + 1) }}
                         />
                       </div>
                     </>

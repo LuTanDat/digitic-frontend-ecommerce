@@ -36,8 +36,14 @@ const Cart = () => {
     dispatch(getUserCart(config2));
   }, [])
   useEffect(() => {
+    console.log("productUpdateDetail?.quantity", productUpdateDetail?.quantity);
     if (productUpdateDetail !== null) {
-      dispatch(updateCartProduct({ cartItemId: productUpdateDetail?.cartItemId, quantity: productUpdateDetail?.quantity }));
+      dispatch(updateCartProduct(
+        {
+          cartItemId: productUpdateDetail?.cartItemId,
+          quantity: Number.isNaN(productUpdateDetail?.quantity) ? 0 : productUpdateDetail?.quantity
+        }
+      ));
       setTimeout(() => {
         dispatch(getUserCart(config2));
       }, 200)
@@ -147,7 +153,7 @@ const Cart = () => {
                       <div className='d-flex align-items-center gap-1' style={{ border: "1px solid #ccc", borderRadius: "10px" }}>
                         <AiOutlineMinus
                           style={{ width: "25px", height: "35px" }}
-                          onClick={() => { item?.quantity > 0 && setProductUpdateDetail({ cartItemId: item?._id, quantity: item?.quantity - 1 }) }}
+                          onClick={() => { item?.quantity > 1 && setProductUpdateDetail({ cartItemId: item?._id, quantity: item?.quantity - 1 }) }}
                         />
                         <input
                           type='number'
@@ -158,7 +164,9 @@ const Cart = () => {
                           style={{ width: "53px", height: "35px", borderTop: "none", borderBottom: "none", background: "transparent" }}
                           id={"cart" + item?._id}
                           value={item?.quantity}
-                          onChange={(e) => { setProductUpdateDetail({ cartItemId: item?._id, quantity: e.target.value }) }}
+                          onChange={(e) => { setProductUpdateDetail({ cartItemId: item?._id, quantity: parseInt(e.target.value, 10) }) }}
+                          inputMode="numeric"
+                          pattern="[0-9]*"
                         />
                         <AiOutlinePlus
                           style={{ width: "25px", height: "35px" }}
