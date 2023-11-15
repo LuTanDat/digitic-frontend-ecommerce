@@ -218,7 +218,7 @@ const SingleProduct = () => {
                     <div
                       key={index}
                       style={{ cursor: "pointer", maxWidth: "146px", maxHeight: "122px" }}
-                      class="col-2-4"
+                      className="col-2-4"
                       onClick={() => handleOtherProductImageClick(index)} // Gọi hàm khi ảnh được click
                     >
                       <img

@@ -64,6 +64,13 @@ const Header = () => {
     localStorage.clear();
     window.location.reload();
   }
+
+  // bat state cai nguoi dung chon de them gach chan
+  const [selectedNavItem, setSelectedNavItem] = useState(null);
+  const handleNavItemClick = (navItem) => {
+    setSelectedNavItem(navItem);
+  }
+
   return (
     <>
       <header className='header-upper p-2 fixed-header'>
@@ -83,15 +90,45 @@ const Header = () => {
             <div className='col-xl-5 d-none d-xl-block'>
               <div className='menu-links hide-on-mobile-tablet'>
                 <div className='d-flex align-items-center gap-15'>
-                  <NavLink to="/">Trang chủ</NavLink>
-                  <NavLink to="/product">Sản phẩm</NavLink>
-                  {/* <NavLink to="/blogs">Bài viết</NavLink> */}
-                  <NavLink to="/contact">Liên hệ</NavLink>
-                  <NavLink to="/introduce">Giới thiệu</NavLink>
+                  <NavLink to="/"
+                    className={selectedNavItem === "home" ? "selected" : ""}
+                    onClick={() => handleNavItemClick("home")}
+                  >
+                    Trang chủ
+                  </NavLink>
+                  <NavLink to="/product"
+                    className={selectedNavItem === "product" ? "selected" : ""}
+                    onClick={() => handleNavItemClick("product")}
+                  >
+                    Sản phẩm
+                  </NavLink>
+                  {/* <NavLink to="/blogs"
+                    className={selectedNavItem === "blogs" ? "selected" : ""}
+                    onClick={() => handleNavItemClick("blogs")}
+                  >
+                  Bài viết
+                  </NavLink> */}
+                  <NavLink to="/contact"
+                    className={selectedNavItem === "contact" ? "selected" : ""}
+                    onClick={() => handleNavItemClick("contact")}
+                  >
+                    Liên hệ
+                  </NavLink>
+                  <NavLink to="/introduce"
+                    className={selectedNavItem === "introduce" ? "selected" : ""}
+                    onClick={() => handleNavItemClick("introduce")}
+                  >
+                    Giới thiệu
+                  </NavLink>
                   {
                     authState?.user === null ?
                       "" :
-                      <NavLink to="/my-orders">Đơn hàng</NavLink>
+                      <NavLink to="/my-orders"
+                        className={selectedNavItem === "order" ? "selected" : ""}
+                        onClick={() => handleNavItemClick("order")}
+                      >
+                        Đơn hàng
+                      </NavLink>
                   }
                   {
                     authState?.user === null ?
@@ -234,24 +271,24 @@ const Header = () => {
             <div className='col-xl-2 col-md-3 col-4'>
               <div className='header-upper-links d-flex align-items-center justify-content-center gap-3'>
                 <div>
-                  <Link to='/wishlist' className='d-flex align-items-center gap-10 text-white'>
+                  <NavLink to='/wishlist' className='d-flex align-items-center gap-10 text-white'>
                     <img src={wishlist} alt='wishlist' />
                     <p className='mb-0 d-none d-md-block' >Yêu thích</p>
-                  </Link>
+                  </NavLink>
                 </div>
                 <div>
-                  <Link to='/cart' className='d-flex align-items-center gap-10 text-white position-relative'>
+                  <NavLink to='/cart' className='d-flex align-items-center gap-10 text-white position-relative'>
                     <img src={cart} alt='cart' />
                     <div className='d-flex flex-column gap-10 position-absolute top-0 start-100 translate-middle'>
                       <span className='badge rounded-circle bg-white text-dark'>{cartState?.length ? cartState?.length : 0}</span>
                     </div>
-                  </Link>
+                  </NavLink>
                 </div>
               </div>
             </div>
             <div className='col-xl-1 d-none d-xl-block p-0'>
-              <div className='hide-on-mobile-tablet'>
-                <Link to={authState?.user === null ? '/login' : '/my-profile'} className='d-flex align-items-center gap-1 text-white'>
+              <div className='my-account hide-on-mobile-tablet'>
+                <NavLink to={authState?.user === null ? '/login' : '/my-profile'} className='d-flex align-items-center gap-1 text-white'>
                   <img src={user} alt='user' />
                   {
                     authState?.user === null ?
@@ -261,7 +298,7 @@ const Header = () => {
                         <p className='mb-0'>{authState?.user?.firstName}</p>
                       </div>
                   }
-                </Link>
+                </NavLink>
               </div>
             </div>
           </div>

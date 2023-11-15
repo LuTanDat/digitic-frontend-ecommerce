@@ -101,6 +101,18 @@ a{
   letter-spacing: .3;
   text-transform: uppercase;
 }
+.header-upper .menu-links a.active{
+  border-bottom: 2px solid orange;
+  color: yellow;
+}
+.header-upper .header-upper-links a.active{
+  border-bottom: 2px solid orange;
+  color: yellow !important;
+}
+.header-upper .my-account a.active{
+  border-bottom: 2px solid orange;
+  color: yellow !important;
+}
 .header-bottom .dropdown button:focus{
   box-shadow:none;
 }
