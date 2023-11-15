@@ -11,6 +11,8 @@ import { deleteCartProduct, getUserCart, resetState, updateCartProduct } from '.
 import { useState } from 'react';
 import { useMemo } from 'react';
 import StepComponent from '../components/StepComponent';
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+
 
 const Cart = () => {
   const getTokenFromLocalStorage = localStorage.getItem("customer")
@@ -142,17 +144,25 @@ const Cart = () => {
                       }
                     </div>
                     <div className='cart-col-3 d-flex align-items-center gap-15'>
-                      <div>
+                      <div className='d-flex align-items-center gap-1' style={{ border: "1px solid #ccc", borderRadius: "10px" }}>
+                        <AiOutlineMinus
+                          style={{ width: "25px", height: "35px" }}
+                          onClick={() => { item?.quantity > 0 && setProductUpdateDetail({ cartItemId: item?._id, quantity: item?.quantity - 1 }) }}
+                        />
                         <input
                           type='number'
                           name={'quantity' + item?._id}
                           min={1}
-                          max={10}
+                          max={100}
                           className='form-control'
+                          style={{ width: "53px", height: "35px", borderTop: "none", borderBottom: "none", background: "transparent" }}
                           id={"cart" + item?._id}
                           value={item?.quantity}
                           onChange={(e) => { setProductUpdateDetail({ cartItemId: item?._id, quantity: e.target.value }) }}
-                        // style={{ width: '70px' }}
+                        />
+                        <AiOutlinePlus
+                          style={{ width: "25px", height: "35px" }}
+                          onClick={() => { item?.quantity < 100 && setProductUpdateDetail({ cartItemId: item?._id, quantity: item?.quantity + 1 }) }}
                         />
                       </div>
                       <div>
@@ -180,7 +190,7 @@ const Cart = () => {
                     </div>
 
 
-                    <div className='cart-data-on-mobile d-none gap-2 mt-2'>
+                    {/* <div className='cart-data-on-mobile d-none gap-2 mt-2'>
                       <div className='cart-col-mobile-price d-flex gap-2 align-items-center'>
                         <h5 className='price mb-0' style={{ color: item?.priceAfterDiscount !== item?.price ? "gray" : "red" }}>
                           {
@@ -237,7 +247,7 @@ const Cart = () => {
                           )
                         }
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 )
               })
