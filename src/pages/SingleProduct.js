@@ -27,24 +27,6 @@ import { Image } from 'antd';
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 const SingleProduct = () => {
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [sliderKey, setSliderKey] = useState(0); // Thêm sliderKey
-  // Xử lý sự kiện khi ảnh ở "other-prouduct-image" được click
-  const handleOtherProductImageClick = (index) => {
-    setSelectedImageIndex(index); // Cập nhật vị trí ảnh được chọn
-    setSliderKey(sliderKey + 1); // Cập nhật sliderKey để cập nhật lại Slider
-  }
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 1500,
-    initialSlide: selectedImageIndex, // Sử dụng vị trí được lưu để đặt ảnh ban đầu
-  };
-
 
   const getTokenFromLocalStorage = localStorage.getItem("customer")
     ? JSON.parse(localStorage.getItem("customer"))
@@ -203,6 +185,26 @@ const SingleProduct = () => {
     }
   }, [productState?.totalrating]);
 
+  //Slider
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [sliderKey, setSliderKey] = useState(0); // Thêm sliderKey
+  // Xử lý sự kiện khi ảnh ở "other-prouduct-image" được click
+  const handleOtherProductImageClick = (index) => {
+    setSelectedImageIndex(index); // Cập nhật vị trí ảnh được chọn
+    setSliderKey(sliderKey + 1); // Cập nhật sliderKey để cập nhật lại Slider
+  }
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1500,
+    initialSlide: selectedImageIndex, // Sử dụng vị trí được lưu để đặt ảnh ban đầu
+  };
+
   return (
     <>
       <Meta title='Product Name' />
@@ -221,7 +223,7 @@ const SingleProduct = () => {
                   productState?.images.map((item, index) => {
                     return (
                       <div key={index}>
-                        <Image src={item?.url} alt="slider" width="100%" preview={true} height="100%" onClick={() => handleOtherProductImageClick(index)} />
+                        <Image src={item?.url} alt="slider" width="100%" preview={true} height="100%" />
                       </div>
                     )
                   })
