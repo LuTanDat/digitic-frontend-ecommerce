@@ -14,17 +14,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist } from '../features/products/productSlice';
 import { getAllCoupons } from '../features/coupon/couponSlice';
 
-const ProductCard = (props) => {
-  const dispatch = useDispatch();
-  const { grid, data } = props;
-  // console.log(Array.isArray(data));
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { getUserProductWishlist } from '../features/user/userSlice';
 
-  let location = useLocation();
+const ProductCard = (props) => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  const { grid, data } = props;
+
   const couponState = useSelector((state) => state.coupon?.coupons);
+  const wishlistState = useSelector((state) => state?.auth?.wishlist?.wishlist);
+  const addedWishlistState = useSelector((state) => state?.product?.addToWishlist);
+
+  // console.log("wishlistState", wishlistState);
 
   useEffect(() => {
     dispatch(getAllCoupons());
   }, [])
+
+  useEffect(() => {
+    dispatch(getUserProductWishlist());
+  }, [addedWishlistState])
 
   const addToWishList = (id) => {
     dispatch(addToWishlist(id));
@@ -36,7 +47,7 @@ const ProductCard = (props) => {
         let priceAfterDiscount = item?.price;
         let discountPercent = 0;
         let isShowPriceDiscount = false;
-        for (let j = 0; j < couponState.length; j++) {
+        for (let j = 0; j < couponState?.length; j++) {
           if (item._id === couponState[j].product?._id) {// co ma giam gia ko
             const currentDate = new Date();
             const startDate = new Date(couponState[j].start);
@@ -46,6 +57,13 @@ const ProductCard = (props) => {
               priceAfterDiscount = priceAfterDiscount * (100 - couponState[j].discount) / 100;
               isShowPriceDiscount = true;
             }
+            break;
+          }
+        }
+        let alreadyAddedToWishlist = false;
+        for (let i = 0; i < wishlistState?.length; i++) {
+          if (item._id === wishlistState[i]?._id) {// da add vao wishlist chua ?
+            alreadyAddedToWishlist = true;
             break;
           }
         }
@@ -62,11 +80,19 @@ const ProductCard = (props) => {
           >
             <div className='product-card position-relative'>
               <div className='wishlist-icon position-absolute'>
-                <button className='border-0 bg-transparent'
+                <button className='border-0 bg-transparent btn-wishlist'
                   onClick={(e) => { addToWishList(item?._id) }}
                 >
                   {
-                    location.pathname === "/wishlist" ? <button type='button' className='btn-close'></button> : <img src={wish} alt='wishlist' />
+                    location.pathname === "/wishlist" ?
+                      <button type='button' className='btn-close'></button> :
+                      <div>
+                        {
+                          alreadyAddedToWishlist ?
+                            <FaHeart className='fs-5 btn-wishlist-fill' style={{ color: "red" }} /> :
+                            <FaRegHeart className='fs-5 btn-wishlist-empty' />
+                        }
+                      </div>
                   }
                 </button>
               </div>
