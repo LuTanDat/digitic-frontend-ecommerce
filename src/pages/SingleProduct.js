@@ -214,12 +214,14 @@ const SingleProduct = () => {
               {/* <ReactImageZoom {...props} /> */}
               <Slider // mac dinh khong reder lai
                 key={sliderKey} // Sử dụng key để đảm bảo Slider được cập nhật khi sliderKey thay đổi
-                {...settings}>
+                {...settings}
+                beforeChange={(oldIndex, newIndex) => setSelectedImageIndex(newIndex)} // theo dõi sự thay đổi của slider và cập nhật state
+              >
                 {
                   productState?.images.map((item, index) => {
                     return (
                       <div key={index}>
-                        <Image src={item?.url} alt="slider" width="100%" preview={true} height="100%" />
+                        <Image src={item?.url} alt="slider" width="100%" preview={true} height="100%" onClick={() => handleOtherProductImageClick(index)} />
                       </div>
                     )
                   })
@@ -232,7 +234,13 @@ const SingleProduct = () => {
                   return (
                     <div
                       key={index}
-                      style={{ cursor: "pointer", maxWidth: "146px", maxHeight: "122px" }}
+                      style={{
+                        cursor: "pointer",
+                        maxWidth: "146px",
+                        maxHeight: "122px",
+                        borderRadius: "16px",
+                        border: selectedImageIndex === index ? "2px solid orange" : ""
+                      }}
                       className="col-2-4"
                       onClick={() => handleOtherProductImageClick(index)} // Gọi hàm khi ảnh được click
                     >
