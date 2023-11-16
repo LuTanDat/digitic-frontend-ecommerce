@@ -124,12 +124,12 @@ const SingleProduct = () => {
     let data = [];
     for (let index = 0; index < productsState.length; index++) {
       const element = productsState[index];
-      if (element.tags === 'popular') {
+      if (element?.tags === 'popular' && element?.category === productState?.category && element?._id !== productState?._id) {
         data.push(element)
       }
       setPopularProduct(data);
     }
-  }, [productsState]);
+  }, [productsState, productState]);
 
   const [star, setStar] = useState(5);
   const [comment, setComment] = useState(null);
@@ -544,7 +544,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </Container>
-      <Container class1="popular-wrapper home-wrapper-2 py-2 home-page">
+      <Container class1="popular-wrapper home-wrapper-2 pt-2 pb-4 home-page">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading mb-0">Sản phẩm phổ biến</h3>
