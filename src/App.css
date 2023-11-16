@@ -330,6 +330,26 @@ footer .input-group-text{
   overflow: hidden;
   width: 100%;
 }
+
+/* .btn-wishlist .btn-wishlist-empty,
+.btn-wishlist .btn-wishlist-fill{
+  font-size: 1.2rem;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+.btn-wishlist .btn-wishlist-fill{
+  opacity: 0;
+  display: none;
+}
+.btn-wishlist:hover .btn-wishlist-empty{
+  opacity: 0;
+  display: none;
+}
+.btn-wishlist:hover .btn-wishlist-fill{
+  opacity: 1;
+  display: block;
+} */
+
 .product-card .product-image {
   height: 270px;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
@@ -13,10 +14,9 @@ import { AiFillFilter, AiOutlineClose } from 'react-icons/ai';
 const Product = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+
   const [grid, setGrid] = useState(4);
-  const productState = useSelector((state) => state?.product?.products);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
@@ -29,6 +29,8 @@ const Product = () => {
   const [maxPrice, setMaxPrice] = useState(null);
   const [sort, setSort] = useState("title");
 
+  const productState = useSelector((state) => state?.product?.products);
+
   useEffect(() => {
     if (location.state) {
       setCategory(location.state);
@@ -38,6 +40,7 @@ const Product = () => {
   useEffect(() => {
     getProducts();
   }, [sort, tag, brand, category, minPrice, maxPrice]);
+
   const getProducts = () => {
     dispatch(getAllProducts({ sort, tag, brand, category, minPrice, maxPrice }));
   }
