@@ -27,6 +27,10 @@ import { Image } from 'antd';
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 const SingleProduct = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const getProductId = location.pathname.split("/")[2];
 
   const getTokenFromLocalStorage = localStorage.getItem("customer")
     ? JSON.parse(localStorage.getItem("customer"))
@@ -44,11 +48,10 @@ const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
   const [alreadyAdded, setAlreadyAdded] = useState(false); // prouduct da add vao cart chua ?
   const [alreadyRating, setAlreadyRating] = useState(false); // co the danh gia hay chua, user chi đc danh gia khi da mua hang và nhan hang ?
+  const [popularProduct, setPopularProduct] = useState([]);
+  const [star, setStar] = useState(5);
+  const [comment, setComment] = useState(null);
 
-  const location = useLocation();
-  const navigate = useNavigate();
-  const getProductId = location.pathname.split("/")[2];
-  const dispatch = useDispatch();
   const authState = useSelector((state) => state?.auth?.user);
   const productState = useSelector((state) => state?.product?.singleProduct);
   const productsState = useSelector((state) => state?.product?.products?.product);
@@ -63,14 +66,15 @@ const SingleProduct = () => {
     dispatch(getUserCart(config2));
     dispatch(getAllProducts());
     dispatch(getOrders())
-  }, [])
+  }, [getProductId])
+
   useEffect(() => {
     for (let index = 0; index < cartState?.length; index++) {
       if (getProductId === cartState[index]?.productId?._id) {
         setAlreadyAdded(true);
       }
     }
-  }, [])
+  }, [getProductId])
 
   useEffect(() => {
     for (let i = 0; i < orderState?.length; i++) {
@@ -85,24 +89,6 @@ const SingleProduct = () => {
     }
   }, [orderState])
 
-  const props = {
-    width: 400,
-    height: 400,
-    zoomWidth: 400,
-    img: productState?.images[0]?.url ? productState?.images[0]?.url : "https://www.apple.com/newsroom/images/2023/09/apple-introduces-the-advanced-new-apple-watch-series-9/article/Apple-Watch-S9-hero-230912_Full-Bleed-Image.jpg.xlarge.jpg"
-  };
-
-  const copyToClipboard = (text) => {
-    console.log('text', text)
-    var textField = document.createElement('textarea')
-    textField.innerText = text
-    document.body.appendChild(textField)
-    textField.select()
-    document.execCommand('copy')
-    textField.remove()
-  }
-
-  const [popularProduct, setPopularProduct] = useState([])
   useEffect(() => {
     let data = [];
     for (let index = 0; index < productsState?.length; index++) {
@@ -114,8 +100,16 @@ const SingleProduct = () => {
     }
   }, [productsState, productState]);
 
-  const [star, setStar] = useState(5);
-  const [comment, setComment] = useState(null);
+
+  const copyToClipboard = (text) => {
+    console.log('text', text)
+    var textField = document.createElement('textarea')
+    textField.innerText = text
+    document.body.appendChild(textField)
+    textField.select()
+    document.execCommand('copy')
+    textField.remove()
+  }
 
   const addRatingToProduct = () => {
     if (alreadyRating === false) {
@@ -151,6 +145,7 @@ const SingleProduct = () => {
       isShowPriceDiscount = true;
     }
   }
+
   const formattedPrice = new Intl.NumberFormat('vi-VN', {
     style: 'currency',
     currency: 'VND',

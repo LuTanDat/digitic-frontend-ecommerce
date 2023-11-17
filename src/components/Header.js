@@ -295,7 +295,7 @@ const Header = () => {
                       <p className='mb-0'>Đăng nhập</p> :
                       <div>
                         <p className='mb-0' style={{ whiteSpace: "nowrap" }}>Xin chào</p>
-                        <p className='mb-0'>{authState?.user?.firstName}</p>
+                        <p className='mb-0'>{`${authState?.user?.lastName} ${authState?.user?.firstName}`}</p>
                       </div>
                   }
                 </NavLink>
