@@ -56,7 +56,6 @@ const SingleProduct = () => {
   const couponState = useSelector((state) => state?.coupon);
   const orderState = useSelector((state) => state?.auth?.getOrderedProduct?.orders);
 
-  console.log("productsState", productsState);
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
