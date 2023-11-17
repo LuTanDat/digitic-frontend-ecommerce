@@ -35,10 +35,17 @@ const rateProduct = async (data) => {
   }
 }
 
+const getProductCategories = async () => {
+  const response = await axios.get(`${base_url}category/`);
+  // console.log(response);
+  return response.data;
+};
+
 export const productService = {
   getProducts,
   addToWishlist,
   getSingleProduct,
   rateProduct,
+  getProductCategories,
 
 }

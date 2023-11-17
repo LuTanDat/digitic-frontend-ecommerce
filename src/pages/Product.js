@@ -2,24 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
-import ReactStars from "react-rating-stars-component";
 import ProductCard from '../components/ProductCard';
-import Color from '../components/Color';
 import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../features/products/productSlice';
+import { getAllProducts, getCategories } from '../features/products/productSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AiFillFilter, AiOutlineClose } from 'react-icons/ai';
 import { Pagination } from 'antd';
 
 const Product = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [grid, setGrid] = useState(4);
   const [brands, setBrands] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
 
   // Filter states
@@ -37,6 +33,7 @@ const Product = () => {
 
 
   const productState = useSelector((state) => state?.product?.products);
+  const pCategoryState = useSelector((state) => state?.product?.pCategories);
 
 
   //------------------------------------------------ useEffect start---------------------------------------------------- 
@@ -44,6 +41,7 @@ const Product = () => {
     if (location.state) {
       setCategory(location.state);
     }
+    dispatch(getCategories());
   }, [])
 
   useEffect(() => {
@@ -56,16 +54,13 @@ const Product = () => {
 
   useEffect(() => {
     let newBrands = [];
-    let category = [];
     let newtags = [];
     for (let index = 0; index < productState?.product?.length; index++) {
       const element = productState?.product[index];
       newBrands.push(element.brand);
-      category.push(element.category);
       newtags.push(element.tags);
     }
     setBrands(newBrands);
-    setCategories(category);
     setTags(newtags);
   }, [productState])
   //------------------------------------------------ useEffect end---------------------------------------------------- 
@@ -99,10 +94,10 @@ const Product = () => {
               <div className='filter-card mb-3'>
                 <h3 className='filter-title'>Lọc theo Danh mục</h3>
                 <div>
-                  <ul className='ps-0'>
+                  <ul className='ps-0 mb-0'>
                     {
-                      categories && [...new Set(categories)].map((item, index) => {
-                        return <li key={index} onClick={() => setCategory(item)}>{item}</li>
+                      pCategoryState && pCategoryState.map((item, index) => {
+                        return <li key={index} onClick={() => setCategory(item?.title)}>{item?.title}</li>
                       })
                     }
                   </ul>
@@ -184,8 +179,8 @@ const Product = () => {
                   <h3 className='filter-title header__mobile-link mb-0' style={{ borderBottom: "0" }}>Danh mục</h3>
                 </li>
                 {
-                  categories && [...new Set(categories)].map((item, index) => {
-                    return <li className="header__mobile-link py-2" key={index} onClick={() => setCategory(item)}>{item}</li>
+                  pCategoryState && pCategoryState.map((item, index) => {
+                    return <li className="header__mobile-link py-2" key={index} onClick={() => setCategory(item?.title)}>{item?.title}</li>
                   })
                 }
 
