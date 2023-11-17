@@ -1,15 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, json, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
-import watch from "../images/watch.jpg";
 import Container from "./../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
-import { config } from "../utils/axiosconfig"
-import { createAnOrder, deleteUserCart, getUserCart, resetState, updateProfile } from "../features/user/userSlice";
+import { createAnOrder, deleteUserCart, updateProfile } from "../features/user/userSlice";
 import { PayPalButton } from "react-paypal-button-v2";
 import { paymentService } from "../features/payment/paymentService";
 import Meta from "../components/Meta";
@@ -19,34 +16,38 @@ let shippingSchema = Yup.object().shape({
   firstName: Yup.string().required("Tên không được để trống"),
   lastName: Yup.string().required("Họ không được để trống"),
   address: Yup.string().required("Địa chỉ không được để trống"),
-  // state: Yup.string().required("State không được để trống"),
   city: Yup.string().required("Thành phố không được để trống"),
-  // country: Yup.string().required("Country không được để trống"),
-  // pincode: Yup.string().required("Zipcode không được để trống"),
   mobile: Yup.string().required("Số điện thoại không được để trống"),
 });
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const cartState = useSelector((state) => state?.auth?.cartProducts);
   const authState = useSelector((state) => state.auth);
 
   const [totalAmount, setTotalAmount] = useState(null);
-  const [totalAmountAfterDiscount, setTotalAmountAfterDiscount] = useState(null);
   const [cartProductState, setCartProductState] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("COD"); // Mặc định là thanh toán khi nhận hàng
   const [sdkReady, setSdkReady] = useState(false);
 
+
   useEffect(() => {
-    let sumPrice = 0;
     let sumPriceAfterDiscount = 0;
+    let items = [];
     for (let index = 0; index < cartState?.length; index++) {
-      sumPrice = sumPrice + Number(cartState[index].quantity) * cartState[index].price;
       sumPriceAfterDiscount = sumPriceAfterDiscount + Number(cartState[index].quantity) * cartState[index].priceAfterDiscount;
-      setTotalAmount(sumPrice);
-      setTotalAmountAfterDiscount(sumPriceAfterDiscount);
+      items.push({
+        product: cartState[index].productId?._id,
+        quantity: cartState[index].quantity,
+        color: cartState[index].color,
+        price: cartState[index].price,
+        priceAfterDiscount: cartState[index].priceAfterDiscount
+      })
     }
+    setTotalAmount(sumPriceAfterDiscount);
+    setCartProductState(items);
   }, [cartState]);
 
   useEffect(() => {
@@ -59,6 +60,7 @@ const Checkout = () => {
     }
   }, [authState])
 
+
   const deliveryPrice = useMemo(() => {
     if (totalAmount >= 2000000 && totalAmount < 5000000) {
       return 10000
@@ -69,6 +71,7 @@ const Checkout = () => {
     }
   }, [totalAmount])
 
+
   const formik = useFormik({
     initialValues: {
       firstName: authState?.user?.firstName || "",
@@ -76,10 +79,6 @@ const Checkout = () => {
       address: authState?.user?.address || "",
       city: authState?.user?.city || "",
       mobile: authState?.user?.mobile || "",
-      // state: "",
-      // country: "",
-      // pincode: "",
-      // other: "",   
     },
     validationSchema: shippingSchema,
     onSubmit: (values) => {
@@ -93,8 +92,9 @@ const Checkout = () => {
       }
       setTimeout(() => {
         dispatch(createAnOrder({
+          itemsPrice: totalAmount,
+          shippingPrice: deliveryPrice,
           totalPrice: totalAmount + deliveryPrice, // loc tong gia trong cart
-          totalPriceAfterDiscount: totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice,
           orderItems: cartProductState, // loc tung sp trong cart
           paymentMethod: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : paymentMethod === "paypal-card" ? "Thanh toán bằng Paypal" : "",
           shippingInfo: values,
@@ -103,27 +103,14 @@ const Checkout = () => {
     },
   });
 
-  useEffect(() => {
-    let items = [];
-    for (let index = 0; index < cartState?.length; index++) {
-      items.push({
-        product: cartState[index].productId?._id,
-        quantity: cartState[index].quantity,
-        color: cartState[index].color,
-        price: cartState[index].price,
-        priceAfterDiscount: cartState[index].priceAfterDiscount
-      })
-    }
-    setCartProductState(items);
-  }, [])
-
 
   // THANH TOAN PAYPAL
   const onSuccessPaypal = (details, data) => {
     // console.log("details, data: ", details, data);
     dispatch(createAnOrder({
+      itemsPrice: totalAmount,
+      shippingPrice: deliveryPrice,
       totalPrice: totalAmount + deliveryPrice, // loc tong gia trong cart
-      totalPriceAfterDiscount: totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice,
       orderItems: cartProductState, // loc tung sp trong cart
       paymentMethod: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : paymentMethod === "paypal-card" ? "Thanh toán bằng Paypal" : "",
       shippingInfo: formik.values,
@@ -151,6 +138,7 @@ const Checkout = () => {
       setSdkReady(true)
     }
   }, [])
+
 
   return (
     <>
@@ -434,12 +422,12 @@ const Checkout = () => {
                     {totalAmount ? (totalAmount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                   </p>
                 </div>
-                <div className="d-flex justify-content-between align-items-center">
+                {/* <div className="d-flex justify-content-between align-items-center">
                   <p className="total">Giảm giá </p>
                   <p className="total-price">
                     {totalAmountAfterDiscount ? (totalAmount - totalAmountAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : 0}
                   </p>
-                </div>
+                </div> */}
                 <div className="d-flex justify-content-between align-items-center">
                   <p className="mb-0 total">Phí vận chuyển </p>
                   <p className="mb-0 total-price">
@@ -452,13 +440,13 @@ const Checkout = () => {
               <div className="d-flex justify-content-between align-items-center pt-4">
                 <h4 className="total">Thành tiền </h4>
                 <h5 className="total-price">
-                  {totalAmount ? ((totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice)).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
+                  {totalAmount ? (totalAmount + deliveryPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                 </h5>
               </div>
               {
                 paymentMethod === "paypal-card" && sdkReady ? (
                   <PayPalButton
-                    amount={(totalAmount - (totalAmount - totalAmountAfterDiscount) + deliveryPrice)}
+                    amount={(totalAmount + deliveryPrice)}
                     // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                     onSuccess={onSuccessPaypal}
                     onError={() => {

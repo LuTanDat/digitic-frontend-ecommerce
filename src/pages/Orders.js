@@ -62,12 +62,12 @@ const Orders = () => {
                         {item?.totalPrice ? (item?.totalPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                       </p>
                     </div>
-                    <div className='col-xl-3 col-lg-4 col-md-6 col-sm-7 p-2 d-flex align-items-center gap-1'>
+                    {/* <div className='col-xl-3 col-lg-4 col-md-6 col-sm-7 p-2 d-flex align-items-center gap-1'>
                       <p className='mb-0'>Tổng tiền sau khuyến mãi:</p>
                       <p className='mb-0'>
                         {item?.totalPriceAfterDiscount ? (item?.totalPriceAfterDiscount).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}
                       </p>
-                    </div>
+                    </div> */}
                     <div className='col-xl-3 col-lg-4 col-md-6 p-2 d-flex align-items-center gap-1'>
                       <p className='mb-0'>Thanh toán:</p>
                       <p className='mb-0'>{item?.paymentMethod}</p>
