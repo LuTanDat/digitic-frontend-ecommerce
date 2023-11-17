@@ -379,11 +379,11 @@ export const authSlice = createSlice({
         state.isSuccess = true;
 
         if (state.isSuccess === true) {
-          if (action.payload.message === 'SUCCESS') {
+          if (action.payload?.message === 'SUCCESS') {
             state.orderedProduct = action.payload;
             toast.success("Đặt hàng thành công!");
           } else
-            if (action.payload.message === 'ERR') {
+            if (action.payload?.message === 'ERR') {
               state.orderedProduct = action.payload;
               {
                 action.payload?.product?.map((item) => {

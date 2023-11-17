@@ -119,7 +119,6 @@ const Checkout = () => {
 
 
   // THANH TOAN PAYPAL
-
   const onSuccessPaypal = (details, data) => {
     // console.log("details, data: ", details, data);
     dispatch(createAnOrder({
