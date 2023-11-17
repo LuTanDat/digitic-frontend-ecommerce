@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../features/products/productSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AiFillFilter, AiOutlineClose } from 'react-icons/ai';
+import { Pagination } from 'antd';
 
 const Product = () => {
   const location = useLocation();
@@ -73,6 +74,10 @@ const Product = () => {
       delete location.state;
     }
   }
+
+  const onChange = (pageNumber) => {
+    console.log('Page: ', pageNumber);
+  };
 
   return (
     <div>
@@ -329,6 +334,9 @@ const Product = () => {
               <div className='row'>
                 <ProductCard data={productState ? productState : []} grid={grid} />
               </div>
+            </div>
+            <div className='col-12 text-center mt-2'>
+              <Pagination defaultCurrent={1} total={100} onChange={onChange} />
             </div>
           </div>
         </div>
