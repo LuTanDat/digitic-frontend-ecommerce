@@ -80,7 +80,7 @@ const Footer = () => {
           <div className='row'>
             <div className='col-12'>
               <p className='text-center mb-0 text-white footer-mobile-second'>
-                &copy; {new Date().getFullYear()}; Powered by Developer's Lu Tan Dat
+                &copy; {new Date().getFullYear()}; Bản quyền thuộc về Lư Tấn Đạt {/* Powered by Developer's Lu Tan Dat */}
               </p>
             </div>
           </div>

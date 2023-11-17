@@ -30,8 +30,16 @@ const Product = () => {
   const [maxPrice, setMaxPrice] = useState(null);
   const [sort, setSort] = useState("title");
 
+  const [panigate, setPanigate] = useState({
+    page: 1,
+    limit: 10
+  })
+
+
   const productState = useSelector((state) => state?.product?.products);
 
+
+  //------------------------------------------------ useEffect start---------------------------------------------------- 
   useEffect(() => {
     if (location.state) {
       setCategory(location.state);
@@ -39,19 +47,19 @@ const Product = () => {
   }, [])
 
   useEffect(() => {
-    getProducts();
-  }, [sort, tag, brand, category, minPrice, maxPrice]);
-
-  const getProducts = () => {
-    dispatch(getAllProducts({ sort, tag, brand, category, minPrice, maxPrice }));
-  }
+    dispatch(getAllProducts(
+      {
+        sort, tag, brand, category, minPrice, maxPrice, page: panigate.page, limit: panigate.limit
+      }
+    ));
+  }, [sort, tag, brand, category, minPrice, maxPrice, panigate.page, panigate.limit]);
 
   useEffect(() => {
     let newBrands = [];
     let category = [];
     let newtags = [];
-    for (let index = 0; index < productState.length; index++) {
-      const element = productState[index];
+    for (let index = 0; index < productState?.product?.length; index++) {
+      const element = productState?.product[index];
       newBrands.push(element.brand);
       category.push(element.category);
       newtags.push(element.tags);
@@ -60,9 +68,10 @@ const Product = () => {
     setCategories(category);
     setTags(newtags);
   }, [productState])
+  //------------------------------------------------ useEffect end---------------------------------------------------- 
 
-  // console.log([...new Set(brands)], [...new Set(categories)], [...new Set(tags)]);
 
+  // FUNCTION
   const removeAllFilter = () => {
     setTag(null);
     setCategory(null);
@@ -75,8 +84,8 @@ const Product = () => {
     }
   }
 
-  const onChange = (pageNumber) => {
-    console.log('Page: ', pageNumber);
+  const onChange = (current, pageSize) => {
+    setPanigate({ ...panigate, page: current, limit: pageSize })// trang bao nhieu, limit bao nhieu sp/trang
   };
 
   return (
@@ -281,7 +290,7 @@ const Product = () => {
                   </div>
                 </div>
                 <div className='d-flex align-items-center gap-10'>
-                  <p className='totalproducts mb-0'>{productState?.length} sản phẩm</p>
+                  <p className='totalproducts mb-0'>{productState?.productCount} sản phẩm</p>
                   <div className='d-none d-xl-flex gap-10 align-items-center grid'>
                     <img onClick={() => setGrid(3)}
                       src='images/gr4.svg'
@@ -332,11 +341,11 @@ const Product = () => {
             }
             <div className='products-list pb-3 col-12 home-page'>
               <div className='row'>
-                <ProductCard data={productState ? productState : []} grid={grid} />
+                <ProductCard data={productState?.product ? productState?.product : []} grid={grid} />
               </div>
             </div>
             <div className='col-12 text-center mt-2'>
-              <Pagination defaultCurrent={1} total={100} onChange={onChange} />
+              <Pagination defaultCurrent={panigate?.page} total={productState?.productCount} onChange={onChange} />
             </div>
           </div>
         </div>

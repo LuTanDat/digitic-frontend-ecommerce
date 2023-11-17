@@ -59,7 +59,7 @@ const Home = () => {
   };
 
   const blogState = useSelector((state) => state?.blog?.blogs);
-  const productState = useSelector((state) => state?.product?.products);
+  const productState = useSelector((state) => state?.product?.products?.product);
   const couponState = useSelector((state) => state.coupon?.coupons);
 
   const navigate = useNavigate();

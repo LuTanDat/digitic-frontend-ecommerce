@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { productService } from "./productService";
 
 export const getAllProducts = createAsyncThunk(
-  "product/gets",
+  "product/getAllProducts",
   async (data, thunkAPI) => {
     try {
       return await productService.getProducts(data);

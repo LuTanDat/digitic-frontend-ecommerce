@@ -51,10 +51,12 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state?.auth?.user);
   const productState = useSelector((state) => state?.product?.singleProduct);
-  const productsState = useSelector((state) => state?.product?.products);
+  const productsState = useSelector((state) => state?.product?.products?.product);
   const cartState = useSelector((state) => state?.auth?.cartProducts);
   const couponState = useSelector((state) => state?.coupon);
   const orderState = useSelector((state) => state?.auth?.getOrderedProduct?.orders);
+
+  console.log("productsState", productsState);
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
@@ -104,7 +106,7 @@ const SingleProduct = () => {
   const [popularProduct, setPopularProduct] = useState([])
   useEffect(() => {
     let data = [];
-    for (let index = 0; index < productsState.length; index++) {
+    for (let index = 0; index < productsState?.length; index++) {
       const element = productsState[index];
       if (element?.tags === 'popular' && element?.category === productState?.category && element?._id !== productState?._id) {
         data.push(element)
