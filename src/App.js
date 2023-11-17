@@ -33,6 +33,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { refreshToken, resetState } from './features/user/userSlice';
 import { toast } from 'react-toastify';
+import OrderDetail from './pages/OrderDetail';
 
 function App() {
   const dispatch = useDispatch();
@@ -93,6 +94,7 @@ function App() {
             <Route path='blog/:id' element={<SingleBlog />} />
             <Route path='cart' element={<PrivateRoutes><Cart /></PrivateRoutes>} />
             <Route path='my-orders' element={<PrivateRoutes><Orders /></PrivateRoutes>} />
+            <Route path='orders/:id' element={<PrivateRoutes><OrderDetail /></PrivateRoutes>} />
             <Route path='my-profile' element={<PrivateRoutes><Profile /></PrivateRoutes>} />
             <Route path='checkout' element={<PrivateRoutes><Checkout /></PrivateRoutes>} />
             <Route path='compare-product' element={<CompareProduct />} />

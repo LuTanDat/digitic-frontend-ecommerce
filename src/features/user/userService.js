@@ -88,6 +88,13 @@ const getUserOrders = async () => {
   }
 };
 
+const getAOrder = async (id) => {
+  const response = await axios.get(`${base_url}user/getaOrder/${id}`, config);
+  if (response.data) {
+    return response.data;
+  }
+};
+
 const updateUser = async (data) => {
   const response = await axios.put(`${base_url}user/edit-user`, data, config);
   if (response.data) {
@@ -129,6 +136,7 @@ export const authService = {
   updateProductFromCart,
   createOrder,
   getUserOrders,
+  getAOrder,
   cancelOrder,
   updateUser,
   forgotPassToken,

@@ -148,51 +148,12 @@ const Checkout = () => {
         <div className="row">
           <div className="col-md-8">
             <div className="checkout-left-data">
-              {/* <nav
-                style={{ "--bs-breadcrumb-divider": ">" }}
-                aria-label="breadcrumb"
-              >
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <Link className="text-dark total-price" to="/cart">
-                      Cart
-                    </Link>
-                  </li>
-                  &nbsp; /
-                  <li
-                    className="breadcrumb-item total-price active"
-                    aria-current="page"
-                  >
-                    Payment
-                  </li>
-                </ol>
-              </nav> */}
-
               <h4 className="mb-3">Thông tin giao hàng</h4>
               <form
                 action=""
                 onSubmit={formik.handleSubmit}
                 className="d-flex flex-wrap gap-15 justify-content-between"
               >
-                {/* <div className="w-100">
-                  <select
-                    name="country"
-                    value={formik.values.country}
-                    onChange={formik.handleChange("country")}
-                    onBlur={formik.handleBlur("country")}
-                    className="form-control form-select"
-                    id=""
-                  >
-                    <option value="" selected disabled>
-                      Select Country
-                    </option>
-                    <option value="vietnam">Viet Nam</option>
-                    <option value="usa">USA</option>
-                  </select>
-                  <div className="error ms-2 my-1">
-                    {formik.touched.country && formik.errors.country}
-                  </div>
-                </div> */}
                 <div className="flex-grow-1">
                   <input
                     type="text"
@@ -265,54 +226,6 @@ const Checkout = () => {
                     {formik.touched.address && formik.errors.address}
                   </div>
                 </div>
-
-                {/* <div className="w-100">
-                  <input
-                    type="text"
-                    placeholder="Apartment, Suit, etc (Optional)"
-                    className="form-control"
-                    name='other'
-                    value={formik.values.other}
-                    onChange={formik.handleChange("other")}
-                    onBlur={formik.handleBlur("other")}
-                  />
-                  <div className="error ms-2 my-1">
-                    {formik.touched.other && formik.errors.other}
-                  </div>
-                </div>
-                <div className="flex-grow-1">
-                  <select
-                    name='state'
-                    value={formik.values.state}
-                    onChange={formik.handleChange("state")}
-                    onBlur={formik.handleBlur("state")}
-                    className="form-control form-select"
-                    id=""
-                  >
-                    <option value="" selected disabled>
-                      State/Province
-                    </option>
-                    <option value="Aberdeenshire">Aberdeenshire</option>
-                    <option value="Angus">Angus</option>
-                  </select>
-                  <div className="error ms-2 my-1">
-                    {formik.touched.state && formik.errors.state}
-                  </div>
-                </div>
-                <div className="flex-grow-1">
-                  <input
-                    type="text"
-                    placeholder="Zipcode"
-                    className="form-control"
-                    name='pincode'
-                    value={formik.values.pincode}
-                    onChange={formik.handleChange("pincode")}
-                    onBlur={formik.handleBlur("pincode")}
-                  />
-                  <div className="error ms-2 my-1">
-                    {formik.touched.pincode && formik.errors.pincode}
-                  </div>
-                </div>*/}
                 <div className="w-100 border-bottom py-4">
                   <h4 className="mb-3">Sản phẩm</h4>
                   {
@@ -379,9 +292,6 @@ const Checkout = () => {
                     <Link to="/product" className="button button-navigate">
                       Tiếp tục mua sắm
                     </Link>
-                    {/* <button className="button" type="submit" style={{ backgroundColor: "#fd7e14" }}>
-                      Đặt hàng
-                    </button> */}
                   </div>
                 </div>
               </form>
