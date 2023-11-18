@@ -81,6 +81,12 @@ const cancelOrder = async (data) => {
   }
 };
 
+const updateOrder = async (data) => {
+  const response = await axios.put(`${base_url}user/updateOrder/${data.id}`, { status: data.status }, config);
+
+  return response.data;
+};
+
 const getUserOrders = async () => {
   const response = await axios.get(`${base_url}user/getmyorders`, config);
   if (response.data) {
@@ -138,6 +144,7 @@ export const authService = {
   getUserOrders,
   getAOrder,
   cancelOrder,
+  updateOrder,
   updateUser,
   forgotPassToken,
   resetPass,

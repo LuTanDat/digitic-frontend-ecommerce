@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect, useState } from 'react'
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
 import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
-import { cancelOrder, getOrders, resetState } from '../features/user/userSlice';
+import { cancelOrder, getOrders, resetState, updateAOrder } from '../features/user/userSlice';
 import { Link } from 'react-router-dom';
 
 const Orders = () => {
@@ -13,12 +14,13 @@ const Orders = () => {
   const [selectedNavItem, setSelectedNavItem] = useState(null);
 
   const canceledOrderState = useSelector((state) => state?.auth?.canceledOrder);
+  const updatedOrderState = useSelector((state) => state?.auth?.updatedOrder);
   const orderState = useSelector((state) => state?.auth?.getOrderedProduct?.orders);
 
   useEffect(() => {
     dispatch(resetState())
     dispatch(getOrders())
-  }, [canceledOrderState])
+  }, [canceledOrderState, updatedOrderState])
 
   return (
     <>
@@ -115,7 +117,7 @@ const Orders = () => {
                             </td>
                             <td className='py-2' style={{ width: "12%" }}>
                               {
-                                item?.orderStatus !== "Đã Hủy" &&
+                                item?.orderStatus === "Đã đặt hàng" &&
                                 <button
                                   className='p-1'
                                   style={{ border: "1px solid #9255FD", borderRadius: "4px", color: "red" }}
@@ -165,13 +167,23 @@ const Orders = () => {
                               </td>
                               <td className='py-2' style={{ width: "12%" }}>
                                 {
-                                  item?.orderStatus !== "Đã Hủy" &&
+                                  item?.orderStatus === "Đã đặt hàng" &&
                                   <button
                                     className='p-1'
                                     style={{ border: "1px solid #9255FD", borderRadius: "4px", color: "red" }}
                                     onClick={() => { dispatch(cancelOrder(item)) }}
                                   >
                                     Hủy đơn hàng
+                                  </button>
+                                }
+                                {
+                                  item?.orderStatus === "Đang giao" &&
+                                  <button
+                                    className='p-1'
+                                    style={{ border: "1px solid #9255FD", borderRadius: "4px", color: "green" }}
+                                    onClick={() => { dispatch(updateAOrder({ id: item?._id, status: "Đã nhận hàng" })) }}
+                                  >
+                                    Đã nhận hàng
                                   </button>
                                 }
                               </td>
