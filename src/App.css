@@ -1072,11 +1072,23 @@ footer .input-group-text{
   .order-totalprice-order{
     display: flex;
     justify-content: center;
-    color: white;
     gap: 16px;
   }
   .order-product-info-mobile {
     justify-content: space-between;
+  }
+
+  .orders-wrapper table tr th:nth-child(1),
+  .orders-wrapper table tr td:nth-child(1),
+  .orders-wrapper table tr th:nth-child(3),
+  .orders-wrapper table tr td:nth-child(3),
+  .orders-wrapper table tr th:nth-child(5),
+  .orders-wrapper table tr td:nth-child(5){
+    display: none;
+  }
+
+  .order-detail-wrapper .info-order-detail-mobile{
+    display: block !important;
   }
 }
 /*RESPONSIVE PARENT END */
@@ -1121,6 +1133,17 @@ footer .input-group-text{
   .description-wrapper .specifications{
     padding-left: 0;
   }
+
+  .orders-wrapper table tr th:nth-child(3),
+  .orders-wrapper table tr td:nth-child(3),
+  .orders-wrapper table tr th:nth-child(5),
+  .orders-wrapper table tr td:nth-child(5){
+    display: none;
+  }
+  .orders-wrapper table tr th:last-child,
+  .orders-wrapper table tr td:last-child{
+    width: 16%;
+  }
 }
 @media(min-width: 576px) and (max-width: 767.98px) {
   .col-sm-6 {
@@ -1148,6 +1171,17 @@ footer .input-group-text{
     align-items: center;
     justify-content: space-between;
     width: 85%;
+  }
+
+  .orders-wrapper table tr th:last-child,
+  .orders-wrapper table tr td:last-child{
+    width: 21%;
+  }
+  .orders-wrapper .btn-group button {
+    padding: 6px 8px;
+  }
+  .order-detail-wrapper .ant-steps .ant-steps-item {
+    width: 20%;
   }
 }
 @media(max-width: 575.98px) {
@@ -1286,6 +1320,14 @@ footer .input-group-text{
   }
   .review-inner-wrapper .reviews{
     margin-top: 8px !important;
+  }
+
+  .orders-wrapper table tr th:last-child,
+  .orders-wrapper table tr td:last-child{
+    width: 24%;
+  }
+  .orders-wrapper .btn-group button {
+    padding: 4px 3px !important;
   }
 }
 /*RESPONSIVE CHILDREN END*/

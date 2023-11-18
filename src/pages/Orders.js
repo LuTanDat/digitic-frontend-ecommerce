@@ -24,7 +24,7 @@ const Orders = () => {
     <>
       <Meta title={'My Orders'} />
       <BreadCrumb title='Đơn hàng của tôi' />
-      <Container class1='cart-wrapper home-wrapper-2 py-3'>
+      <Container class1='orders-wrapper home-wrapper-2 py-3'>
         <div className='row'>
           <div className='col-12 p-0 mb-3'>
             <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
