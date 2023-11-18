@@ -83,7 +83,7 @@ const OrderDetail = () => {
               <p>{`Mã đơn hàng: ${aOrderState?._id}`}</p>
               <p>{`Ngày đặt hàng: ${new Date(aOrderState?.createdAt).toLocaleString()}`}</p>
               <p>{`Phương thức thanh toán: ${aOrderState?.paymentMethod}`}</p>
-              <p className='mb-0'>{`Thời gian thanh toán: ${new Date(aOrderState?.paidAt).toLocaleString()}`}</p>
+              <p className='mb-0'>{`Thời gian thanh toán: ${aOrderState?.paidAt ? new Date(aOrderState?.paidAt).toLocaleString() : "Chưa Thanh toán"}`}</p>
             </div>
           </div>
 
@@ -152,7 +152,7 @@ const OrderDetail = () => {
             </div>
           </div>
 
-          <div className='col-12 my-3' style={{ textAlign: "right" }}>
+          <div className='col-12 my-3 text-end'>
             <p>{`Tổng tiền hàng: ${aOrderState?.itemsPrice ? (aOrderState?.itemsPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}</p>
             <p>{`Phí vận chuyển: ${aOrderState?.shippingPrice ? (aOrderState?.shippingPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}</p>
             <b>{`Thành tiền: ${aOrderState?.totalPrice ? (aOrderState?.totalPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}</b>
