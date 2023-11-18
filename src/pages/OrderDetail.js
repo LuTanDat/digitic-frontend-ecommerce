@@ -6,6 +6,8 @@ import Container from '../components/Container'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAOrder } from '../features/user/userSlice'
+import StepOrderComponent from '../components/StepOrderComponent'
+import { useMemo } from 'react'
 
 const OrderDetail = () => {
   const location = useLocation();
@@ -20,6 +22,42 @@ const OrderDetail = () => {
     dispatch(getAOrder(getOrderId));
   }, [])
 
+  const orderStatus = useMemo(() => {
+    if (aOrderState?.orderStatus === "Đã đặt hàng") {
+      return 0
+    }
+    else if (aOrderState?.orderStatus === "Đang xử lý") {
+      return 1
+    }
+    else if (aOrderState?.orderStatus === "Đang giao") {
+      return 2
+    }
+    else if (aOrderState?.orderStatus === "Đã nhận hàng") {
+      return 3
+    }
+    else if (aOrderState?.orderStatus === "Đã Hủy") {
+      return 4
+    }
+  }, [aOrderState?.orderStatus])
+
+  const itemsOrderStatus = [
+    {
+      title: 'Đã đặt hàng',
+    },
+    {
+      title: 'Đang xử lý',
+    },
+    {
+      title: 'Đang giao',
+    },
+    {
+      title: 'Đã nhận hàng',
+    },
+    {
+      title: 'Đã Hủy',
+    },
+  ]
+
   return (
     <>
       <Meta title='Product Name' />
@@ -28,9 +66,12 @@ const OrderDetail = () => {
       <Container class1='main-product-wrapper home-wrapper-2 py-4'>
         <div className='row'>
           <div className='col-12'>
-            <h3 className="mb-2 text-center">Chi Tiết Đơn Hàng</h3>
+            <h3 className="mb-3 text-center fs-4">Chi Tiết Đơn Hàng</h3>
           </div>
-          <div className="col-12 d-flex my-4 justify-content-around">
+          <div className='col-12 mb-3 mt-2 text-center'>
+            <StepOrderComponent items={itemsOrderStatus} current={orderStatus} />
+          </div>
+          <div className="col-12 d-flex mb-4 mt-2 justify-content-around align-items-baseline">
             <div style={{ border: "1px solid #857575cc", borderRadius: "10px", padding: "15px", backgroundColor: "white" }}>
               <h5>Địa chỉ nhận hàng</h5>
               <p>{`Người nhận: ${aOrderState?.shippingInfo?.lastName} ${aOrderState?.shippingInfo?.firstName}`}</p>

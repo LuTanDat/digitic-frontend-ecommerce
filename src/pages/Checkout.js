@@ -139,6 +139,9 @@ const Checkout = () => {
     }
   }, [])
 
+  const exchangeRate = 24265; // Tỷ giá hối đoái
+  const totalAmountUSD = (totalAmount + deliveryPrice) / exchangeRate;
+  const convertTotalAmountUSD = Math.round(totalAmountUSD * 10) / 10;
 
   return (
     <>
@@ -356,7 +359,7 @@ const Checkout = () => {
               {
                 paymentMethod === "paypal-card" && sdkReady ? (
                   <PayPalButton
-                    amount={(totalAmount + deliveryPrice)}
+                    amount={convertTotalAmountUSD}
                     // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                     onSuccess={onSuccessPaypal}
                     onError={() => {
