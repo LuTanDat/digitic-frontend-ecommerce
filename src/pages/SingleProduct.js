@@ -318,7 +318,7 @@ const SingleProduct = () => {
                     </>
                   }
                 </div>
-                <div className='d-flex gap-15 align-items-center flex-row mt-2 mb-3'>
+                <div className='product-detail-quantity d-flex gap-15 align-items-center flex-row mt-2 mb-3'>
                   {
                     alreadyAdded === false && <>
                       <h3 className='product-heading'>Số lượng</h3>
@@ -516,7 +516,7 @@ const SingleProduct = () => {
                 </div>
                 <div className='d-flex justify-content-end mt-3'>
                   <button onClick={addRatingToProduct}
-                    className='button border-0' type='button' style={{ backgroundColor: "rgb(253, 126, 20)" }}
+                    className='button border-0 btn-review' type='button' style={{ backgroundColor: "rgb(253, 126, 20)" }}
                   >
                     Gửi đánh giá
                   </button>
