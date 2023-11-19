@@ -32,7 +32,6 @@ import dogiadung from '../images/do_gia_dung_logo.webp';
 import tvbox from '../images/TVBox_logo.webp';
 
 
-
 // special product
 import wish from '../images/wish.svg';
 import wishlist from '../images/wishlist.svg';
@@ -43,6 +42,8 @@ import prodcompare from '../images/prodcompare.svg';
 import addcart from '../images/add-cart.svg';
 import view from '../images/view.svg';
 import { getAllCoupons } from "../features/coupon/couponSlice";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { getUserProductWishlist } from "../features/user/userSlice";
 // special product end
 
 
@@ -61,18 +62,29 @@ const Home = () => {
   const blogState = useSelector((state) => state?.blog?.blogs);
   const productState = useSelector((state) => state?.product?.products?.product);
   const couponState = useSelector((state) => state.coupon?.coupons);
+  const wishlistState = useSelector((state) => state?.auth?.wishlist?.wishlist);
+  const addedWishlistState = useSelector((state) => state?.product?.addToWishlist);
+
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     getBlogs();
     getProducts();
     dispatch(getAllCoupons());
   }, [])
+
+  useEffect(() => {
+    dispatch(getUserProductWishlist());
+  }, [addedWishlistState])
+
+
   const getBlogs = () => {
     dispatch(getAllBlogs());
   }
+
   const getProducts = () => {
     dispatch(getAllProducts());
   }
@@ -295,20 +307,31 @@ const Home = () => {
                     break;
                   }
                 }
+                let alreadyAddedToWishlist = false;
+                for (let i = 0; i < wishlistState?.length; i++) {
+                  if (item._id === wishlistState[i]?._id) {// da add vao wishlist chua ?
+                    alreadyAddedToWishlist = true;
+                    break;
+                  }
+                }
                 return (
                   <div
                     key={index}
                     className="col-xl-2-4 col-lg-3 col-md-4 col-sm-6 col-xs-6 mt-3 home-product-card"
                     disabled={item?.quantity === 0}
                   >
-                    <div
-                      className='product-card position-relative'
-                    >
+                    <div className='product-card position-relative'>
                       <div className='wishlist-icon position-absolute'>
-                        <button className='border-0 bg-transparent'
+                        <button className='border-0 bg-transparent btn-wishlist'
                           onClick={(e) => { addToWishList(item?._id) }}
                         >
-                          <img src={wish} alt='wishlist' />
+                          <div>
+                            {
+                              alreadyAddedToWishlist ?
+                                <FaHeart className='fs-5 btn-wishlist-fill' style={{ color: "red" }} /> :
+                                <FaRegHeart className='fs-5 btn-wishlist-empty' />
+                            }
+                          </div>
                         </button>
                       </div>
                       <Link to={item?.quantity !== 0 && '/product/' + item?._id} className='w-100'>

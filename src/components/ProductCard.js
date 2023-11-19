@@ -27,7 +27,6 @@ const ProductCard = (props) => {
   const wishlistState = useSelector((state) => state?.auth?.wishlist?.wishlist);
   const addedWishlistState = useSelector((state) => state?.product?.addToWishlist);
 
-  // console.log("wishlistState", wishlistState);
 
   useEffect(() => {
     dispatch(getAllCoupons());
@@ -36,6 +35,7 @@ const ProductCard = (props) => {
   useEffect(() => {
     dispatch(getUserProductWishlist());
   }, [addedWishlistState])
+
 
   const addToWishList = (id) => {
     dispatch(addToWishlist(id));

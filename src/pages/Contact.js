@@ -125,7 +125,7 @@ const Contact = () => {
                     </div>
                   </div>
                   <div>
-                    <button className="button border-0" type="submit">Gửi</button>
+                    <button className="button border-0 contact-button-submit" type="submit">Gửi</button>
                   </div>
                 </form>
               </div>
