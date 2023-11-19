@@ -79,7 +79,7 @@ const ChangePassword = () => {
                 <div>
                   <Link to='/forgot-password'>Quên mật khẩu?</Link>
                   <div className='mt-3 d-flex justify-content-center align-items-center gap-15'>
-                    <button className='button border-0 btn-submit' type='submit'>Đổi mật khẩu</button>
+                    <button className='button border-0 signIn btn-submit' type='submit'>Đổi mật khẩu</button>
                   </div>
                 </div>
               </form>

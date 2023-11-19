@@ -350,6 +350,7 @@ const SingleProduct = () => {
                   <div className={'d-flex justify-content-center gap-30 ms-5' + alreadyAdded ? "ms-0" : "ms-5"}>
                     <button
                       className='button border-0 cart-siProduct-mobile'
+                      style={{ backgroundColor: "rgb(253, 126, 20)" }}
                       type='button'
                       onClick={() => { alreadyAdded ? navigate('/cart') : uploadCart() }}
                     >
@@ -515,7 +516,7 @@ const SingleProduct = () => {
                 </div>
                 <div className='d-flex justify-content-end mt-3'>
                   <button onClick={addRatingToProduct}
-                    className='button border-0' type='button'
+                    className='button border-0' type='button' style={{ backgroundColor: "rgb(253, 126, 20)" }}
                   >
                     Gửi đánh giá
                   </button>
