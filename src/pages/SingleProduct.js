@@ -153,7 +153,7 @@ const SingleProduct = () => {
 
   const uploadCart = () => {
     // if (color === null) {
-    //   toast.error("Please Choose Color");
+    //   toast.error("Vui lòng chọn màu");
     //   return false;
 
     if (!authState?._id) {
