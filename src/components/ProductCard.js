@@ -127,7 +127,7 @@ const ProductCard = (props) => {
                     <p
                       style={{ wordWrap: 'break-word' }}
                       className={`description ${grid === 12 ? "d-block" : "d-none"}`}
-                      dangerouslySetInnerHTML={{ __html: item.description }}
+                      dangerouslySetInnerHTML={{ __html: item.description.substr(0, 330) + "..." }}
                     >
                     </p>
                     <div className="d-flex gap-1 price-on-mobile-home">
