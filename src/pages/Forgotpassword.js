@@ -35,7 +35,7 @@ const Forgotpassword = () => {
         <div className='row'>
           <div className='col-12'>
             <div className='auth-card'>
-              <h3 className='text-center mb-3'>Reset Mật khẩu của bạn</h3>
+              <h3 className='text-center mb-3'>Quên mật khẩu?</h3>
               <p className='text-center mt-2 mb-3'>Chúng tôi sẽ gửi cho bạn một email để reset mật khẩu của bạn!</p>
               <form
                 action=''
@@ -55,8 +55,8 @@ const Forgotpassword = () => {
                 </div>
                 <div>
                   <div className='mt-3 d-flex flex-column justify-content-center align-items-center gap-15'>
-                    <button className='button border-0' type='submit'>Gửi</button>
-                    <Link to='/login'>Hủy</Link>
+                    <button className='button border-0 btn-submit' type='submit'>Gửi</button>
+                    <Link to='/login' className='btn-submit text-center'>Hủy</Link>
                   </div>
                 </div>
               </form>

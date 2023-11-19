@@ -1169,6 +1169,7 @@ footer .input-group-text{
   }
   .cart-data-on-mobile {
     justify-content: center;
+    gap: 18px !important;
   }
   .order-product-detail-info-mobile{
     display: flex;
@@ -1226,11 +1227,24 @@ footer .input-group-text{
     width: 100%;
   }
   .cart-data-on-mobile {
+    display: block !important;
+  }
+  .cart-data-on-mobile > div {
     justify-content: center;
   }
-  .cart-data-on-mobile .cart-col-mobile-totalprice {
-    display: none !important;
+  .cart-data-on-mobile{
+    padding: 10px;
   }
+  .cart-data {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+  .cart-wrapper,
+  .checkout-wrapper{
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+
   .continue-shopping-mobile{
     padding: 13px 8px !important
   }
@@ -1341,6 +1355,10 @@ footer .input-group-text{
   .contact-wrapper .contact-item{
     padding-left: 5px;
     padding-right: 5px;
+  }
+
+  .login-wrapper .btn-submit {
+    width: 100%;
   }
 }
 /*RESPONSIVE CHILDREN END*/

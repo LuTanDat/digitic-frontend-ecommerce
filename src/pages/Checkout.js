@@ -368,7 +368,7 @@ const Checkout = () => {
                   />
                 ) : (
                   <button
-                    className="button w-100 mt-3"
+                    className="button border-0 w-100 mt-3"
                     type="submit"
                     style={{ backgroundColor: "#fd7e14" }}
                     onClick={formik.handleSubmit}

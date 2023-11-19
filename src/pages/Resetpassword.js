@@ -66,7 +66,7 @@ const Resetpassword = () => {
                 /> */}
                 <div>
                   <div className='mt-3 d-flex justify-content-center align-items-center gap-15'>
-                    <button className='button border-0' type='submit'>OK</button>
+                    <button className='button border-0 btn-submit' type='submit'>OK</button>
                   </div>
                 </div>
               </form>

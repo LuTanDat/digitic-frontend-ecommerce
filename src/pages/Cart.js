@@ -198,7 +198,7 @@ const Cart = () => {
                     </div>
 
 
-                    {/* <div className='cart-data-on-mobile d-none gap-2 mt-2'>
+                    <div className='cart-data-on-mobile d-none gap-2 mt-2'>
                       <div className='cart-col-mobile-price d-flex gap-2 align-items-center'>
                         <h5 className='price mb-0' style={{ color: item?.priceAfterDiscount !== item?.price ? "gray" : "red" }}>
                           {
@@ -219,24 +219,34 @@ const Cart = () => {
                         }
                       </div>
                       <div className='cart-col-mobile-quantity d-flex align-items-center gap-2'>
-                        <div>
+                        <div className='d-flex align-items-center gap-1' style={{ border: "1px solid #ccc", borderRadius: "10px" }}>
+                          <AiOutlineMinus
+                            style={{ width: "25px", height: "35px" }}
+                            onClick={() => { item?.quantity > 1 && setProductUpdateDetail({ cartItemId: item?._id, quantity: item?.quantity - 1 }) }}
+                          />
                           <input
                             type='number'
                             name={'quantity' + item?._id}
                             min={1}
-                            max={10}
+                            max={100}
                             className='form-control'
+                            style={{ width: "53px", height: "35px", borderTop: "none", borderBottom: "none", background: "transparent" }}
                             id={"cart" + item?._id}
                             value={item?.quantity}
-                            onChange={(e) => { setProductUpdateDetail({ cartItemId: item?._id, quantity: e.target.value }) }}
-                          // style={{ width: '70px' }}
+                            onChange={(e) => { setProductUpdateDetail({ cartItemId: item?._id, quantity: parseInt(e.target.value, 10) }) }}
+                            inputMode="numeric"
+                            pattern="[0-9]*"
+                          />
+                          <AiOutlinePlus
+                            style={{ width: "25px", height: "35px" }}
+                            onClick={() => { item?.quantity < 100 && setProductUpdateDetail({ cartItemId: item?._id, quantity: item?.quantity + 1 }) }}
                           />
                         </div>
                         <div>
                           <AiFillDelete onClick={() => { deleteACartProduct(item?._id) }} className='text-danger' />
                         </div>
                       </div>
-                      <div className='cart-col-mobile-totalprice gap-2 align-items-center'>
+                      <div className='cart-col-mobile-totalprice d-flex gap-2 align-items-center'>
                         <h5 className='price mb-0' style={{ color: item?.priceAfterDiscount !== item?.price ? "gray" : "red" }}>
                           {
                             item?.priceAfterDiscount !== item?.price ? <del>
@@ -255,7 +265,7 @@ const Cart = () => {
                           )
                         }
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                 )
               })
