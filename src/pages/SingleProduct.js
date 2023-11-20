@@ -93,7 +93,7 @@ const SingleProduct = () => {
     let data = [];
     for (let index = 0; index < productsState?.length; index++) {
       const element = productsState[index];
-      if (element?.tags === 'popular' && element?.category === productState?.category && element?._id !== productState?._id) {
+      if (element?.tags === 'Phổ biến' && element?.category === productState?.category && element?._id !== productState?._id) {
         data.push(element)
       }
       setPopularProduct(data);

@@ -290,7 +290,7 @@ const Home = () => {
           </div>
           {
             productState && productState?.map((item, index) => {
-              if (item.tags === "featured") {
+              if (item.tags === "Nổi bật") {
                 let priceAfterDiscount = item?.price;
                 let discountPercent = 0;
                 let isShowPriceDiscount = false;
@@ -344,7 +344,7 @@ const Home = () => {
                             style={{ width: "100%", height: "100%" }}
 
                           />
-                          <img src={item?.images[1]?.url ? item?.images[0]?.url : watch}
+                          <img src={item?.images[1]?.url ? item?.images[1]?.url : watch}
                             className='img-fluid mx-auto'
                             alt='product image'
                             width={160}
