@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect } from "react";
@@ -7,7 +8,7 @@ import Meta from "../components/Meta";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBlogs } from '../features/blogs/blogSlice';
-import { addToWishlist, getAllProducts } from '../features/products/productSlice';
+import { addToWishlist, getAllProducts, getCategories } from '../features/products/productSlice';
 // import BlogCard from "../components/BlogCard";
 // import ProductCard from "../components/ProductCard";
 // import SpecialProduct from "../components/SpecialProduct";
@@ -23,14 +24,6 @@ import slider1 from '../images/slider1.webp';
 import slider2 from '../images/slider2.webp';
 import slider3 from '../images/slider3.webp';
 import slider4 from '../images/slider4.webp';
-
-import maylockhongkhi from '../images/may_loc_khong_khi_logo.webp';
-import quat from '../images/Quat_logo.webp';
-import denthongminh from '../images/den_thong_minh_logo.webp';
-import maychieu from '../images/May_chieu_logo.webp';
-import dogiadung from '../images/do_gia_dung_logo.webp';
-import tvbox from '../images/TVBox_logo.webp';
-
 
 // special product
 import wish from '../images/wish.svg';
@@ -48,6 +41,9 @@ import { getUserProductWishlist } from "../features/user/userSlice";
 
 
 const Home = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const arrImagesSlider = [slider1, slider2, slider3, slider4];
   const settings = {
     dots: true,
@@ -64,16 +60,13 @@ const Home = () => {
   const couponState = useSelector((state) => state.coupon?.coupons);
   const wishlistState = useSelector((state) => state?.auth?.wishlist?.wishlist);
   const addedWishlistState = useSelector((state) => state?.product?.addToWishlist);
-
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
+  const pCategoryState = useSelector((state) => state?.product?.pCategories);
 
   useEffect(() => {
     getBlogs();
     getProducts();
     dispatch(getAllCoupons());
+    dispatch(getCategories());
   }, [])
 
   useEffect(() => {
@@ -203,48 +196,19 @@ const Home = () => {
           </div>
           <div className="col-12">
             <div className="categories d-flex justify-content-between flex-wrap align-items-center">
-              <div
-                onClick={() => navigate("/product", { state: "Máy lọc không khí" })}
-                style={{ cursor: "pointer" }}
-              >
-                <img src={maylockhongkhi} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
-                <p style={{ fontWeight: "600", textAlign: "center" }}>Máy lọc không khí</p>
-              </div>
-              <div
-                onClick={() => navigate("/product", { state: "Quạt" })}
-                style={{ cursor: "pointer" }}
-              >
-                <img src={quat} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
-                <p style={{ fontWeight: "600", textAlign: "center" }}>Quạt</p>
-              </div>
-              <div
-                onClick={() => navigate("/product", { state: "Đèn thông minh" })}
-                style={{ cursor: "pointer" }}
-              >
-                <img src={denthongminh} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
-                <p style={{ fontWeight: "600", textAlign: "center" }}>Đèn thông minh</p>
-              </div>
-              <div
-                onClick={() => navigate("/product", { state: "Máy chiếu" })}
-                style={{ cursor: "pointer" }}
-              >
-                <img src={maychieu} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
-                <p style={{ fontWeight: "600", textAlign: "center" }}>Máy chiếu</p>
-              </div>
-              <div
-                onClick={() => navigate("/product", { state: "Đồ gia dụng" })}
-                style={{ cursor: "pointer" }}
-              >
-                <img src={dogiadung} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
-                <p style={{ fontWeight: "600", textAlign: "center" }}>Đồ gia dụng</p>
-              </div>
-              <div
-                onClick={() => navigate("/product", { state: "TV Box" })}
-                style={{ cursor: "pointer" }}
-              >
-                <img src={tvbox} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
-                <p style={{ fontWeight: "600", textAlign: "center" }}>TV Box</p>
-              </div>
+              {
+                pCategoryState && pCategoryState.map((item, index) => {
+                  return (
+                    <div key={index}
+                      onClick={() => navigate("/product", { state: item?.title })}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <img src={item?.images[0]?.url} alt="camera" className="d-block" style={{ height: "75px", margin: "0 auto 8px" }} />
+                      <p style={{ fontWeight: "600", textAlign: "center" }}>{item?.title}</p>
+                    </div>
+                  )
+                })
+              }
             </div>
           </div>
         </div>
