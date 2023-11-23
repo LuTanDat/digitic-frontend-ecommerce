@@ -59,6 +59,15 @@ a{
   color: var(--color-131921);
 }
 
+.hide-spinner::-webkit-inner-spin-button,
+.hide-spinner::-webkit-outer-spin-button { /*An nut tang giam mac dinh*/
+  -webkit-appearance: none;
+  margin: 0;
+}
+.hide-spinner{
+  text-align: center;
+}
+
 
 
 /*Header part */

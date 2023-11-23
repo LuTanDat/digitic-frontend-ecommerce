@@ -160,8 +160,14 @@ const Cart = () => {
                           name={'quantity' + item?._id}
                           min={1}
                           max={100}
-                          className='form-control'
-                          style={{ width: "53px", height: "35px", borderTop: "none", borderBottom: "none", background: "transparent" }}
+                          className='form-control hide-spinner'
+                          style={{
+                            width: "53px",
+                            height: "35px",
+                            borderTop: "none",
+                            borderBottom: "none",
+                            background: "transparent"
+                          }}
                           id={"cart" + item?._id}
                           value={item?.quantity}
                           onChange={(e) => { setProductUpdateDetail({ cartItemId: item?._id, quantity: parseInt(e.target.value, 10) }) }}
@@ -281,7 +287,7 @@ const Cart = () => {
                   <div className='d-flex flex-column align-items-end'>
                     <h4>{`Tổng tiền : ${userCartState?.length > 0 ? (totalAmount + deliveryPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}</h4>
                     <Link to={userCartState?.length > 0 ? '/checkout' : ""} className='button' style={{ backgroundColor: "#fd7e14" }}>
-                      Thanh toán
+                      Đặt hàng
                     </Link>
                   </div>
                 }

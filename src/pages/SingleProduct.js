@@ -332,7 +332,7 @@ const SingleProduct = () => {
                           name=''
                           min={1}
                           max={100}
-                          className='form-control'
+                          className='form-control hide-spinner'
                           style={{ width: "53px", height: "35px", borderTop: "none", borderBottom: "none", background: "transparent" }}
                           id=''
                           onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
@@ -554,7 +554,7 @@ const SingleProduct = () => {
       <Container class1="popular-wrapper home-wrapper-2 pt-2 pb-4 home-page">
         <div className="row">
           <div className="col-12">
-            <h3 className="section-heading mb-0">Sản phẩm phổ biến</h3>
+            <h3 className="section-heading mb-0">Sản phẩm tương tự</h3>
           </div>
         </div>
         <div className="row">

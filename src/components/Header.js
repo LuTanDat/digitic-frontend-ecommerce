@@ -31,7 +31,7 @@ const Header = () => {
   const navigate = useNavigate();
   const cartState = useSelector((state) => state?.auth?.cartProducts);
   const authState = useSelector((state) => state?.auth);
-  const productState = useSelector((state) => state?.product?.products);
+  const productState = useSelector((state) => state?.product?.products?.product);
   const [productOpt, setProductOpt] = useState([]); // de search trong mang nay
   const [paginate, setPaginate] = useState(true);
   const [total, setTotal] = useState(null);
@@ -49,7 +49,7 @@ const Header = () => {
 
   useEffect(() => {
     let data = [];
-    for (let index = 0; index < productState.length; index++) {
+    for (let index = 0; index < productState?.length; index++) {
       const element = productState[index];
       data.push({
         id: index,
