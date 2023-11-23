@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsLinkedin, BsGithub, BsYoutube, BsInstagram, BsFacebook } from "react-icons/bs";
@@ -40,8 +42,8 @@ const Footer = () => {
               <div className='d-flex align-items-center justify-content-center gap-30 footer-mobile-head'>
                 <h4 className='text-white text-center mb-0'>Liên lạc với chúng tôi</h4>
                 <div className='social-icons d-flex align-items-center gap-15 justify-content-center'>
-                  <a href='#' className='text-white'><BsFacebook className='fs-4' /></a>
-                  <a href='#' className='text-white'><BsInstagram className='fs-4' /></a>
+                  <a href='https://www.facebook.com/profile.php?id=100032169791462&mibextid=ZbWKwL' target="_blank" className='text-white'><BsFacebook className='fs-4' /></a>
+                  <a href='https://instagram.com/lutandat1112?igshid=OGQ5ZDc2ODk2ZA==' target="_blank" className='text-white'><BsInstagram className='fs-4' /></a>
                 </div>
               </div>
             </div>
