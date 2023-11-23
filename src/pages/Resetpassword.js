@@ -10,7 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetPassword } from '../features/user/userSlice';
 
 let passwordSchema = Yup.object().shape({
-  password: Yup.string().required("Mật khẩu không được để trống"),
+  password: Yup.string()
+    .required("Mật khẩu không được để trống")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Mật khẩu phải có ít nhất 8 ký tự, bao gồm ký tự hoa, ký tự thường, số và ký tự đặc biệt"
+    ),
 });
 
 const Resetpassword = () => {

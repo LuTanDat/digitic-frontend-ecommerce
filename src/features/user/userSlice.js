@@ -282,7 +282,7 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         if (state.isSuccess === true && action.payload.message === "Updated Successfully") {
           state.updatedPassword = action.payload.updatedPassword;
-          toast.success("Cập nhật mật khẩu thành công");
+          toast.success("Đổi mật khẩu thành công");
         } else {
           toast.warning("Mật khẩu cũ không chính xác!");
         }

@@ -16,7 +16,12 @@ let profileSchema = Yup.object().shape({
   email: Yup.string()
     .email("Email không khả dụng")
     .required("Email không được để trống"),
-  mobile: Yup.string().required("Số điện thoại không được để trống"),
+  mobile: Yup.string()
+    .required("Số điện thoại không được để trống")
+    .matches(
+      /^(84|0[3|5|7|8|9])+([0-9]{8,9})$/,
+      "Số điện thoại không hợp lệ"
+    ),
 });
 
 const Profile = () => {

@@ -12,7 +12,12 @@ import { changePassword, resetState } from '../features/user/userSlice';
 
 let Schema = Yup.object().shape({
   oldPassword: Yup.string().required("Mật khẩu cũ không được để trống"),
-  newPassword: Yup.string().required("Mật khẩu mới không được để trống"),
+  newPassword: Yup.string()
+    .required("Mật khẩu mới không được để trống")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Mật khẩu phải có ít nhất 8 ký tự, bao gồm ký tự hoa, ký tự thường, số và ký tự đặc biệt"
+    ),
 });
 
 const ChangePassword = () => {

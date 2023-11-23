@@ -16,8 +16,18 @@ let signUpSchema = Yup.object().shape({
   email: Yup.string()
     .email("Email không khả dụng")
     .required("Email không được để trống"),
-  mobile: Yup.string().required("Số điện thoại không được để trống"),
-  password: Yup.string().required("Mật khẩu không được để trống"),
+  mobile: Yup.string()
+    .required("Số điện thoại không được để trống")
+    .matches(
+      /^(84|0[3|5|7|8|9])+([0-9]{8,9})$/,
+      "Số điện thoại không hợp lệ"
+    ),
+  password: Yup.string()
+    .required("Mật khẩu không được để trống")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Mật khẩu phải có ít nhất 8 ký tự, bao gồm ký tự hoa, ký tự thường, số và ký tự đặc biệt"
+    ),
 });
 
 const Signup = () => {

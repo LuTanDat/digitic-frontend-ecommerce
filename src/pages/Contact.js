@@ -19,7 +19,12 @@ let contactSchema = Yup.object().shape({
   email: Yup.string()
     .email("Email không khả dụng")
     .required("Email không được để trống"),
-  mobile: Yup.string().required("Mobile không được để trống"),
+  mobile: Yup.string()
+    .required("Mobile không được để trống")
+    .matches(
+      /^(84|0[3|5|7|8|9])+([0-9]{8,9})$/,
+      "Số điện thoại không hợp lệ"
+    ),
   comment: Yup.string().required("Comment không được để trống"),
 });
 
