@@ -82,12 +82,12 @@ const Header = () => {
             <div className='col-2 d-block d-md-none fs-2 text-white'>
               <label htmlFor='mobile-search-checkbox'><BsSearch /></label>
             </div>
-            <div className='col-xl-2 col-md-3 col-4 p-0 ps-md-3 pe-md-3 ps-xl-5 pe-xl-4'>
+            <div className='col-xl-2 col-md-3 col-4 p-0 ps-md-3 pe-md-3 ps-xl-5 pe-xl-4 logo-website'>
               <Link to='/' style={{ width: "100%" }}>
                 <img src={logo} alt='logo' style={{ width: "100%", height: "48px", maxWidth: "180px" }} />
               </Link>
             </div>
-            <div className='col-xl-5 d-none d-xl-block'>
+            <div className='col-xl-5 d-none d-xl-block navigate-header-left'>
               <div className='menu-links hide-on-mobile-tablet'>
                 <div className='d-flex align-items-center gap-15'>
                   <NavLink to="/"
@@ -268,7 +268,7 @@ const Header = () => {
                   </Link>
                 </div> */}
             </div>
-            <div className='col-xl-2 col-md-3 col-4'>
+            <div className='col-xl-2 col-md-3 col-4 navigate-header-right'>
               <div className='header-upper-links d-flex align-items-center justify-content-center gap-3'>
                 <div>
                   <NavLink to='/wishlist' className='d-flex align-items-center gap-10 text-white'>
@@ -287,7 +287,7 @@ const Header = () => {
               </div>
             </div>
             <div className='col-xl-1 d-none d-xl-block p-0'>
-              <div className='my-account hide-on-mobile-tablet'>
+              <div className='my-profile hide-on-mobile-tablet'>
                 <NavLink to={authState?.user === null ? '/login' : '/my-profile'} className='d-flex align-items-center gap-1 text-white'>
                   <img src={user} alt='user' />
                   {
