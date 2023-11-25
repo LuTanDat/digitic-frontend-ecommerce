@@ -10,7 +10,7 @@ const Introduce = () => {
     <>
       <Meta title="Giới thiệu" />
       <BreadCrumb title="Giới thiệu" />
-      <Container class1="contact-wrapper home-wrapper-2 py-5">
+      <Container class1="contact-wrapper home-wrapper-2 pt-3 pb-4">
         <div className="row">
           <div className="col-12">
             <header className="p-2 bg-primary text-white text-center">

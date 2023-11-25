@@ -31,6 +31,7 @@ const Product = () => {
     limit: 10
   })
 
+  console.log('panigate', panigate);
 
   const productState = useSelector((state) => state?.product?.products);
   const pCategoryState = useSelector((state) => state?.product?.pCategories);
@@ -87,7 +88,7 @@ const Product = () => {
     <div>
       <Meta title='Our Store' />
       <BreadCrumb title='Sản phẩm' />
-      <Container class1='store-wrapper home-wrapper-2 py-5'>
+      <Container class1='store-wrapper home-wrapper-2 py-4'>
         <div className='row'>
           <div className='col-lg-3'>
             <div className='d-none d-lg-block'>

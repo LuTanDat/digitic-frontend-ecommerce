@@ -31,10 +31,12 @@ const Cart = () => {
   const [totalAmount, setTotalAmount] = useState(null);
   const dispatch = useDispatch();
   const userCartState = useSelector((state) => state?.auth?.cartProducts);
+
   useEffect(() => {
     dispatch(resetState())
     dispatch(getUserCart(config2));
   }, [])
+
   useEffect(() => {
     console.log("productUpdateDetail?.quantity", productUpdateDetail?.quantity);
     if (productUpdateDetail !== null) {
@@ -46,7 +48,7 @@ const Cart = () => {
       ));
       setTimeout(() => {
         dispatch(getUserCart(config2));
-      }, 200)
+      }, 300)
     }
   }, [productUpdateDetail])
 
@@ -93,7 +95,7 @@ const Cart = () => {
     <>
       <Meta title={'Cart'} />
       <BreadCrumb title='Giỏ hàng' />
-      <Container class1='cart-wrapper home-wrapper-2 py-5'>
+      <Container class1='cart-wrapper home-wrapper-2 py-4'>
         <div className='row'>
           <div className='col-12'>
             <div className='p-2 mb-3' style={{ border: "1px solid rgb(159 150 150)", borderRadius: "10px" }}>
@@ -125,7 +127,7 @@ const Cart = () => {
                         <p className='cart-data-color d-flex gap-3'>
                           Color:
                           <ul className='colors ps-0'>
-                            <li style={{ backgroundColor: item?.color }}></li>
+                            <li style={{ backgroundColor: item?.color, border: "1px solid #333" }}></li>
                           </ul>
                         </p>
                       </div>

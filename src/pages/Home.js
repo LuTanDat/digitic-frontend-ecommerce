@@ -189,7 +189,7 @@ const Home = () => {
           </div> */}
         </div>
       </Container>
-      <Container class1="home-wrapper-2 py-5 home-page">
+      <Container class1="home-wrapper-2 py-3 home-page">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Danh mục sản phẩm</h3>
@@ -213,7 +213,7 @@ const Home = () => {
           </div>
         </div>
       </Container>
-      <Container class1="marquee-wrapper py-5 home-wrapper-2 home-page">
+      <Container class1="marquee-wrapper py-3 home-wrapper-2 home-page">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Thương hiệu nổi bật</h3>
@@ -247,10 +247,10 @@ const Home = () => {
           </div>
         </div>
       </Container>
-      <Container class1="featured-wrapper py-5 home-wrapper-2 home-page">
+      <Container class1="featured-wrapper pt-3 pb-4 home-wrapper-2 home-page">
         <div className="row">
           <div className="col-12">
-            <h3 className="section-heading">Sản phẩm nổi bật</h3>
+            <h3 className="section-heading mb-0">Sản phẩm nổi bật</h3>
           </div>
           {
             productState && productState?.map((item, index) => {

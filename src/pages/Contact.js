@@ -49,7 +49,7 @@ const Contact = () => {
     <>
       <Meta title="Liên hệ" />
       <BreadCrumb title="Liên hệ" />
-      <Container class1="contact-wrapper home-wrapper-2 py-5">
+      <Container class1="contact-wrapper home-wrapper-2 pt-3 pb-4">
         <div className="row">
           <div className="col-12">
             <iframe
@@ -62,7 +62,7 @@ const Contact = () => {
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </div>
-          <div className="col-12 mt-5">
+          <div className="col-12 mt-3">
             <div className="contact-inner-wrapper d-flex justify-content-between">
               <div>
                 <h3 className="contact-title mb-4">Góp ý</h3>
