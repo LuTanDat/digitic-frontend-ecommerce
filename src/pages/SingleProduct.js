@@ -60,6 +60,7 @@ const SingleProduct = () => {
   const orderState = useSelector((state) => state?.auth?.getOrderedProduct?.orders);
 
 
+
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     dispatch(getACoupon(getProductId));
@@ -342,7 +343,15 @@ const SingleProduct = () => {
                         />
                         <AiOutlinePlus
                           style={{ width: "25px", height: "35px" }}
-                          onClick={() => { quantity < 100 && setQuantity(quantity + 1) }}
+                          onClick={() => {
+                            if (quantity >= 100) {
+                              toast.error("Chọn tối đa là 100 sản phẩm.");
+                            } else if (quantity < 100 && quantity >= productState?.quantity) {
+                              toast.warning("Không đủ số lượng sản phẩm trong hệ thống.");
+                            } else {
+                              setQuantity(quantity + 1);
+                            }
+                          }}
                         />
                       </div>
                     </>

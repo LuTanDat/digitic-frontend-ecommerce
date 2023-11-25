@@ -379,7 +379,12 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.updatedCartProduct = action.payload;
         if (state.isSuccess === true) {
-          toast.success("Cập nhật số lượng thành công!");
+          if (action.payload?.message === 'SUCCESS') {
+            toast.success("Cập nhật số lượng thành công!");
+          } else
+            if (action.payload?.message === 'ERR') {
+              toast.warning("Không đủ số lượng trong hệ thống!");
+            }
         }
       })
       .addCase(updateCartProduct.rejected, (state, action) => {
@@ -399,14 +404,12 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-
+        state.orderedProduct = action.payload;
         if (state.isSuccess === true) {
           if (action.payload?.message === 'SUCCESS') {
-            state.orderedProduct = action.payload;
             toast.success("Đặt hàng thành công!");
           } else
             if (action.payload?.message === 'ERR') {
-              state.orderedProduct = action.payload;
               {
                 action.payload?.product?.map((item) => {
                   toast.warning(`Chỉ còn ${item.quantity} sản phẩm ${item.title} trong hệ thống`);

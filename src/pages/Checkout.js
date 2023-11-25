@@ -97,9 +97,9 @@ const Checkout = () => {
       }
       setTimeout(() => {
         dispatch(createAnOrder({
-          itemsPrice: totalAmount,
+          itemsPrice: totalAmount,// loc tong gia trong cart
           shippingPrice: deliveryPrice,
-          totalPrice: totalAmount + deliveryPrice, // loc tong gia trong cart
+          totalPrice: totalAmount + deliveryPrice,
           orderItems: cartProductState, // loc tung sp trong cart
           paymentMethod: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : paymentMethod === "paypal-card" ? "Thanh toán bằng Paypal" : "",
           shippingInfo: values,
@@ -113,9 +113,9 @@ const Checkout = () => {
   const onSuccessPaypal = (details, data) => {
     // console.log("details, data: ", details, data);
     dispatch(createAnOrder({
-      itemsPrice: totalAmount,
+      itemsPrice: totalAmount,// loc tong gia trong cart
       shippingPrice: deliveryPrice,
-      totalPrice: totalAmount + deliveryPrice, // loc tong gia trong cart
+      totalPrice: totalAmount + deliveryPrice,
       orderItems: cartProductState, // loc tung sp trong cart
       paymentMethod: paymentMethod === "COD" ? "Thanh toán khi nhận hàng" : paymentMethod === "paypal-card" ? "Thanh toán bằng Paypal" : "",
       shippingInfo: formik.values,
