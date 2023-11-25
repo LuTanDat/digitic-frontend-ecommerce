@@ -71,7 +71,7 @@ const OrderDetail = () => {
           <div className='col-12 mb-3 mt-2 text-center'>
             <StepOrderComponent items={itemsOrderStatus} current={orderStatus} />
           </div>
-          <div className="col-12 d-flex mb-4 justify-content-around align-items-baseline info-order-detail-mobile">
+          <div className="col-12 d-flex mb-4 justify-content-around align-items-center info-order-detail-mobile">
             <div style={{ border: "1px solid #857575cc", borderRadius: "10px", padding: "15px", backgroundColor: "white", marginTop: "16px" }}>
               <h5>Địa chỉ nhận hàng</h5>
               <p>{`Người nhận: ${aOrderState?.shippingInfo?.lastName} ${aOrderState?.shippingInfo?.firstName}`}</p>
@@ -153,9 +153,18 @@ const OrderDetail = () => {
           </div>
 
           <div className='col-12 my-3 text-end'>
-            <p>{`Tổng tiền hàng: ${aOrderState?.itemsPrice ? (aOrderState?.itemsPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}</p>
-            <p>{`Phí vận chuyển: ${aOrderState?.shippingPrice ? (aOrderState?.shippingPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}</p>
-            <b>{`Thành tiền: ${aOrderState?.totalPrice ? (aOrderState?.totalPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}`}</b>
+            <div className='d-flex justify-content-end gap-3'>
+              <p>Tổng tiền hàng:</p>
+              <p style={{ minWidth: 70 }}>{aOrderState?.itemsPrice ? (aOrderState?.itemsPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}</p>
+            </div>
+            <div className='d-flex justify-content-end gap-3'>
+              <p>Phí vận chuyển:</p>
+              <p style={{ minWidth: 70 }}>{aOrderState?.shippingPrice ? (aOrderState?.shippingPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}</p>
+            </div>
+            <div className='d-flex justify-content-end gap-3'>
+              <b>Thành tiền:</b>
+              <b style={{ minWidth: 70 }}>{aOrderState?.totalPrice ? (aOrderState?.totalPrice).toLocaleString("vi-VN", { style: "currency", currency: "VND" }) : "0 đ"}</b>
+            </div>
           </div>
           <div className='col-12 text-center'>Cảm ơn quý khách đã tin tưởng và ủng hộ. Xin cảm ơn!</div>
         </div>
