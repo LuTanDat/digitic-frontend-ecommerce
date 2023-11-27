@@ -169,12 +169,14 @@ const Profile = () => {
                     </div>
                   </div>
                   {edit === false &&
-                    <button
-                      type="submit"
-                      className="btn btn-primary edit-profile"
-                    >
-                      Lưu lại
-                    </button>
+                    <div className='mt-3 d-flex justify-content-center align-items-center gap-15'>
+                      <button
+                        type="submit"
+                        className="button signIn border-0 edit-profile"
+                      >
+                        Lưu lại
+                      </button>
+                    </div>
                   }
                 </form>
               </div>
