@@ -43,7 +43,7 @@ const Footer = () => {
                 <h4 className='text-white text-center mb-0'>Liên lạc với chúng tôi</h4>
                 <div className='social-icons d-flex align-items-center gap-15 justify-content-center'>
                   <a href='https://www.facebook.com/profile.php?id=100032169791462&mibextid=ZbWKwL' target="_blank" className='text-white'><BsFacebook className='fs-4' /></a>
-                  <a href='https://instagram.com/lutandat1112?igshid=OGQ5ZDc2ODk2ZA==' target="_blank" className='text-white'><BsInstagram className='fs-4' /></a>
+                  <a href='https://www.instagram.com/lutandat1112/?igshid=OGQ5ZDc2ODk2ZA%3D%3D' target="_blank" className='text-white'><BsInstagram className='fs-4' /></a>
                 </div>
               </div>
             </div>
