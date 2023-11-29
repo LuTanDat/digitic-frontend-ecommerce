@@ -4,7 +4,7 @@ import { BsSearch } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import { getAProduct } from '../features/products/productSlice';
+import { getAProduct, getAllProducts } from '../features/products/productSlice';
 import { getUserCart } from '../features/user/userSlice';
 import { FaBars } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -38,6 +38,7 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(getUserCart(config2));
+    dispatch(getAllProducts());
   }, [])
   // useEffect(() => {
   //   let sum = 0;
