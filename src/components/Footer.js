@@ -77,17 +77,17 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <footer className='py-2'>
+      {/* <footer className='py-2'>
         <div className="container-xxl">
           <div className='row'>
             <div className='col-12'>
               <p className='text-center mb-0 text-white footer-mobile-second'>
-                &copy; {new Date().getFullYear()}; Bản quyền thuộc về Lư Tấn Đạt {/* Powered by Developer's Lu Tan Dat */}
+                &copy; {new Date().getFullYear()}; Bản quyền thuộc về Lư Tấn Đạt Powered by Developer's Lu Tan Dat
               </p>
             </div>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </>
   )
 }
