@@ -8,6 +8,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetPassword } from '../features/user/userSlice';
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useState } from 'react';
+
 
 let passwordSchema = Yup.object().shape({
   password: Yup.string()
@@ -21,6 +24,9 @@ let passwordSchema = Yup.object().shape({
 const Resetpassword = () => {
   const location = useLocation();
   const getToken = location.pathname.split("/")[2];
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -52,17 +58,29 @@ const Resetpassword = () => {
                 onSubmit={formik.handleSubmit}
                 className='d-flex flex-column gap-15'
               >
-                <CustomInput
-                  type='password'
-                  name='password'
-                  placeholder='Password'
-                  value={formik.values.password}
-                  onChange={formik.handleChange("password")}
-                  onBlur={formik.handleBlur("password")}
-                />
-                <div className="error text-center">
-                  {formik.touched.password && formik.errors.password}
+                <div className='custom-input-password'>
+                  <CustomInput
+                    type={isShowPassword ? "text" : "password"}
+                    name='password'
+                    placeholder='Password'
+                    value={formik.values.password}
+                    onChange={formik.handleChange("password")}
+                    onBlur={formik.handleBlur("password")}
+                  />
+                  <div className="error text-center">
+                    {formik.touched.password && formik.errors.password}
+                  </div>
+                  <span
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                  >
+                    {
+                      isShowPassword
+                        ? <FaRegEye />
+                        : <FaRegEyeSlash />
+                    }
+                  </span>
                 </div>
+
                 {/* <CustomInput
                   type='password'
                   name='confpassword'

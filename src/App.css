@@ -68,6 +68,16 @@ a{
   text-align: center;
 }
 
+.custom-input-password {
+  position: relative;
+}
+.custom-input-password span {
+  position: absolute;
+  font-size: 22px;
+  right: 12px;
+  top: 6px;
+  cursor: pointer;
+}
 
 
 /*Header part */

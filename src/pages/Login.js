@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import BreadCrumb from '../components/BreadCrumb';
 import Meta from '../components/Meta'; // thay doi tieu de
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -9,18 +9,26 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../features/user/userSlice';
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 let loginSchema = Yup.object().shape({
   email: Yup.string()
     .email("Email không khả dụng")
     .required("Email không được để trống"),
-  password: Yup.string().required("Password không được để trống"),
+  password: Yup.string()
+    .required("Mật khẩu không được để trống")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Mật khẩu phải có ít nhất 8 ký tự, bao gồm ký tự hoa, ký tự thường, số và ký tự đặc biệt"
+    ),
 });
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const authState = useSelector((state) => state.auth);
 
@@ -68,16 +76,27 @@ const Login = () => {
                 <div className="error">
                   {formik.touched.email && formik.errors.email}
                 </div>
-                <CustomInput
-                  type='password'
-                  name='password'
-                  placeholder='Mật khẩu'
-                  value={formik.values.password}
-                  onChange={formik.handleChange("password")}
-                  onBlur={formik.handleBlur("password")}
-                />
-                <div className="error">
-                  {formik.touched.password && formik.errors.password}
+                <div className='custom-input-password'>
+                  <CustomInput
+                    type={isShowPassword ? "text" : "password"}
+                    name='password'
+                    placeholder='Mật khẩu'
+                    value={formik.values.password}
+                    onChange={formik.handleChange("password")}
+                    onBlur={formik.handleBlur("password")}
+                  />
+                  <div className="error">
+                    {formik.touched.password && formik.errors.password}
+                  </div>
+                  <span
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                  >
+                    {
+                      isShowPassword
+                        ? <FaRegEye />
+                        : <FaRegEyeSlash />
+                    }
+                  </span>
                 </div>
                 <div>
                   <Link to='/forgot-password'>Quên mật khẩu?</Link>

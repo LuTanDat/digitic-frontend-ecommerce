@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../features/user/userSlice';
 import { useEffect } from 'react';
+import { useState } from 'react';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 let signUpSchema = Yup.object().shape({
   firstName: Yup.string().required("Tên không được để trống"),
@@ -34,6 +36,8 @@ const Signup = () => {
   const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -111,17 +115,29 @@ const Signup = () => {
                 <div className="error">
                   {formik.touched.mobile && formik.errors.mobile}
                 </div>
-                <CustomInput
-                  type='password'
-                  name='password'
-                  placeholder='Mật khẩu'
-                  value={formik.values.password}
-                  onChange={formik.handleChange("password")}
-                  onBlur={formik.handleBlur("password")}
-                />
-                <div className="error">
-                  {formik.touched.password && formik.errors.password}
+                <div className='custom-input-password'>
+                  <CustomInput
+                    type={isShowPassword ? "text" : "password"}
+                    name='password'
+                    placeholder='Mật khẩu'
+                    value={formik.values.password}
+                    onChange={formik.handleChange("password")}
+                    onBlur={formik.handleBlur("password")}
+                  />
+                  <div className="error">
+                    {formik.touched.password && formik.errors.password}
+                  </div>
+                  <span
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                  >
+                    {
+                      isShowPassword
+                        ? <FaRegEye />
+                        : <FaRegEyeSlash />
+                    }
+                  </span>
                 </div>
+
                 <div>
                   <div className='d-flex justify-content-center align-items-center gap-15'>
                     <button className='button border-0 signIn' type='submit'>Đăng ký</button>

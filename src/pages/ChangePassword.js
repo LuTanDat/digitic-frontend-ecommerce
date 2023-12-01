@@ -9,6 +9,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { changePassword, resetState } from '../features/user/userSlice';
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useState } from 'react';
+
 
 let Schema = Yup.object().shape({
   oldPassword: Yup.string().required("Mật khẩu cũ không được để trống"),
@@ -23,6 +26,9 @@ let Schema = Yup.object().shape({
 const ChangePassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [isShowPasswordOld, setIsShowPasswordOld] = useState(false);
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const authState = useSelector((state) => state.auth);
 
@@ -59,27 +65,50 @@ const ChangePassword = () => {
                 onSubmit={formik.handleSubmit}
                 className='d-flex flex-column gap-15'
               >
-                <CustomInput
-                  type='password'
-                  name='oldPassword'
-                  placeholder='Mật khẩu cũ'
-                  value={formik.values.oldPassword}
-                  onChange={formik.handleChange("oldPassword")}
-                  onBlur={formik.handleBlur("oldPassword")}
-                />
-                <div className="error">
-                  {formik.touched.oldPassword && formik.errors.oldPassword}
+                <div className='custom-input-password'>
+                  <CustomInput
+                    type={isShowPasswordOld ? "text" : "password"}
+                    name='oldPassword'
+                    placeholder='Mật khẩu cũ'
+                    value={formik.values.oldPassword}
+                    onChange={formik.handleChange("oldPassword")}
+                    onBlur={formik.handleBlur("oldPassword")}
+                  />
+                  <div className="error">
+                    {formik.touched.oldPassword && formik.errors.oldPassword}
+                  </div>
+                  <span
+                    onClick={() => setIsShowPasswordOld(!isShowPasswordOld)}
+                  >
+                    {
+                      isShowPasswordOld
+                        ? <FaRegEye />
+                        : <FaRegEyeSlash />
+                    }
+                  </span>
                 </div>
-                <CustomInput
-                  type='password'
-                  name='newPassword'
-                  placeholder='Mật khẩu mới'
-                  value={formik.values.newPassword}
-                  onChange={formik.handleChange("newPassword")}
-                  onBlur={formik.handleBlur("newPassword")}
-                />
-                <div className="error">
-                  {formik.touched.newPassword && formik.errors.newPassword}
+
+                <div className='custom-input-password'>
+                  <CustomInput
+                    type={isShowPassword ? "text" : "password"}
+                    name='newPassword'
+                    placeholder='Mật khẩu mới'
+                    value={formik.values.newPassword}
+                    onChange={formik.handleChange("newPassword")}
+                    onBlur={formik.handleBlur("newPassword")}
+                  />
+                  <div className="error">
+                    {formik.touched.newPassword && formik.errors.newPassword}
+                  </div>
+                  <span
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                  >
+                    {
+                      isShowPassword
+                        ? <FaRegEye />
+                        : <FaRegEyeSlash />
+                    }
+                  </span>
                 </div>
                 <div>
                   <Link to='/forgot-password'>Quên mật khẩu?</Link>
