@@ -13,6 +13,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { createQuery } from "../features/contact/contactSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 let contactSchema = Yup.object().shape({
   name: Yup.string().required("Name không được để trống"),
@@ -30,6 +31,8 @@ let contactSchema = Yup.object().shape({
 
 const Contact = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const userState = useSelector((state) => state?.auth?.user);
 
@@ -42,7 +45,12 @@ const Contact = () => {
     },
     validationSchema: contactSchema,
     onSubmit: values => {
-      dispatch(createQuery(values));
+      if (!userState?._id) {
+        navigate('/login', { state: location.pathname })// ben login lay trong location.state, de biet duong quay ve day thay vi chuyen den trang chu
+      }
+      else {
+        dispatch(createQuery(values));
+      }
     },
   });
   return (

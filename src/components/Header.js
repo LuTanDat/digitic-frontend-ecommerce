@@ -29,11 +29,9 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const cartState = useSelector((state) => state?.auth?.cartProducts);
   const authState = useSelector((state) => state?.auth);
   const productState = useSelector((state) => state?.product?.products?.product);
-
   const [productOpt, setProductOpt] = useState([]); // de search trong mang nay
   const [paginate, setPaginate] = useState(true);
   const [total, setTotal] = useState(null);
@@ -42,6 +40,13 @@ const Header = () => {
     dispatch(getUserCart(config2));
     dispatch(getAllProducts());
   }, [])
+
+  // useEffect(() => {
+  //   if (authState.user !== null) {
+  //     dispatch(getUserCart(config2));
+  //   }
+  // }, [authState.user])
+
   // useEffect(() => {
   //   let sum = 0;
   //   for (let index = 0; index < cartState?.length; index++) {
