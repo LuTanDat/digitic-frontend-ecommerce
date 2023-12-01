@@ -126,6 +126,16 @@ const Orders = () => {
                                   Hủy đơn hàng
                                 </button>
                               }
+                              {
+                                item?.orderStatus === "Đang giao" &&
+                                <button
+                                  className='p-1'
+                                  style={{ border: "1px solid #9255FD", borderRadius: "4px", color: "green" }}
+                                  onClick={() => { dispatch(updateAOrder({ id: item?._id, status: "Đã nhận hàng" })) }}
+                                >
+                                  Đã nhận hàng
+                                </button>
+                              }
                             </td>
                           </tr>
                         </tbody>
