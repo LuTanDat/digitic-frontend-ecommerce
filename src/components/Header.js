@@ -37,15 +37,15 @@ const Header = () => {
   const [total, setTotal] = useState(null);
 
   useEffect(() => {
-    dispatch(getUserCart(config2));
     dispatch(getAllProducts());
   }, [])
 
-  // useEffect(() => {
-  //   if (authState.user !== null) {
-  //     dispatch(getUserCart(config2));
-  //   }
-  // }, [authState.user])
+  useEffect(() => {
+    if (authState.user !== null) {
+      dispatch(getUserCart(config2));
+    }
+  }, [authState.user]);
+
 
   // useEffect(() => {
   //   let sum = 0;
