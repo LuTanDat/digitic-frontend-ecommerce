@@ -41,11 +41,14 @@ function App() {
 
   useEffect(() => {
     const refresh = async () => {
-      const refreshedToken = await dispatch(refreshToken(userState?.refreshToken));
-      // refreshedToken là refreshToken mới được trả về sau khi dispatch refreshToken action in Redux
+      // Kiểm tra nếu userState không phải là null
+      if (userState) {
+        const refreshedToken = await dispatch(refreshToken(userState?.refreshToken));
+        // refreshedToken là refreshToken mới được trả về sau khi dispatch refreshToken action in Redux
+      }
     };
     refresh();
-  }, [])
+  }, [userState])
 
   const handleDecoded = () => {
     let storageData = userState?.token || (JSON.parse(localStorage.getItem('customer')))?.token;
