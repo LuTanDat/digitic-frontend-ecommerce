@@ -62,6 +62,9 @@ const SingleProduct = () => {
 
 
   useEffect(() => {
+    // Scroll đến đầu trang
+    window.scrollTo(0, 0);
+
     dispatch(getAProduct(getProductId));
     dispatch(getACoupon(getProductId));
     dispatch(getUserCart(config2));
