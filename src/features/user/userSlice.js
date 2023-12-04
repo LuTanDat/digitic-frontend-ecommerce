@@ -548,7 +548,7 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
         if (state.isError === true) {
-          toast.error("Có lỗi xảy ra!")
+          toast.error("Email không tồn tại trong hệ thống!")
         }
       })
 
