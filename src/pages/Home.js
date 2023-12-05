@@ -41,6 +41,18 @@ import { getUserProductWishlist } from "../features/user/userSlice";
 
 
 const Home = () => {
+  const getTokenFromLocalStorage = localStorage.getItem("customer")
+    ? JSON.parse(localStorage.getItem("customer"))
+    : null;
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+        }`,
+      Accept: "application/json",
+    },
+  };
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -80,8 +92,12 @@ const Home = () => {
     dispatch(getAllProducts());
   }
 
+  useEffect(() => {
+    dispatch(getUserProductWishlist(config2));
+  }, [addedWishlistState])
+
   const addToWishList = (id) => {
-    dispatch(addToWishlist(id));
+    dispatch(addToWishlist({ id, config2 }));
   }
 
   return (
