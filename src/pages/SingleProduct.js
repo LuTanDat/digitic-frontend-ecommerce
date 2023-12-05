@@ -293,10 +293,15 @@ const SingleProduct = () => {
                     <p className='mb-0'>{`${productState?.ratings?.length} đánh giá`}</p>
                   </div>
                   {
-                    alreadyRating && (
+                    alreadyRating ? (
                       <div>
                         <a href='#review' className='review-btn text-decoration-underline'>Viết đánh giá</a>
-                      </div>)
+                      </div>
+                    ) : (
+                      <div>
+                        <a href='#review' className='review-btn text-decoration-underline'>Xem đánh giá</a>
+                      </div>
+                    )
                   }
                 </div>
                 <div className='d-flex'>
