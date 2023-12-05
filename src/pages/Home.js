@@ -55,6 +55,7 @@ const Home = () => {
     autoplaySpeed: 1500
   };
 
+  const authState = useSelector((state) => state?.auth);
   const blogState = useSelector((state) => state?.blog?.blogs);
   const productState = useSelector((state) => state?.product?.products?.product);
   const couponState = useSelector((state) => state.coupon?.coupons);
@@ -62,16 +63,13 @@ const Home = () => {
   const addedWishlistState = useSelector((state) => state?.product?.addToWishlist);
   const pCategoryState = useSelector((state) => state?.product?.pCategories);
 
+
   useEffect(() => {
     getBlogs();
     getProducts();
     dispatch(getAllCoupons());
     dispatch(getCategories());
   }, [])
-
-  useEffect(() => {
-    dispatch(getUserProductWishlist());
-  }, [addedWishlistState])
 
 
   const getBlogs = () => {

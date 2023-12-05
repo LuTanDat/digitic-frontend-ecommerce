@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { getAProduct, getAllProducts } from '../features/products/productSlice';
-import { getUserCart } from '../features/user/userSlice';
+import { getUserCart, getUserProductWishlist } from '../features/user/userSlice';
 import { FaBars } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 
@@ -36,6 +36,7 @@ const Header = () => {
   const [paginate, setPaginate] = useState(true);
   const [total, setTotal] = useState(null);
 
+
   useEffect(() => {
     dispatch(getAllProducts());
   }, [])
@@ -43,6 +44,7 @@ const Header = () => {
   useEffect(() => {
     if (authState.user !== null) {
       dispatch(getUserCart(config2));
+      dispatch(getUserProductWishlist(config2));
     }
   }, [authState.user]);
 

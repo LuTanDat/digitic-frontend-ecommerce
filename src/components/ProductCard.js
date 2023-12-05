@@ -18,6 +18,18 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { getUserProductWishlist } from '../features/user/userSlice';
 
 const ProductCard = (props) => {
+  const getTokenFromLocalStorage = localStorage.getItem("customer")
+    ? JSON.parse(localStorage.getItem("customer"))
+    : null;
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+        }`,
+      Accept: "application/json",
+    },
+  };
+
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -33,12 +45,12 @@ const ProductCard = (props) => {
   }, [])
 
   useEffect(() => {
-    dispatch(getUserProductWishlist());
+    dispatch(getUserProductWishlist(config2));
   }, [addedWishlistState])
 
 
   const addToWishList = (id) => {
-    dispatch(addToWishlist(id));
+    dispatch(addToWishlist({ id, config2 }));
   }
 
   return (

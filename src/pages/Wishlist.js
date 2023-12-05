@@ -8,6 +8,18 @@ import { addToWishlist } from '../features/products/productSlice';
 import ProductCard from '../components/ProductCard';
 
 const Wishlist = () => {
+  const getTokenFromLocalStorage = localStorage.getItem("customer")
+    ? JSON.parse(localStorage.getItem("customer"))
+    : null;
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${getTokenFromLocalStorage !== null ? getTokenFromLocalStorage.token : ""
+        }`,
+      Accept: "application/json",
+    },
+  };
+
   const dispatch = useDispatch();
 
   const wishlistState = useSelector((state) => state?.auth?.wishlist?.wishlist);
@@ -18,7 +30,7 @@ const Wishlist = () => {
   }, [addedWishlistState])
 
   const getWishlistFromDb = () => {
-    dispatch(getUserProductWishlist());
+    dispatch(getUserProductWishlist(config2));
   }
 
   return (

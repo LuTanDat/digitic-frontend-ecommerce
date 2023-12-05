@@ -37,10 +37,10 @@ export const changePassword = createAsyncThunk(
 );
 
 export const getUserProductWishlist = createAsyncThunk(
-  "user/wishlist",
-  async (thunkAPI) => {
+  "user/get-wishlist",
+  async (data, thunkAPI) => {
     try {
-      return await authService.getUserWishlist();
+      return await authService.getUserWishlist(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
