@@ -409,8 +409,12 @@ footer .input-group-text{
   transition: 0.3s;
 }
 .wishlist-icon{
-  top: 2%;
-  right: 20px;
+  top: 2px;
+  right: 0px;
+}
+
+.wishlist-icon .btn-wishlist{
+  padding: 10px;
 }
 /* Product Card Ends here */
 
