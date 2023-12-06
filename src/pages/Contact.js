@@ -16,17 +16,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 let contactSchema = Yup.object().shape({
-  name: Yup.string().required("Name không được để trống"),
+  name: Yup.string().required("Tê không được để trống"),
   email: Yup.string()
     .email("Email không khả dụng")
     .required("Email không được để trống"),
   mobile: Yup.string()
-    .required("Mobile không được để trống")
+    .required("Số điện thoại không được để trống")
     .matches(
       /^(84|0[3|5|7|8|9])+([0-9]{8,9})$/,
       "Số điện thoại không hợp lệ"
     ),
-  comment: Yup.string().required("Comment không được để trống"),
+  comment: Yup.string().required("Nội dung không được để trống"),
 });
 
 const Contact = () => {
@@ -38,7 +38,9 @@ const Contact = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: `${userState?.lastName} ${userState?.firstName}` || '',
+      name: userState?.lastName && userState?.firstName
+        ? `${userState.lastName} ${userState.firstName}`
+        : '',
       email: userState?.email || '',
       mobile: userState?.mobile || '',
       comment: '',
